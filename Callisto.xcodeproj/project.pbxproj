@@ -1,0 +1,329 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CD8BBDE41EE009C600E8EE2E /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD41EE009C600E8EE2E /* Branch.swift */; };
+		CD8BBDE51EE009C600E8EE2E /* CompilerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */; };
+		CD8BBDE61EE009C600E8EE2E /* Dictionary+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */; };
+		CD8BBDE71EE009C600E8EE2E /* DictionaryConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */; };
+		CD8BBDE81EE009C600E8EE2E /* FastlaneParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */; };
+		CD8BBDE91EE009C600E8EE2E /* GithubAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */; };
+		CD8BBDEA1EE009C600E8EE2E /* GitHubCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */; };
+		CD8BBDEB1EE009C600E8EE2E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDB1EE009C600E8EE2E /* main.swift */; };
+		CD8BBDEC1EE009C600E8EE2E /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDC1EE009C600E8EE2E /* MainController.swift */; };
+		CD8BBDED1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */; };
+		CD8BBDEE1EE009C600E8EE2E /* SlackAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDE1EE009C600E8EE2E /* SlackAction.swift */; };
+		CD8BBDEF1EE009C600E8EE2E /* SlackAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDF1EE009C600E8EE2E /* SlackAttachment.swift */; };
+		CD8BBDF01EE009C600E8EE2E /* SlackCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE01EE009C600E8EE2E /* SlackCommunicationController.swift */; };
+		CD8BBDF11EE009C600E8EE2E /* SlackField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE11EE009C600E8EE2E /* SlackField.swift */; };
+		CD8BBDF21EE009C600E8EE2E /* SlackMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */; };
+		CD8BBDF31EE009C600E8EE2E /* URLSession+synchronousTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CD8BBDC81EE0093900E8EE2E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		CD8BBDCA1EE0093900E8EE2E /* Callisto */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Callisto; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD8BBDD41EE009C600E8EE2E /* Branch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
+		CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompilerMessage.swift; sourceTree = "<group>"; };
+		CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Optional.swift"; sourceTree = "<group>"; };
+		CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryConvertable.swift; sourceTree = "<group>"; };
+		CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FastlaneParser.swift; sourceTree = "<group>"; };
+		CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubAccount.swift; sourceTree = "<group>"; };
+		CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubCommunicationController.swift; sourceTree = "<group>"; };
+		CD8BBDDB1EE009C600E8EE2E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		CD8BBDDC1EE009C600E8EE2E /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+NSColorHexadecimalValue.swift"; sourceTree = "<group>"; };
+		CD8BBDDE1EE009C600E8EE2E /* SlackAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackAction.swift; sourceTree = "<group>"; };
+		CD8BBDDF1EE009C600E8EE2E /* SlackAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackAttachment.swift; sourceTree = "<group>"; };
+		CD8BBDE01EE009C600E8EE2E /* SlackCommunicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackCommunicationController.swift; sourceTree = "<group>"; };
+		CD8BBDE11EE009C600E8EE2E /* SlackField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackField.swift; sourceTree = "<group>"; };
+		CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackMessage.swift; sourceTree = "<group>"; };
+		CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+synchronousTask.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CD8BBDC71EE0093900E8EE2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CD8BBDC11EE0093900E8EE2E = {
+			isa = PBXGroup;
+			children = (
+				CD8BBDCC1EE0093900E8EE2E /* Callisto */,
+				CD8BBDCB1EE0093900E8EE2E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CD8BBDCB1EE0093900E8EE2E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD8BBDCA1EE0093900E8EE2E /* Callisto */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD8BBDCC1EE0093900E8EE2E /* Callisto */ = {
+			isa = PBXGroup;
+			children = (
+				CD8BBDD41EE009C600E8EE2E /* Branch.swift */,
+				CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */,
+				CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */,
+				CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */,
+				CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */,
+				CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */,
+				CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */,
+				CD8BBDDB1EE009C600E8EE2E /* main.swift */,
+				CD8BBDDC1EE009C600E8EE2E /* MainController.swift */,
+				CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */,
+				CD8BBDDE1EE009C600E8EE2E /* SlackAction.swift */,
+				CD8BBDDF1EE009C600E8EE2E /* SlackAttachment.swift */,
+				CD8BBDE01EE009C600E8EE2E /* SlackCommunicationController.swift */,
+				CD8BBDE11EE009C600E8EE2E /* SlackField.swift */,
+				CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */,
+				CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */,
+			);
+			path = Callisto;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CD8BBDC91EE0093900E8EE2E /* Callisto */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD8BBDD11EE0093900E8EE2E /* Build configuration list for PBXNativeTarget "Callisto" */;
+			buildPhases = (
+				CD8BBDC61EE0093900E8EE2E /* Sources */,
+				CD8BBDC71EE0093900E8EE2E /* Frameworks */,
+				CD8BBDC81EE0093900E8EE2E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Callisto;
+			productName = Callisto;
+			productReference = CD8BBDCA1EE0093900E8EE2E /* Callisto */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CD8BBDC21EE0093900E8EE2E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = IdeasOnCanvas;
+				TargetAttributes = {
+					CD8BBDC91EE0093900E8EE2E = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = W6L39UYL6Z;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = CD8BBDC51EE0093900E8EE2E /* Build configuration list for PBXProject "Callisto" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CD8BBDC11EE0093900E8EE2E;
+			productRefGroup = CD8BBDCB1EE0093900E8EE2E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CD8BBDC91EE0093900E8EE2E /* Callisto */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CD8BBDC61EE0093900E8EE2E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD8BBDE61EE009C600E8EE2E /* Dictionary+Optional.swift in Sources */,
+				CD8BBDE71EE009C600E8EE2E /* DictionaryConvertable.swift in Sources */,
+				CD8BBDEB1EE009C600E8EE2E /* main.swift in Sources */,
+				CD8BBDE91EE009C600E8EE2E /* GithubAccount.swift in Sources */,
+				CD8BBDF01EE009C600E8EE2E /* SlackCommunicationController.swift in Sources */,
+				CD8BBDEE1EE009C600E8EE2E /* SlackAction.swift in Sources */,
+				CD8BBDF31EE009C600E8EE2E /* URLSession+synchronousTask.swift in Sources */,
+				CD8BBDEC1EE009C600E8EE2E /* MainController.swift in Sources */,
+				CD8BBDF11EE009C600E8EE2E /* SlackField.swift in Sources */,
+				CD8BBDED1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift in Sources */,
+				CD8BBDEF1EE009C600E8EE2E /* SlackAttachment.swift in Sources */,
+				CD8BBDE51EE009C600E8EE2E /* CompilerMessage.swift in Sources */,
+				CD8BBDE81EE009C600E8EE2E /* FastlaneParser.swift in Sources */,
+				CD8BBDEA1EE009C600E8EE2E /* GitHubCommunicationController.swift in Sources */,
+				CD8BBDF21EE009C600E8EE2E /* SlackMessage.swift in Sources */,
+				CD8BBDE41EE009C600E8EE2E /* Branch.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CD8BBDCF1EE0093900E8EE2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CD8BBDD01EE0093900E8EE2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		CD8BBDD21EE0093900E8EE2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = W6L39UYL6Z;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		CD8BBDD31EE0093900E8EE2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = W6L39UYL6Z;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CD8BBDC51EE0093900E8EE2E /* Build configuration list for PBXProject "Callisto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD8BBDCF1EE0093900E8EE2E /* Debug */,
+				CD8BBDD01EE0093900E8EE2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD8BBDD11EE0093900E8EE2E /* Build configuration list for PBXNativeTarget "Callisto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD8BBDD21EE0093900E8EE2E /* Debug */,
+				CD8BBDD31EE0093900E8EE2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CD8BBDC21EE0093900E8EE2E /* Project object */;
+}
