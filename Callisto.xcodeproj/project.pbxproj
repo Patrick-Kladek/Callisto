@@ -87,24 +87,80 @@
 		CD8BBDCC1EE0093900E8EE2E /* Callisto */ = {
 			isa = PBXGroup;
 			children = (
-				CD8BBDD41EE009C600E8EE2E /* Branch.swift */,
-				CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */,
-				CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */,
-				CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */,
-				CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */,
-				CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */,
-				CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */,
 				CD8BBDDB1EE009C600E8EE2E /* main.swift */,
 				CD8BBDDC1EE009C600E8EE2E /* MainController.swift */,
-				CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */,
-				CD8BBDDE1EE009C600E8EE2E /* SlackAction.swift */,
-				CD8BBDDF1EE009C600E8EE2E /* SlackAttachment.swift */,
-				CD8BBDE01EE009C600E8EE2E /* SlackCommunicationController.swift */,
-				CD8BBDE11EE009C600E8EE2E /* SlackField.swift */,
-				CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */,
-				CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */,
+				CD8BBDFA1EE00A8E00E8EE2E /* Parser */,
+				CD8BBDF41EE00A2500E8EE2E /* Communication Controller */,
+				CD8BBDF91EE00A7B00E8EE2E /* Helper */,
 			);
 			path = Callisto;
+			sourceTree = "<group>";
+		};
+		CD8BBDF41EE00A2500E8EE2E /* Communication Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CD8BBDF51EE00A3300E8EE2E /* Github */,
+				CD8BBDF61EE00A3900E8EE2E /* Slack */,
+			);
+			name = "Communication Controller";
+			sourceTree = "<group>";
+		};
+		CD8BBDF51EE00A3300E8EE2E /* Github */ = {
+			isa = PBXGroup;
+			children = (
+				CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */,
+				CD8BBDF81EE00A6500E8EE2E /* Properties */,
+			);
+			name = Github;
+			sourceTree = "<group>";
+		};
+		CD8BBDF61EE00A3900E8EE2E /* Slack */ = {
+			isa = PBXGroup;
+			children = (
+				CD8BBDE01EE009C600E8EE2E /* SlackCommunicationController.swift */,
+				CD8BBDF71EE00A3D00E8EE2E /* Message */,
+			);
+			name = Slack;
+			sourceTree = "<group>";
+		};
+		CD8BBDF71EE00A3D00E8EE2E /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */,
+				CD8BBDDF1EE009C600E8EE2E /* SlackAttachment.swift */,
+				CD8BBDE11EE009C600E8EE2E /* SlackField.swift */,
+				CD8BBDDE1EE009C600E8EE2E /* SlackAction.swift */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		CD8BBDF81EE00A6500E8EE2E /* Properties */ = {
+			isa = PBXGroup;
+			children = (
+				CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */,
+				CD8BBDD41EE009C600E8EE2E /* Branch.swift */,
+			);
+			name = Properties;
+			sourceTree = "<group>";
+		};
+		CD8BBDF91EE00A7B00E8EE2E /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */,
+				CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */,
+				CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */,
+				CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		CD8BBDFA1EE00A8E00E8EE2E /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */,
+				CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */,
+			);
+			name = Parser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
