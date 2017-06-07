@@ -1,0 +1,110 @@
+[17:07:20]: ▸ [35m[31m❌  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxx/xxxxxxxxxx/Mac/Classes/ABCThemeCollectionViewItem.swift:173:52: [31mcannot use optional chaining on non-optional value of type 'NSCollectionView'[0m
+[17:07:20]: ▸ [35mlet hasKeyAppearance = (self.collectionView?.window?.isKeyWindow ?? false)[0m
+[17:07:20]: ▸ [35m[36m                                ~~~~~~~~~~~~~~~~~~~^[0m
+[17:07:20]: ▸ [35m[31m❌  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxx/xxxxxxxxxx/Mac/Classes/ABCThemeCollectionViewItem.swift:174:51: [31mcannot use optional chaining on non-optional value of type 'NSCollectionView'[0m
+[17:07:20]: ▸ [35mlet isFirstResponder = self.collectionView?.isFirstResponder ?? false[0m
+[17:07:20]: ▸ [35m[36m                               ~~~~~~~~~~~~~~~~~~~^[0m
+[17:07:26]: ▸ [35m[31m❌  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxx/xxxxxxxxxx/Mac/Classes/ABCThemeCollectionViewItem.swift:173:52: [31mcannot use optional chaining on non-optional value of type 'NSCollectionView'[0m
+[17:07:26]: ▸ [35mlet hasKeyAppearance = (self.collectionView?.window?.isKeyWindow ?? false)[0m
+[17:07:26]: ▸ [35m[36m                                ~~~~~~~~~~~~~~~~~~~^[0m
+[17:07:26]: ▸ [35m[31m❌  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxx/xxxxxxxxxx/Mac/Classes/ABCThemeCollectionViewItem.swift:174:51: [31mcannot use optional chaining on non-optional value of type 'NSCollectionView'[0m
+[17:07:26]: ▸ [35mlet isFirstResponder = self.collectionView?.isFirstResponder ?? false[0m
+[17:07:26]: ▸ [35m[36m                               ~~~~~~~~~~~~~~~~~~~^[0m
+[17:07:33]: ▸ [35m[31m❌  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxx/xxxxxxxxxx/Mac/Classes/ABCThemeCollectionViewItem.swift:173:52: [31mcannot use optional chaining on non-optional value of type 'NSCollectionView'[0m
+[17:07:33]: ▸ [35mlet hasKeyAppearance = (self.collectionView?.window?.isKeyWindow ?? false)[0m
+[17:07:33]: ▸ [35m[36m                                ~~~~~~~~~~~~~~~~~~~^[0m
+[17:07:33]: ▸ [35m[31m❌  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxx/xxxxxxxxxx/Mac/Classes/ABCThemeCollectionViewItem.swift:174:51: [31mcannot use optional chaining on non-optional value of type 'NSCollectionView'[0m
+[17:07:33]: ▸ [35mlet isFirstResponder = self.collectionView?.isFirstResponder ?? false[0m
+[17:07:33]: ▸ [35m[36m                               ~~~~~~~~~~~~~~~~~~~^[0m
+
+
+[31m❌  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxx/xxxxxxxxxx/Mac/Classes/ABCThemeCollectionViewItem.swift:173:52: [31mcannot use optional chaining on non-optional value of type 'NSCollectionView'[0m
+
+let hasKeyAppearance = (self.collectionView?.window?.isKeyWindow ?? false)
+[36m                                ~~~~~~~~~~~~~~~~~~~^[0m
+
+
+
+[31m❌  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxx/xxxxxxxxxx/Mac/Classes/ABCThemeCollectionViewItem.swift:174:51: [31mcannot use optional chaining on non-optional value of type 'NSCollectionView'[0m
+
+let isFirstResponder = self.collectionView?.isFirstResponder ?? false
+[36m                               ~~~~~~~~~~~~~~~~~~~^[0m
+
+
+
+** ANALYZE FAILED **
+
+
+The following build commands failed:
+CompileSwiftSources normal x86_64 com.apple.xcode.tools.swift.compiler
+CompileSwift normal x86_64 /usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxx/xxxxxxxxxx/Mac/Classes/ABCThemeCollectionViewItem.swift
+(2 failures)
+
+
+[31m❌  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxx/xxxxxxxxxx/Mac/Classes/ABCThemeCollectionViewItem.swift:173:52: [31mcannot use optional chaining on non-optional value of type 'NSCollectionView'[0m
+
+let hasKeyAppearance = (self.collectionView?.window?.isKeyWindow ?? false)
+[36m                                ~~~~~~~~~~~~~~~~~~~^[0m
+
+
+
+[31m❌  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxx/xxxxxxxxxx/Mac/Classes/ABCThemeCollectionViewItem.swift:174:51: [31mcannot use optional chaining on non-optional value of type 'NSCollectionView'[0m
+
+let isFirstResponder = self.collectionView?.isFirstResponder ?? false
+[36m                               ~~~~~~~~~~~~~~~~~~~^[0m
+
+
+
+** BUILD FAILED **
+
+
+
+
+[31m❌  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxx/xxxxxxxxxx/Mac/Classes/ABCThemeCollectionViewItem.swift:173:52: [31mcannot use optional chaining on non-optional value of type 'NSCollectionView'[0m
+
+let hasKeyAppearance = (self.collectionView?.window?.isKeyWindow ?? false)
+[36m                                ~~~~~~~~~~~~~~~~~~~^[0m
+
+
+
+[31m❌  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxx/xxxxxxxxxx/Mac/Classes/ABCThemeCollectionViewItem.swift:174:51: [31mcannot use optional chaining on non-optional value of type 'NSCollectionView'[0m
+
+let isFirstResponder = self.collectionView?.isFirstResponder ?? false
+[36m                               ~~~~~~~~~~~~~~~~~~~^[0m
+
+
+Testing failed:
+Cannot use optional chaining on non-optional value of type 'NSCollectionView'
+Cannot use optional chaining on non-optional value of type 'NSCollectionView'
+** TEST FAILED **
+
+
+The following build commands failed:
+CompileSwift normal x86_64 /usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxx/xxxxxxxxxx/Mac/Classes/ABCThemeCollectionViewItem.swift
+CompileSwiftSources normal x86_64 com.apple.xcode.tools.swift.compiler
+(2 failures)
+[17:07:33]: [31mExit status: 65[0m
++----------------------------+---------------------------------------------------------------------+
+|                                           [33mLane Context[0m                                           |
++----------------------------+---------------------------------------------------------------------+
+| PLATFORM_NAME              | mac                                                                 |
+| LANE_NAME                  | mac staticAnalyze                                                   |
+| SCAN_DERIVED_DATA_PATH     | /Users/administrator/Library/Developer/Xcode/DerivedData/xxxxxxx... |
+| SCAN_GENERATED_PLIST_FILES | []                                                                  |
+| SCAN_GENERATED_PLIST_FILE  |                                                                     |
++----------------------------+---------------------------------------------------------------------+
+[17:07:33]: [31mError building the application - see the log above[0m
+
++------+-------------------------------------+-------------+
+|                     [32mfastlane summary[0m                     |
++------+-------------------------------------+-------------+
+| Step | Action                              | Time (in s) |
++------+-------------------------------------+-------------+
+| 1    | Verifying required fastlane version | 0           |
+| 2    | clear_derived_data                  | 1           |
+| 💥   | [31mscan[0m                                | 77          |
++------+-------------------------------------+-------------+
+
+[17:07:33]: [31mfastlane finished with errors[0m
+[31m
+[!] Error building the application - see the log above[0m

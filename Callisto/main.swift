@@ -82,11 +82,8 @@ func main() {
     let account = GithubAccount(username: githubUsername, token: githubToken)
     guard let controller = MainController(contentsOfFile: url, branch: branch, account: account, organisation: githubOrganisation, repository: githubRepository, slack: slackURL, ignoredKeywords: ignoredKeywords) else { exit(-8) }
 
-    let status = controller.run()
-    switch status {
+    switch controller.run() {
     case .success(let warningCount) where warningCount > 0:
-        LogWarning("\(warningCount). Analyzer Warnings found")
-
         // Limit count because exit func only display 8 bit -> 256 mean 0 which will say everything is ok while it´s not.
         // also use 200 so it will not conflict with above return values.
         exit(min(200, warningCount))

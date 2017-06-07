@@ -1,0 +1,122 @@
+[16:56:20]: [32m-------------------------------------------------[0m
+[16:56:20]: [32m--- Step: Verifying required fastlane version ---[0m
+[16:56:20]: [32m-------------------------------------------------[0m
+[16:56:20]: Your fastlane version 2.26.1 matches the minimum requirement of 1.37.0  ✅
+[16:56:20]: [32mDriving the lane 'ios staticAnalyze' 🚀[0m
+[16:56:20]: [32m--------------------------------[0m
+[16:56:20]: [32m--- Step: clear_derived_data ---[0m
+[16:56:20]: [32m--------------------------------[0m
+[16:56:20]: Derived Data path located at: /Users/administrator/Library/Developer/Xcode/DerivedData
+[16:56:22]: [32mSuccessfully cleared Derived Data ♻️[0m
+[16:56:22]: [32m------------------[0m
+[16:56:22]: [32m--- Step: scan ---[0m
+[16:56:22]: [32m------------------[0m
+[16:56:22]: [4m[36m$ xcodebuild -list -workspace xxxxxxxxxxxx.xcworkspace[0m[0m
+[16:56:24]: [4m[36m$ xcodebuild clean -showBuildSettings -workspace xxxxxxxxxxxx.xcworkspace -scheme xxxxxxxxxxxx\ for\ iOS[0m[0m
+[16:56:26]: [4m[36m$ xcodebuild -list -workspace xxxxxxxxxxxx.xcworkspace[0m[0m
+[16:56:28]: [4m[36m$ xcodebuild clean -showBuildSettings -workspace xxxxxxxxxxxx.xcworkspace -scheme xxxxxxxxxxxx\ for\ iOS[0m[0m
+
++------------------------+-------------------------------------------------------------------------+
+|                                     [32mSummary for scan 2.26.1[0m                               |
++------------------------+-------------------------------------------------------------------------+
+| devices                | ["iPhone 6s"]                                                           |
+| clean                  | true                                                                    |
+| workspace              | xxxxxxxxxxxx.xcworkspace                                                |
+| scheme                 | xxxxxxxxxxxx for iOS                                                    |
+| xcargs                 | CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY='' IDEBuildOperationMaxN... |
+| derived_data_path      | /Users/administrator/Library/Developer/Xcode/DerivedData/xxxxxxxxxxxx-aw|
+| skip_build             | false                                                                   |
+| output_directory       | ./fastlane/test_output                                                  |
+| output_types           | html,junit                                                              |
+| buildlog_path          | ~/Library/Logs/scan                                                     |
+| include_simulator_logs | false                                                                   |
+| open_report            | false                                                                   |
+| skip_slack             | false                                                                   |
+| slack_only_on_failure  | false                                                                   |
+| use_clang_report_name  | false                                                                   |
+| fail_build             | true                                                                    |
+| xcode_path             | /Applications/Xcode.app                                                 |
++------------------------+-------------------------------------------------------------------------+
+
+
+[16:57:57]: ▸ [35m[33m⚠️  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxxxx/xxxxxxxxxxxx/iOS/Classes/ABCDocumentViewController.m:641:9: [33mTODO: This is just temporary, we need a better way to handle updating the state of the iPad toolbar items. Also check TODO in _selectionChanged. [-W#pragma-messages][0m
+[16:57:57]: ▸ [35m#pragma message("TODO: This is just temporary, we need a better way to handle updating the state of the iPad toolbar items. Also check TODO in _selectionChanged.")[0m
+[16:57:57]: ▸ [35m[36m        ^[0m
+
+[17:00:22]: ▸ [35m[33m⚠️  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxxxx/xxxxxxxxxxxx/iOS/Classes/ABCDocumentViewController.m:641:9: [33mTODO: This is just temporary, we need a better way to handle updating the state of the iPad toolbar items. Also check TODO in _selectionChanged. [-W#pragma-messages][0m
+[17:00:22]: ▸ [35m#pragma message("TODO: This is just temporary, we need a better way to handle updating the state of the iPad toolbar items. Also check TODO in _selectionChanged.")[0m
+[17:00:22]: ▸ [35m[36m        ^[0m
+
+[17:01:34]: ▸ [35m[33m⚠️  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxxxx/xxxxxxxxxxxx/iOS/Classes/ABCDocumentViewController.m:641:9: [33mTODO: This is just temporary, we need a better way to handle updating the state of the iPad toolbar items. Also check TODO in _selectionChanged. [-W#pragma-messages][0m
+[17:01:34]: ▸ [35m#pragma message("TODO: This is just temporary, we need a better way to handle updating the state of the iPad toolbar items. Also check TODO in _selectionChanged.")[0m
+[17:01:34]: ▸ [35m[36m        ^[0m
+[17:04:14]: ▸ [35m[31m✗[0m testImageRepresentation, XCTAssertTrue failed - The exported mind map image differs from the comparison image.[0m
+[17:04:16]: ▸ [35m[31m✗[0m testImageRepresentationWithoutBackground, XCTAssertTrue failed - The background-less exported mind map image differs from the comparison image.[0m
+[17:04:17]: ▸ [35m[31m✗[0m testImageRepresentationWithPadding, XCTAssertTrue failed - The exported mind map image with padding differs from the comparison image.[0m
+[17:04:22]: ▸ [35m[31m✗[0m testImageRepresentationWithScaling, XCTAssertTrue failed - The exported mind map image with scaling differs from the comparison image.[0m
+[33m⚠️  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxxxx/xxxxxxxxxxxx/iOS/Classes/ABCDocumentViewController.m:641:9: [33mTODO: This is just temporary, we need a better way to handle updating the state of the iPad toolbar items. Also check TODO in _selectionChanged. [-W#pragma-messages][0m
+
+#pragma message("TODO: This is just temporary, we need a better way to handle updating the state of the iPad toolbar items. Also check TODO in _selectionChanged.")
+[36m        ^[0m
+
+
+[33m⚠️  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxxxx/xxxxxxxxxxxx/iOS/Classes/ABCDocumentViewController.m:641:9: [33mTODO: This is just temporary, we need a better way to handle updating the state of the iPad toolbar items. Also check TODO in _selectionChanged. [-W#pragma-messages][0m
+
+#pragma message("TODO: This is just temporary, we need a better way to handle updating the state of the iPad toolbar items. Also check TODO in _selectionChanged.")
+[36m        ^[0m
+
+
+
+[33m⚠️  [0m/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxxxx/xxxxxxxxxxxx/iOS/Classes/ABCDocumentViewController.m:641:9: [33mTODO: This is just temporary, we need a better way to handle updating the state of the iPad toolbar items. Also check TODO in _selectionChanged. [-W#pragma-messages][0m
+
+#pragma message("TODO: This is just temporary, we need a better way to handle updating the state of the iPad toolbar items. Also check TODO in _selectionChanged.")
+[36m        ^[0m
+
+
+[31m✗[0m testImageRepresentation, XCTAssertTrue failed - The exported mind map image differs from the comparison image.
+[31m✗[0m testImageRepresentationWithoutBackground, XCTAssertTrue failed - The background-less exported mind map image differs from the comparison image.
+[31m✗[0m testImageRepresentationWithPadding, XCTAssertTrue failed - The exported mind map image with padding differs from the comparison image.
+[31m✗[0m testImageRepresentationWithScaling, XCTAssertTrue failed - The exported mind map image with scaling differs from the comparison image.
+
+[31m	 Executed 408 tests, with 4 failures (0 unexpected) in 182.353 (182.519) seconds
+[0m
+Failing tests:
+-[ABCImageExporterTests testImageRepresentation()]
+-[ABCImageExporterTests testImageRepresentationWithoutBackground()]
+-[ABCImageExporterTests testImageRepresentationWithPadding()]
+-[ABCImageExporterTests testImageRepresentationWithScaling()]
+** TEST FAILED **
+[17:05:17]: [31mExit status: 65[0m
++--------------------+-----+
+|       Test Results       |
++--------------------+-----+
+| Number of tests    | 408 |
+| Number of failures | [31m4[0m   |
++--------------------+-----+
+
+[17:05:49]: [32mSuccessfully generated report at '/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxxxx/xxxxxxxxxxxx/fastlane/test_output/report.html'[0m
+[17:06:05]: [32mSuccessfully generated report at '/usr/local/var/buildkite-agent/builds/ci01.local-1/xxxxxxxxxxxxxxx/xxxxxxxxxxxx/fastlane/test_output/report.junit'[0m
++----------------------------+---------------------------------------------------------------------+
+|                                           [33mLane Context[0m                                           |
++----------------------------+---------------------------------------------------------------------+
+| PLATFORM_NAME              | ios                                                                 |
+| LANE_NAME                  | ios staticAnalyze                                                   |
+| SCAN_DERIVED_DATA_PATH     | /Users/administrator/Library/Developer/Xcode/DerivedData/xxxxxxx... |
+| SCAN_GENERATED_PLIST_FILES | ["/Users/administrator/Library/Developer/Xcode/DerivedData/xxxxx... |
+| SCAN_GENERATED_PLIST_FILE  | /Users/administrator/Library/Developer/Xcode/DerivedData/xxxxxxx... |
++----------------------------+---------------------------------------------------------------------+
+[17:06:05]: [31mTests have failed[0m
+
++------+-------------------------------------+-------------+
+|                     [32mfastlane summary[0m                     |
++------+-------------------------------------+-------------+
+| Step | Action                              | Time (in s) |
++------+-------------------------------------+-------------+
+| 1    | Verifying required fastlane version | 0           |
+| 2    | clear_derived_data                  | 1           |
+| 💥   | [31mscan[0m                                | 583         |
++------+-------------------------------------+-------------+
+
+[17:06:05]: [31mfastlane finished with errors[0m
+[31m
+[!] Tests have failed[0m

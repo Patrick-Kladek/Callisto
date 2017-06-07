@@ -36,8 +36,11 @@ class MainController {
     }
 
     func run() -> Status {
-        if self.parser.parse() == false {
-            return .error(code: ExitCodes.parsingFailed.rawValue)
+        let fastlaneParserStatus = self.parser.parse()
+
+        if case .error() = fastlaneParserStatus {
+            // Status code was unavailible but program should work fine
+            LogError("Error parsing status code from fastlane.")
         }
 
         if !self.reloadCurrentBranch() {
@@ -48,10 +51,29 @@ class MainController {
             let slackMessage = self.makeSlackMessage(title: self.currentBranch.title, url: self.currentBranch.url)
             guard let data = slackMessage.jsonDataRepresentation() else { return .warning(code: ExitCodes.jsonConversationFailed.rawValue) }
             self.slackController.post(data: data)
-            self.logStaticAnalyzerMessages(self.parser.staticAnalyzerMessages)
         }
 
-        return .success(warningCount: Int32(self.parser.staticAnalyzerMessages.count))
+        self.logCompilerMessages(self.parser.staticAnalyzerMessages)
+        self.logCompilerMessages(self.parser.buildErrorMessages)
+        self.logUnitTestMessage(self.parser.unitTestMessages)
+
+        var warningCount = 0
+
+        if case .success(let code) = fastlaneParserStatus {
+            LogWarning("Fastlane exit code: \(code)")
+            warningCount += code
+        }
+
+        LogWarning("--------------------- Summary ---------------------")
+        LogError("\(self.parser.buildErrorMessages.count). Build Errors")
+        LogWarning("\(self.parser.staticAnalyzerMessages.count). Static analyzer Warnings")
+        LogWarning("\(self.parser.unitTestMessages.count). Unit test Errors")
+
+        warningCount += self.parser.buildErrorMessages.count
+        warningCount += self.parser.staticAnalyzerMessages.count
+        warningCount += self.parser.unitTestMessages.count
+
+        return .success(warningCount: Int32(warningCount))
     }
 }
 
@@ -96,7 +118,13 @@ fileprivate extension MainController {
         return message
     }
 
-    func logStaticAnalyzerMessages(_ messages: [CompilerMessage]) {
+    func logCompilerMessages(_ messages: [CompilerMessage]) {
+        for message in messages {
+            LogMessage(message.description)
+        }
+    }
+
+    func logUnitTestMessage(_ messages: [UnitTestMessage]) {
         for message in messages {
             LogMessage(message.description)
         }

@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD081CB71EE7E10D00F537B3 /* CompilerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */; };
+		CD081CB91EE7EDCD00F537B3 /* UnitTestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */; };
+		CD081CBA1EE7EDCD00F537B3 /* UnitTestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */; };
+		CD081CBC1EE7F19100F537B3 /* ios_build_4454.log in Resources */ = {isa = PBXBuildFile; fileRef = CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */; };
+		CD081CBE1EE7F1D700F537B3 /* mac_build_4454.log in Resources */ = {isa = PBXBuildFile; fileRef = CD081CBD1EE7F1D700F537B3 /* mac_build_4454.log */; };
+		CD8321011EE7DF640029DBE0 /* CallistoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8321001EE7DF640029DBE0 /* CallistoTest.swift */; };
+		CD8321061EE7DFA70029DBE0 /* FastlaneParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */; };
 		CD8BBDE41EE009C600E8EE2E /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD41EE009C600E8EE2E /* Branch.swift */; };
 		CD8BBDE51EE009C600E8EE2E /* CompilerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */; };
 		CD8BBDE61EE009C600E8EE2E /* Dictionary+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */; };
@@ -38,6 +45,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTestMessage.swift; sourceTree = "<group>"; };
+		CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_4454.log; sourceTree = "<group>"; };
+		CD081CBD1EE7F1D700F537B3 /* mac_build_4454.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mac_build_4454.log; sourceTree = "<group>"; };
+		CD8320FE1EE7DF640029DBE0 /* CallistoTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CallistoTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD8321001EE7DF640029DBE0 /* CallistoTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallistoTest.swift; sourceTree = "<group>"; };
+		CD8321021EE7DF640029DBE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD8BBDCA1EE0093900E8EE2E /* Callisto */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Callisto; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD8BBDD41EE009C600E8EE2E /* Branch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
 		CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompilerMessage.swift; sourceTree = "<group>"; };
@@ -58,6 +71,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CD8320FB1EE7DF640029DBE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD8BBDC71EE0093900E8EE2E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -68,10 +88,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD8320FF1EE7DF640029DBE0 /* CallistoTest */ = {
+			isa = PBXGroup;
+			children = (
+				CD8321001EE7DF640029DBE0 /* CallistoTest.swift */,
+				CD8321091EE7DFBF0029DBE0 /* Resources */,
+				CD8321021EE7DF640029DBE0 /* Info.plist */,
+			);
+			path = CallistoTest;
+			sourceTree = "<group>";
+		};
+		CD8321091EE7DFBF0029DBE0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CD83210A1EE7DFC40029DBE0 /* Sample Logs */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		CD83210A1EE7DFC40029DBE0 /* Sample Logs */ = {
+			isa = PBXGroup;
+			children = (
+				CD081CBD1EE7F1D700F537B3 /* mac_build_4454.log */,
+				CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */,
+			);
+			name = "Sample Logs";
+			sourceTree = "<group>";
+		};
 		CD8BBDC11EE0093900E8EE2E = {
 			isa = PBXGroup;
 			children = (
 				CD8BBDCC1EE0093900E8EE2E /* Callisto */,
+				CD8320FF1EE7DF640029DBE0 /* CallistoTest */,
 				CD8BBDCB1EE0093900E8EE2E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				CD8BBDCA1EE0093900E8EE2E /* Callisto */,
+				CD8320FE1EE7DF640029DBE0 /* CallistoTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,6 +208,7 @@
 			children = (
 				CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */,
 				CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */,
+				CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */,
 			);
 			name = Parser;
 			sourceTree = "<group>";
@@ -166,6 +216,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CD8320FD1EE7DF640029DBE0 /* CallistoTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD8321051EE7DF640029DBE0 /* Build configuration list for PBXNativeTarget "CallistoTest" */;
+			buildPhases = (
+				CD8320FA1EE7DF640029DBE0 /* Sources */,
+				CD8320FB1EE7DF640029DBE0 /* Frameworks */,
+				CD8320FC1EE7DF640029DBE0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CallistoTest;
+			productName = CallistoTest;
+			productReference = CD8320FE1EE7DF640029DBE0 /* CallistoTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CD8BBDC91EE0093900E8EE2E /* Callisto */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD8BBDD11EE0093900E8EE2E /* Build configuration list for PBXNativeTarget "Callisto" */;
@@ -193,6 +260,11 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = IdeasOnCanvas;
 				TargetAttributes = {
+					CD8320FD1EE7DF640029DBE0 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = W6L39UYL6Z;
+						ProvisioningStyle = Automatic;
+					};
 					CD8BBDC91EE0093900E8EE2E = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = W6L39UYL6Z;
@@ -214,11 +286,35 @@
 			projectRoot = "";
 			targets = (
 				CD8BBDC91EE0093900E8EE2E /* Callisto */,
+				CD8320FD1EE7DF640029DBE0 /* CallistoTest */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		CD8320FC1EE7DF640029DBE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD081CBE1EE7F1D700F537B3 /* mac_build_4454.log in Resources */,
+				CD081CBC1EE7F19100F537B3 /* ios_build_4454.log in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		CD8320FA1EE7DF640029DBE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD081CB71EE7E10D00F537B3 /* CompilerMessage.swift in Sources */,
+				CD081CBA1EE7EDCD00F537B3 /* UnitTestMessage.swift in Sources */,
+				CD8321061EE7DFA70029DBE0 /* FastlaneParser.swift in Sources */,
+				CD8321011EE7DF640029DBE0 /* CallistoTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD8BBDC61EE0093900E8EE2E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -226,6 +322,7 @@
 				CD8BBDE61EE009C600E8EE2E /* Dictionary+Optional.swift in Sources */,
 				CD8BBDE71EE009C600E8EE2E /* DictionaryConvertable.swift in Sources */,
 				CD8BBDEB1EE009C600E8EE2E /* main.swift in Sources */,
+				CD081CB91EE7EDCD00F537B3 /* UnitTestMessage.swift in Sources */,
 				CD8BBDE91EE009C600E8EE2E /* GithubAccount.swift in Sources */,
 				CD8BBDF01EE009C600E8EE2E /* SlackCommunicationController.swift in Sources */,
 				CD8BBDEE1EE009C600E8EE2E /* SlackAction.swift in Sources */,
@@ -245,6 +342,34 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		CD8321031EE7DF640029DBE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = W6L39UYL6Z;
+				INFOPLIST_FILE = CallistoTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ideasoncanvas.callisto.CallistoTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		CD8321041EE7DF640029DBE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = W6L39UYL6Z;
+				INFOPLIST_FILE = CallistoTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ideasoncanvas.callisto.CallistoTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		CD8BBDCF1EE0093900E8EE2E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -361,6 +486,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CD8321051EE7DF640029DBE0 /* Build configuration list for PBXNativeTarget "CallistoTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD8321031EE7DF640029DBE0 /* Debug */,
+				CD8321041EE7DF640029DBE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CD8BBDC51EE0093900E8EE2E /* Build configuration list for PBXProject "Callisto" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
