@@ -64,10 +64,16 @@ class MainController {
             warningCount += code
         }
 
-        LogWarning("--------------------- Summary ---------------------")
-        LogError("\(self.parser.buildErrorMessages.count). Build Errors")
-        LogWarning("\(self.parser.staticAnalyzerMessages.count). Static analyzer Warnings")
-        LogWarning("\(self.parser.unitTestMessages.count). Unit test Errors")
+        LogMessage("--------------------- Summary ---------------------")
+        if self.parser.buildErrorMessages.isEmpty == false {
+            LogError("\(self.parser.buildErrorMessages.count). Build Errors")
+        }
+        if self.parser.staticAnalyzerMessages.isEmpty == false {
+            LogError("\(self.parser.staticAnalyzerMessages.count). Static analyzer Warnings")
+        }
+        if self.parser.unitTestMessages.isEmpty == false {
+            LogError("\(self.parser.unitTestMessages.count). Unit test Errors")
+        }
 
         warningCount += self.parser.buildErrorMessages.count
         warningCount += self.parser.staticAnalyzerMessages.count
