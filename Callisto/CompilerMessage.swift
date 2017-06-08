@@ -54,7 +54,7 @@ extension CompilerMessage: Hashable {
     }
 
     var hashValue: Int {
-        return message.hashValue
+        return (self.fileName + String(self.line) + self.message).hashValue
     }
 }
 

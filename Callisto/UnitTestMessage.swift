@@ -8,11 +8,11 @@
 
 import Cocoa
 
-class UnitTestMessage {
+final class UnitTestMessage {
 
-    public let method: String
-    public let assertType: String
-    public let explanation: String
+    let method: String
+    let assertType: String
+    let explanation: String
 
     init?(message: String) {
         guard let xRange = (message.range(of: "✗")) else { return nil }
@@ -28,12 +28,14 @@ class UnitTestMessage {
 }
 
 extension UnitTestMessage: CustomStringConvertible {
+
     var description: String {
         return self.method
     }
 }
 
 extension UnitTestMessage: Hashable {
+
     static func == (left: UnitTestMessage, right: UnitTestMessage) -> Bool {
         return
                 left.method == right.method &&
@@ -42,6 +44,6 @@ extension UnitTestMessage: Hashable {
     }
 
     var hashValue: Int {
-        return self.method.hashValue
+        return (self.method + self.assertType + self.explanation).hashValue
     }
 }
