@@ -33,7 +33,3 @@ Callisto -fastlane "/tmp/fastlane_iOS_Output.txt" \
 
 ### How does it work
 Callisto simply parses the output from fastlane which mostly pipes through the clang messages from the compiler. By filtering this messages and reformatting them Callisto is able to post them to slack. When you enable GitHub checks you can also merge blocking if Callisto finds an analyzer Message so you are forced to fix it before merging your branch.
-
-
-
-Parse Clang Static Analyzer messages and pass them to Slack
