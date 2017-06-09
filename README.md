@@ -4,7 +4,7 @@
 ![alt text](https://img.shields.io/badge/Platform-Mac%2010.12+-blue.svg "Target Mac")
 
 
-![Logo](file:///Users/patrick/Desktop/Callisto Workflow Image.png "Logo")
+![Logo](https://raw.githubusercontent.com/IdeasOnCanvas/Callisto/master/Documentation/Callisto%20Workflow%20Image.png "Logo")
 
 If you enabled the clang static analyzer in your xcode project you might notice that your build time nearly doubled. One way to deal with this issue, is to run the static analyzer on your server (buildkite) but there is no built in way to post the results to slack. So we build Callisto. We use Callisto with fastlane so we first must pipe the fastlane output to a temp-file. After that we call Callisto to parse the fastlane file and post the results back to slack.
 
