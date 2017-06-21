@@ -6,7 +6,7 @@
 
 ![Logo](https://raw.githubusercontent.com/IdeasOnCanvas/Callisto/master/Documentation/Callisto%20Workflow%20Image.png "Logo")
 
-If you enabled the clang static analyzer in your xcode project you might notice that your build time nearly doubled. One way to deal with this issue, is to run the static analyzer on your server (buildkite) but there is no built in way to post the results to slack. So we build Callisto. We use Callisto with fastlane so we first must pipe the fastlane output to a temp-file. After that we call Callisto to parse the fastlane file and post the results back to slack.
+Clang Static Analyzer is great, it catches lots of potential bugs and errors in your code. It has one downside though: running the Clang Static Analyzer every time you build your project takes a lot of time, and we all could use some shorter build times. Callisto solves this problem, as it allows you to run the Clang Static Analyzer on your build server (e.g. Buildkite) and posts the results to our favorite messaging tool Slack.
 
 ```
 #!/bin/bash
@@ -22,7 +22,7 @@ Callisto -fastlane "/tmp/fastlane_iOS_Output.txt" \
 -ignore "todo, -Wpragma"
 ```
 
-### Parameter
+### Parameters
 * -slack: create a slack webhook url and pass as parameter to Callisto
 * -branch: when using buildKite you can simply pass the envirmonment variable "$BUILDKITE_BRANCH"
 * -githubUsername: Callisto needs access to the github resolve the branch to the associated pull request.
@@ -31,5 +31,5 @@ Callisto -fastlane "/tmp/fastlane_iOS_Output.txt" \
 * -githubRepository: this parameter is used to create the correct url for communicating with guthub.
 * -ignore: pass keywords which should be excluded from your slack report. We use "todo & -Wpragma" since we know they are in our code but we don't want to be messaged about it by every push.
 
-### How does it work
-Callisto simply parses the output from fastlane which mostly pipes through the clang messages from the compiler. By filtering this messages and reformatting them Callisto is able to post them to slack. When you enable GitHub checks you can also merge blocking if Callisto finds an analyzer Message so you are forced to fix it before merging your branch.
+### How does it work?
+Callisto simply parses the output from Fastlane, which mostly pipes through the Clang Static Analyzer messages from the compiler. By filtering these messages and reformatting them Callisto is able to post only the relevant information to Slack. In addition to that, if you enable GitHub-Checks you can also block Pull Request from being merged, if Callisto finds an issue in your code.
