@@ -23,13 +23,13 @@ Callisto -fastlane "/tmp/fastlane_iOS_Output.txt" \
 ```
 
 ### Parameters
-* -slack: create a Slack Webhook URL and pass it as a parameter to Callisto, to enable posting to Slack
-* -branch: when using BuildKite you can simply pass the environment variable "$BUILDKITE_BRANCH"
-* -githubUsername: The username of a GitHub account that has access to your repository
-* -githubToken: The recommended way to safely connect to GitHub: create a token for your user
-* -githubOrganisation: needed to create the correct URL for communicating with GitHub
-* -githubRepository: needed to create the correct URL for communicating with GitHub
-* -ignore: pass keywords which should be excluded from your Slack report, e.g. you can exclude "todo"
+* `-slack`: create a Slack Webhook URL and pass it as a parameter to Callisto, to enable posting to Slack
+* `-branch`: when using BuildKite you can simply pass the environment variable "$BUILDKITE_BRANCH"
+* `-githubUsername`: The username of a GitHub account that has access to your repository
+* `-githubToken`: The recommended way to safely connect to GitHub: create a token for your user
+* `-githubOrganisation`: needed to create the correct URL for communicating with GitHub
+* `-githubRepository`: needed to create the correct URL for communicating with GitHub
+* `-ignore`: pass keywords which should be excluded from your Slack report, e.g. you can exclude "todo"
 
 ### How does it work?
 Callisto simply parses the output from Fastlane, which mostly pipes through the Clang Static Analyzer messages from the compiler. By filtering these messages and reformatting them Callisto is able to post only the relevant information to Slack. In addition to that, if you enable GitHub-Checks you can also block Pull Request from being merged, if Callisto finds an issue in your code.
