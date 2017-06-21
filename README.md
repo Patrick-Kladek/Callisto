@@ -33,3 +33,5 @@ Callisto -fastlane "/tmp/fastlane_iOS_Output.txt" \
 
 ### How does it work?
 Callisto simply parses the output from Fastlane, which mostly pipes through the Clang Static Analyzer messages from the compiler. By filtering these messages and reformatting them Callisto is able to post only the relevant information to Slack. In addition to that, if you enable GitHub-Checks you can also block Pull Request from being merged, if Callisto finds an issue in your code.
+
+Callisto is brought to you by [IdeasOnCanvas](http://ideasoncanvas.com), the creator of MindNode for iOS, macOS & watchOS.
