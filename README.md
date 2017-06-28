@@ -11,7 +11,7 @@ Clang Static Analyzer is great, it catches lots of potential bugs and errors in 
 ```
 #!/bin/bash
 
-fastlane ios staticAnalyze 2>&1 | tee /tmp/fastlane_iOS_Output.txt
+fastlane ios static_analyze 2>&1 | tee /tmp/fastlane_iOS_Output.txt
 Callisto -fastlane "/tmp/fastlane_iOS_Output.txt" \
 -slack "<SLACK_WEBHOOK_URL>" \
 -branch "$BUILDKITE_BRANCH" \
@@ -20,6 +20,25 @@ Callisto -fastlane "/tmp/fastlane_iOS_Output.txt" \
 -githubOrganisation "<GITHUB_ORGANISATION>" \
 -githubRepository "<GITHUB_REPOSITORY>" \
 -ignore "todo, -Wpragma"
+```
+
+#### fastlane static_analyze lane:
+The important thing here is `xcargs: "analyze"`. If you don't want to run the static analyzer and only post build errors & warnings to slack just remove the `"analyze"` from `xcargs`.
+```
+platform :ios do
+    desc "Build and run the static Analyzer"
+    lane :staticAnalyze do
+        scan(
+             devices: [
+                "iPhone 6s"
+             ],
+             clean: true,
+             workspace: "MyWorkspace.xcworkspace",
+             scheme: "MyProject for iOS",
+             xcargs: "CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY='' IDEBuildOperationMaxNumberOfConcurrentCompileTasks=1 analyze"
+        )
+    end
+end
 ```
 
 ### Parameters
@@ -32,6 +51,6 @@ Callisto -fastlane "/tmp/fastlane_iOS_Output.txt" \
 * `-ignore`: pass keywords which should be excluded from your Slack report, e.g. you can exclude "todo"
 
 ### How does it work?
-Callisto simply parses the output from Fastlane, which mostly pipes through the Clang Static Analyzer messages from the compiler. By filtering these messages and reformatting them Callisto is able to post only the relevant information to Slack. In addition to that, if you enable GitHub-Checks you can also block Pull Request from being merged, if Callisto finds an issue in your code.
+Callisto simply parses the output from *fastlane*, which mostly pipes through the Clang Static Analyzer messages from the compiler. By filtering these messages and reformatting them Callisto is able to post only the relevant information to Slack. In addition to that, if you enable GitHub-Checks you can also block Pull Request from being merged, if Callisto finds an issue in your code.
 
 Callisto is brought to you by [IdeasOnCanvas](http://ideasoncanvas.com), the creator of MindNode for iOS, macOS & watchOS.
