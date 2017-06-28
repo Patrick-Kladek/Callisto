@@ -24,24 +24,26 @@ Callisto -fastlane "/tmp/fastlane_iOS_Output.txt" \
 
 #### fastlane static_analyze lane:
 The important thing here is `xcargs: "analyze"`. If you don't want to run the static analyzer and only post build errors & warnings to slack just remove the `"analyze"` from `xcargs`.
-```
+
+```ruby
 platform :ios do
-    desc "Build and run the static Analyzer"
-    lane :staticAnalyze do
-        scan(
-             devices: [
-                "iPhone 6s"
-             ],
-             clean: true,
-             workspace: "MyWorkspace.xcworkspace",
-             scheme: "MyProject for iOS",
-             xcargs: "analyze"
-        )
-    end
+  desc "Build and run the static Analyzer"
+  lane :staticAnalyze do
+    scan(
+      devices: [
+        "iPhone 6s"
+      ],
+      clean: true,
+      workspace: "MyWorkspace.xcworkspace",
+      scheme: "MyProject for iOS",
+      xcargs: "analyze"
+    )
+  end
 end
 ```
 
 ### Parameters
+
 * `-slack`: create a Slack Webhook URL and pass it as a parameter to Callisto, to enable posting to Slack
 * `-branch`: when using BuildKite you can simply pass the environment variable "$BUILDKITE_BRANCH"
 * `-githubUsername`: The username of a GitHub account that has access to your repository
@@ -51,6 +53,7 @@ end
 * `-ignore`: pass keywords which should be excluded from your Slack report, e.g. you can exclude "todo"
 
 ### How does it work?
+
 Callisto simply parses the output from *fastlane*, which mostly pipes through the Clang Static Analyzer messages from the compiler. By filtering these messages and reformatting them Callisto is able to post only the relevant information to Slack. In addition to that, if you enable GitHub-Checks you can also block Pull Request from being merged, if Callisto finds an issue in your code.
 
 Callisto is brought to you by [IdeasOnCanvas](http://ideasoncanvas.com), the creator of MindNode for iOS, macOS & watchOS.
