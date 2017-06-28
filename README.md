@@ -35,7 +35,7 @@ platform :ios do
              clean: true,
              workspace: "MyWorkspace.xcworkspace",
              scheme: "MyProject for iOS",
-             xcargs: "CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY='' IDEBuildOperationMaxNumberOfConcurrentCompileTasks=1 analyze"
+             xcargs: "analyze"
         )
     end
 end
