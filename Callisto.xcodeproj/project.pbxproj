@@ -90,6 +90,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD7691761F1CB29C00E4DC16 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		CD8320FF1EE7DF640029DBE0 /* CallistoTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +151,7 @@
 				CD8BBDFA1EE00A8E00E8EE2E /* Parser */,
 				CD8BBDF41EE00A2500E8EE2E /* Communication Controller */,
 				CD8BBDF91EE00A7B00E8EE2E /* Helper */,
+				CD7691761F1CB29C00E4DC16 /* Supporting Files */,
 			);
 			path = Callisto;
 			sourceTree = "<group>";
@@ -484,7 +492,9 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = W6L39UYL6Z;
+				INFOPLIST_FILE = "$(SRCROOT)/Callisto/Supporting Files/info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ideasoncanvas.callisto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -495,7 +505,9 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = W6L39UYL6Z;
+				INFOPLIST_FILE = "$(SRCROOT)/Callisto/Supporting Files/info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ideasoncanvas.callisto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -23,6 +23,11 @@ enum ExitCodes: Int32 {
     case jsonConversationFailed = -12
 }
 
+struct AppInfo {
+    static let version = "1.0"
+    static let build = 2
+}
+
 func time() -> String {
     return DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .medium)
 }
@@ -39,8 +44,15 @@ func LogMessage(_ message: String) {
     print("\(time()) [\u{001B}[0;32mMESSAGE\u{001B}[0;0m] \(message)")
 }
 
+// MARK: - Main
+
 func main() {
     let defaults = UserDefaults.standard
+
+    if (CommandLine.arguments.contains("-help") || CommandLine.arguments.contains("-info")) {
+        LogMessage("Callisto \(AppInfo.version) (Build: \(AppInfo.build))")
+        exit(0)
+    }
 
     guard let url = defaults.url(forKey: "fastlane") else {
         LogError("invalid file. Usage -fastfile \"/path/to/file\"")
