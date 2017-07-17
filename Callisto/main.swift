@@ -89,7 +89,7 @@ func main() {
         exit(ExitCodes.invalidSlackWebhook.rawValue)
     }
 
-    let ignoredKeywords = defaults.string(forKey: "ignore")?.components(separatedBy: ", ")
+    let ignoredKeywords = defaults.string(forKey: "ignore")?.components(separatedBy: ", ") ?? []
 
     let account = GithubAccount(username: githubUsername, token: githubToken)
     guard let controller = MainController(contentsOfFile: url, branch: branch, account: account, organisation: githubOrganisation, repository: githubRepository, slack: slackURL, ignoredKeywords: ignoredKeywords) else { exit(-8) }

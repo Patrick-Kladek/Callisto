@@ -21,12 +21,12 @@ class FastlaneParser {
     private(set) var unitTestMessages: [UnitTestMessage] = []
     private(set) var buildErrorMessages: [CompilerMessage] = []
 
-    init(content: String, ignoredKeywords: [String]? = nil) {
+    init(content: String, ignoredKeywords: [String]) {
         self.content = content
-        self.ignoredKeywords = ignoredKeywords ?? []
+        self.ignoredKeywords = ignoredKeywords
     }
 
-    convenience init?(url: URL, ignoredKeywords: [String]? = nil) {
+    convenience init?(url: URL, ignoredKeywords: [String]) {
         guard let content = try? String(contentsOf: url) else { return nil }
         self.init(content: content, ignoredKeywords: ignoredKeywords)
     }

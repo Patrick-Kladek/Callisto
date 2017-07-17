@@ -22,14 +22,15 @@ class MainController {
     fileprivate var parser: FastlaneParser
     fileprivate var githubController: GitHubCommunicationController
     fileprivate var slackController: SlackCommunicationController
-    var ignore: [String] = []
+    fileprivate var ignore: [String]
 
-    init?(contentsOfFile url: URL, branch: String, account: GithubAccount, organisation: String, repository: String, slack: URL, ignoredKeywords: [String]?) {
+    init?(contentsOfFile url: URL, branch: String, account: GithubAccount, organisation: String, repository: String, slack: URL, ignoredKeywords: [String]) {
         self.currentBranch = Branch()
         self.currentBranch.name = branch
         self.gitAccount = account
         self.githubController = GitHubCommunicationController(account: account, organisation: organisation, repository: repository)
         self.slackController = SlackCommunicationController(url: slack)
+        self.ignore = ignoredKeywords
 
         guard let parser = FastlaneParser(url: url, ignoredKeywords: ignoredKeywords) else { return nil }
         self.parser = parser
@@ -39,7 +40,7 @@ class MainController {
         let fastlaneParserStatus = self.parser.parse()
 
         if case .error() = fastlaneParserStatus {
-            // Status code was unavailible but program should work fine
+            // Status code was unavailible but App should work fine
             LogError("Error parsing status code from fastlane.")
         }
 
