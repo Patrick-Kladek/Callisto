@@ -86,6 +86,7 @@ func main() {
     case .success(let warningCount) where warningCount > 0:
         // Limit count because exit func only display 8 bit -> 256 mean 0 which will say everything is ok while it´s not.
         // also use 200 so it will not conflict with above return values.
+        LogError("Static Analyzer failed")
         exit(min(200, warningCount))
     case .warning(code: let code):
         LogWarning("Posting to Slack Failed \(code)")

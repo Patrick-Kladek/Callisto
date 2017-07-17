@@ -18,7 +18,11 @@ extension NSColor {
 
         getRed(&r, green: &g, blue: &b, alpha: &a)
 
-        let rgb: Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        let rHex = Int(r*255)<<16
+        let gHex = Int(g*255)<<8
+        let bHex = Int(b*255)<<0
+
+        let rgb: Int =  rHex | gHex | bHex
         return String(format:"#%06x", rgb)
     }
 }

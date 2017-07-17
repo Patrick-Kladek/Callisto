@@ -122,7 +122,7 @@ fileprivate extension FastlaneParser {
     func compilerMessages(from: [String]) -> [CompilerMessage] {
         let filteredLines = Set(from.flatMap { line -> CompilerMessage? in
             for keyword in self.ignoredKeywords {
-                guard line.lowercased().contains(keyword) == false else { return nil }
+                guard line.lowercased().contains(keyword.lowercased()) == false else { return nil }
             }
 
             return CompilerMessage(message: line)

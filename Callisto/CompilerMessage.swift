@@ -73,7 +73,7 @@ fileprivate extension CompilerMessage {
         let matches = regex.matches(in: message, options: .reportCompletion, range: NSMakeRange(0, message.characters.count))
 
         for match in matches {
-            let range = match.rangeAt(1)
+            let range = match.range(at: 1)
             return message.substring(with: range)
         }
 
@@ -91,7 +91,7 @@ extension String {
     /// Returns a substring with the given `NSRange`,
     /// or `nil` if the range can't be converted.
     func substring(with nsrange: NSRange) -> String? {
-        guard let range = nsrange.toRange() else { return nil }
+        guard let range = Range(nsrange) else { return nil }
         let start = UTF16Index(range.lowerBound)
         let end = UTF16Index(range.upperBound)
         return String(utf16[start..<end])
@@ -100,7 +100,7 @@ extension String {
     /// Returns a range equivalent to the given `NSRange`,
     /// or `nil` if the range can't be converted.
     func range(from nsrange: NSRange) -> Range<Index>? {
-        guard let range = nsrange.toRange() else { return nil }
+        guard let range = Range(nsrange) else { return nil }
         let utf16Start = UTF16Index(range.lowerBound)
         let utf16End = UTF16Index(range.upperBound)
 
