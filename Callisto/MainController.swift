@@ -65,14 +65,15 @@ class MainController {
         }
 
         LogMessage("--------------------- Summary ---------------------")
+        LogMessage("Ignored Keywords: \(self.ignore.joined(separator: ", "))")
         if self.parser.buildErrorMessages.isEmpty == false {
             LogError("\(self.parser.buildErrorMessages.count). Build Errors")
         }
         if self.parser.staticAnalyzerMessages.isEmpty == false {
-            LogError("\(self.parser.staticAnalyzerMessages.count). Static analyzer Warnings")
+            LogError("\(self.parser.staticAnalyzerMessages.count). Static Analyzer Warnings")
         }
         if self.parser.unitTestMessages.isEmpty == false {
-            LogError("\(self.parser.unitTestMessages.count). Unit test Errors")
+            LogError("\(self.parser.unitTestMessages.count). Unit Test Errors")
         }
 
         warningCount += self.parser.buildErrorMessages.count
