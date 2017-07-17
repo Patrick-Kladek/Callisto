@@ -39,7 +39,7 @@ class CallistoTest: XCTestCase {
             XCTFail()
         }
 
-        XCTAssertEqual(parser.buildErrorMessages.count, 2)
+        XCTAssertEqual(parser.buildErrorMessages.count, 2) 
         XCTAssertEqual(parser.staticAnalyzerMessages.count, 0)
         XCTAssertEqual(parser.unitTestMessages.count, 0)
     }

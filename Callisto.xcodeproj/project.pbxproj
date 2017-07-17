@@ -12,6 +12,7 @@
 		CD081CBA1EE7EDCD00F537B3 /* UnitTestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */; };
 		CD081CBC1EE7F19100F537B3 /* ios_build_4454.log in Resources */ = {isa = PBXBuildFile; fileRef = CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */; };
 		CD081CBE1EE7F1D700F537B3 /* mac_build_4454.log in Resources */ = {isa = PBXBuildFile; fileRef = CD081CBD1EE7F1D700F537B3 /* mac_build_4454.log */; };
+		CD7691711F1CA89300E4DC16 /* ios_build_4822.log in Resources */ = {isa = PBXBuildFile; fileRef = CD7691701F1CA89300E4DC16 /* ios_build_4822.log */; };
 		CD8321011EE7DF640029DBE0 /* CallistoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8321001EE7DF640029DBE0 /* CallistoTest.swift */; };
 		CD8321061EE7DFA70029DBE0 /* FastlaneParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */; };
 		CD8BBDE41EE009C600E8EE2E /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD41EE009C600E8EE2E /* Branch.swift */; };
@@ -30,7 +31,6 @@
 		CD8BBDF11EE009C600E8EE2E /* SlackField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE11EE009C600E8EE2E /* SlackField.swift */; };
 		CD8BBDF21EE009C600E8EE2E /* SlackMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */; };
 		CD8BBDF31EE009C600E8EE2E /* URLSession+synchronousTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */; };
-		CDB409D61F0FC89200F1628F /* ios_build_4822.log in Resources */ = {isa = PBXBuildFile; fileRef = CDB409D51F0FC89200F1628F /* ios_build_4822.log */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +49,7 @@
 		CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTestMessage.swift; sourceTree = "<group>"; };
 		CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_4454.log; sourceTree = "<group>"; };
 		CD081CBD1EE7F1D700F537B3 /* mac_build_4454.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mac_build_4454.log; sourceTree = "<group>"; };
+		CD7691701F1CA89300E4DC16 /* ios_build_4822.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_build_4822.log; path = ../../../Downloads/ios_build_4822.log; sourceTree = "<group>"; };
 		CD8320FE1EE7DF640029DBE0 /* CallistoTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CallistoTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD8321001EE7DF640029DBE0 /* CallistoTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallistoTest.swift; sourceTree = "<group>"; };
 		CD8321021EE7DF640029DBE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,7 +70,6 @@
 		CD8BBDE11EE009C600E8EE2E /* SlackField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackField.swift; sourceTree = "<group>"; };
 		CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackMessage.swift; sourceTree = "<group>"; };
 		CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+synchronousTask.swift"; sourceTree = "<group>"; };
-		CDB409D51F0FC89200F1628F /* ios_build_4822.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_build_4822.log; path = ../../../Desktop/ios_build_4822.log; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +113,7 @@
 			children = (
 				CD081CBD1EE7F1D700F537B3 /* mac_build_4454.log */,
 				CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */,
-				CDB409D51F0FC89200F1628F /* ios_build_4822.log */,
+				CD7691701F1CA89300E4DC16 /* ios_build_4822.log */,
 			);
 			name = "Sample Logs";
 			sourceTree = "<group>";
@@ -299,7 +299,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDB409D61F0FC89200F1628F /* ios_build_4822.log in Resources */,
+				CD7691711F1CA89300E4DC16 /* ios_build_4822.log in Resources */,
 				CD081CBE1EE7F1D700F537B3 /* mac_build_4454.log in Resources */,
 				CD081CBC1EE7F19100F537B3 /* ios_build_4454.log in Resources */,
 			);
