@@ -57,8 +57,6 @@ extension Dictionary where Key: StringProtocol {
                     // Invalid key path, abort.
                     return nil
                 }
-            default:
-                return nil
             }
         }
     }
