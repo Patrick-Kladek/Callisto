@@ -115,6 +115,7 @@ fileprivate extension MainController {
 
         attachment.title = title
         attachment.titleURL = url
+        attachment.footer = "Ignored: \(self.ignore.joined(separator: ", "))"
 
         for compilerMessage in self.parser.staticAnalyzerMessages {
             attachment.addField(SlackField(message: compilerMessage))
