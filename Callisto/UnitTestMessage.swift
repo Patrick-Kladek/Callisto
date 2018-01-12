@@ -17,7 +17,7 @@ final class UnitTestMessage {
     init?(message: String) {
         guard let xRange = (message.range(of: "✗")) else { return nil }
 
-        let validMessage = message.substring(from: xRange.lowerBound)
+        let validMessage = message[xRange.lowerBound...]
         let components = validMessage.components(separatedBy: CharacterSet(charactersIn: ",-"))
         guard components.count >= 3 else { return nil }
 

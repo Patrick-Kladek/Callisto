@@ -19,7 +19,7 @@ class CompilerMessage {
     init?(message: String) {
         guard let slashRange = message.range(of: "/") else { return nil }
 
-        let validMessage = message.substring(from: slashRange.lowerBound)
+        let validMessage = message[slashRange.lowerBound...]
         let components = validMessage.components(separatedBy: ":")
         guard components.count >= 4 else { return nil }
 
@@ -70,7 +70,7 @@ fileprivate extension CompilerMessage {
             return nil
         }
 
-        let matches = regex.matches(in: message, options: .reportCompletion, range: NSMakeRange(0, message.characters.count))
+        let matches = regex.matches(in: message, options: .reportCompletion, range: NSMakeRange(0, message.count))
 
         for match in matches {
             let range = match.range(at: 1)
@@ -91,23 +91,7 @@ extension String {
     /// Returns a substring with the given `NSRange`,
     /// or `nil` if the range can't be converted.
     func substring(with nsrange: NSRange) -> String? {
-        guard let range = Range(nsrange) else { return nil }
-        let start = UTF16Index(range.lowerBound)
-        let end = UTF16Index(range.upperBound)
-        return String(utf16[start..<end])
-    }
-
-    /// Returns a range equivalent to the given `NSRange`,
-    /// or `nil` if the range can't be converted.
-    func range(from nsrange: NSRange) -> Range<Index>? {
-        guard let range = Range(nsrange) else { return nil }
-        let utf16Start = UTF16Index(range.lowerBound)
-        let utf16End = UTF16Index(range.upperBound)
-
-        guard let start = Index(utf16Start, within: self),
-            let end = Index(utf16End, within: self)
-        else { return nil }
-
-        return start..<end
+        guard let range = Range(nsrange, in: self) else { return nil }
+        return String(self[range])
     }
 }
