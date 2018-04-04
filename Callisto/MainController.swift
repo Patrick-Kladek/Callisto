@@ -39,13 +39,13 @@ class MainController {
     func run() -> Status {
         let fastlaneParserStatus = self.parser.parse()
 
-        if case .error() = fastlaneParserStatus {
+        if case .error = fastlaneParserStatus {
             // Status code was unavailible but App should work fine
             LogError("Error parsing status code from fastlane.")
         }
 
-        if !self.reloadCurrentBranch() {
-            return .error(code: ExitCodes.reloadBranchFailed.rawValue)
+        if self.reloadCurrentBranch() == false {
+            LogWarning("Loading of branch failed, contiune without corrent branch name")
         }
 
         if self.parser.staticAnalyzerMessages.isEmpty == false {
@@ -88,12 +88,12 @@ class MainController {
 fileprivate extension MainController {
 
     func reloadCurrentBranch() -> Bool {
-        guard let name = self.currentBranch.name else { fatalError() }
+        guard let name = self.currentBranch.name else { return false }
 
         do {
             let dict: [String: Any]
             try dict = self.githubController.pullRequest(forBranch: name)
-                guard let branchPath = dict["html_url"] as? String, let title = dict["title"] as? String else { throw GithubError.pullRequestNoURL }
+            guard let branchPath = dict["html_url"] as? String, let title = dict["title"] as? String else { throw GithubError.pullRequestNoURL }
 
             self.currentBranch.title = title
             self.currentBranch.url = URL(string: branchPath)

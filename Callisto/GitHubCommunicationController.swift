@@ -44,6 +44,15 @@ fileprivate extension GitHubCommunicationController {
 enum StatusCodeError: Error {
     case noResponse
     case noData
+
+    var localizedDescription: String {
+        switch self {
+        case .noData:
+            return "Could not parse data from github"
+        case .noResponse:
+            return "Github did not respond to request"
+        }
+    }
 }
 
 enum GithubError: Error {
@@ -72,10 +81,9 @@ extension GitHubCommunicationController {
                 throw StatusCodeError.noData
             }
         } catch {
-            fatalError()
+            print(error.localizedDescription)
+            return []
         }
-
-        return []
     }
 
     func defaultRequest(url: URL) -> URLRequest {

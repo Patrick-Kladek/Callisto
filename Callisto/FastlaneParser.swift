@@ -10,7 +10,7 @@ import Cocoa
 
 enum FastlaneParserStatus {
     case success(exitCode: Int)
-    case error()
+    case error
 }
 
 class FastlaneParser {
@@ -39,7 +39,16 @@ class FastlaneParser {
         self.staticAnalyzerMessages.append(contentsOf: self.parseAnalyzerWarnings(lines))
         self.unitTestMessages.append(contentsOf: self.parseUnitTestWarnings(lines))
 
-        return self.parseExitStatusFromFastlane(trimmedContent)
+        switch self.parseExitStatusFromFastlane(trimmedContent) {
+        case .success(let code):
+            if code == -1 {
+                return self.parseExitedWithError(trimmedContent)
+            } else {
+                return .success(exitCode: code)
+            }
+        case .error:
+            return .error
+        }
     }
 }
 
@@ -72,23 +81,32 @@ fileprivate extension FastlaneParser {
     func parseExitStatusFromFastlane(_ content: String) -> FastlaneParserStatus {
         guard let regex = try? NSRegularExpression(pattern: "\\[[0-9]+:[0-9]+:[0-9]+]: Exit status: [0-9]+", options: .caseInsensitive) else {
             print("Regular Expression Failed");
-            return FastlaneParserStatus.error()
+            return FastlaneParserStatus.error
         }
 
-        let exitStatusLineRange = regex.rangeOfFirstMatch(in: content, options: .reportCompletion, range: NSMakeRange(0, content.characters.count))
+        let exitStatusLineRange = regex.rangeOfFirstMatch(in: content, options: .reportCompletion, range: NSMakeRange(0, content.count))
         guard let exitStatusLine = content.substring(with: exitStatusLineRange) else {
             // No exit status found means we`re ok
             return FastlaneParserStatus.success(exitCode: -1)
         }
 
         guard let regexStatus = try? NSRegularExpression(pattern: "\\[[0-9]+:[0-9]+:[0-9]+]: Exit status: ", options: .caseInsensitive) else {
-            print("Regular Expression Failed");
-            return FastlaneParserStatus.error()
+            LogWarning("Regular Expression Failed")
+            return FastlaneParserStatus.error
         }
 
-        let statusCodeString = regexStatus.stringByReplacingMatches(in: exitStatusLine, options: [], range: NSMakeRange(0, exitStatusLine.characters.count), withTemplate: "")
+        let statusCodeString = regexStatus.stringByReplacingMatches(in: exitStatusLine, options: [], range: NSMakeRange(0, exitStatusLine.count), withTemplate: "")
 
         return FastlaneParserStatus.success(exitCode: Int(statusCodeString) ?? -1)
+    }
+
+    func parseExitedWithError(_ content: String) -> FastlaneParserStatus {
+        if content.contains("fastlane finished with errors") {
+            LogError("Fastlane finished with errors")
+            return FastlaneParserStatus.success(exitCode: Int(ExitCodes.fastlaneFinishedWithErrors.rawValue))
+        }
+
+        return FastlaneParserStatus.success(exitCode: -1)
     }
 }
 
@@ -115,7 +133,7 @@ fileprivate extension FastlaneParser {
         filteredString = filteredString.replacingOccurrences(of: "\u{1b}", with: "")
 
         guard let regex = try? NSRegularExpression(pattern: "\\[[0-9]+(m|;)[0-9]*m?", options: .caseInsensitive) else { print("Regular Expression Failed"); return "" }
-        let range = NSMakeRange(0, filteredString.characters.count)
+        let range = NSMakeRange(0, filteredString.count)
         return regex.stringByReplacingMatches(in: filteredString, options: [], range: range, withTemplate: "")
     }
 
@@ -141,7 +159,7 @@ fileprivate extension FastlaneParser {
             return false
         }
 
-        let range = NSMakeRange(0, line.characters.count)
+        let range = NSMakeRange(0, line.count)
         let matches = regex.matches(in: line, options: .reportCompletion, range: range)
         return matches.count > 0
     }
