@@ -67,7 +67,7 @@ fileprivate extension FastlaneParser {
     func parseUnitTestWarnings(_ lines: [String]) -> [UnitTestMessage] {
         let unitTestLines = lines.filter { self.lineIsUnitTest($0) }
 
-        let filteredLines = Set(unitTestLines.flatMap { line -> UnitTestMessage? in
+        let filteredLines = Set(unitTestLines.compactMap { line -> UnitTestMessage? in
             for keyword in self.ignoredKeywords {
                 guard line.lowercased().contains(keyword) == false else { return nil }
             }
@@ -138,7 +138,7 @@ fileprivate extension FastlaneParser {
     }
 
     func compilerMessages(from: [String]) -> [CompilerMessage] {
-        let filteredLines = Set(from.flatMap { line -> CompilerMessage? in
+        let filteredLines = Set(from.compactMap { line -> CompilerMessage? in
             for keyword in self.ignoredKeywords {
                 guard line.lowercased().contains(keyword.lowercased()) == false else { return nil }
             }
