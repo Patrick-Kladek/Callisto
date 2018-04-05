@@ -78,7 +78,6 @@ class MainController {
         }
 
         warningCount += self.parser.buildErrorMessages.count
-        warningCount += self.parser.staticAnalyzerMessages.count
         warningCount += self.parser.unitTestMessages.count
 
         return .success(warningCount: Int32(warningCount))
