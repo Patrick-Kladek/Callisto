@@ -71,7 +71,7 @@ class MainController {
             LogError("\(self.parser.buildErrorMessages.count). Build Errors")
         }
         if self.parser.staticAnalyzerMessages.isEmpty == false {
-            LogError("\(self.parser.staticAnalyzerMessages.count). Static Analyzer Warnings")
+            LogWarning("\(self.parser.staticAnalyzerMessages.count). Static Analyzer Warnings")
         }
         if self.parser.unitTestMessages.isEmpty == false {
             LogError("\(self.parser.unitTestMessages.count). Unit Test Errors")
