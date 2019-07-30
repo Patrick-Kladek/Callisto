@@ -8,18 +8,19 @@
 
 import Cocoa
 
-enum FastlaneParserStatus {
-    case success(exitCode: Int)
-    case error
+
+enum ParserError: Error {
+    case regularExpressionError
+    case fastlaneRunError
 }
 
 class FastlaneParser {
 
-    fileprivate let content: String
-    fileprivate let ignoredKeywords: [String]
-    private(set) var staticAnalyzerMessages: [CompilerMessage] = []
-    private(set) var unitTestMessages: [UnitTestMessage] = []
+    private let content: String
+    private let ignoredKeywords: [String]
+    private(set) var buildWarningMessages: [CompilerMessage] = []
     private(set) var buildErrorMessages: [CompilerMessage] = []
+    private(set) var unitTestMessages: [UnitTestMessage] = []
 
     init(content: String, ignoredKeywords: [String]) {
         self.content = content
@@ -31,23 +32,25 @@ class FastlaneParser {
         self.init(content: content, ignoredKeywords: ignoredKeywords)
     }
 
-    func parse() -> FastlaneParserStatus {
+    func parse() -> Result<Int, ParserError> {
         let trimmedContent = self.trimColors(in: self.content)
         let lines = trimmedContent.components(separatedBy: .newlines)
 
         self.buildErrorMessages.append(contentsOf: self.parseBuildErrors(lines))
-        self.staticAnalyzerMessages.append(contentsOf: self.parseAnalyzerWarnings(lines))
+        self.buildWarningMessages.append(contentsOf: self.parseAnalyzerWarnings(lines))
         self.unitTestMessages.append(contentsOf: self.parseUnitTestWarnings(lines))
 
-        switch self.parseExitStatusFromFastlane(trimmedContent) {
+        let exitStatus = self.parseExitStatusFromFastlane(trimmedContent)
+
+        switch exitStatus {
         case .success(let code):
             if code == -1 {
                 return self.parseExitedWithError(trimmedContent)
             } else {
-                return .success(exitCode: code)
+                return .success(code)
             }
-        case .error:
-            return .error
+        case .failure:
+            return exitStatus
         }
     }
 }
@@ -78,39 +81,39 @@ fileprivate extension FastlaneParser {
         return Array(filteredLines)
     }
 
-    func parseExitStatusFromFastlane(_ content: String) -> FastlaneParserStatus {
+    func parseExitStatusFromFastlane(_ content: String) -> Result<Int, ParserError> {
         guard let regex = try? NSRegularExpression(pattern: "\\[[0-9]+:[0-9]+:[0-9]+]: Exit status: [0-9]+", options: .caseInsensitive) else {
             print("Regular Expression Failed");
-            return FastlaneParserStatus.error
+            return .failure(.regularExpressionError)
         }
 
         let exitStatusLineRange = regex.rangeOfFirstMatch(in: content, options: .reportCompletion, range: NSMakeRange(0, content.count))
         guard let exitStatusLine = content.substring(with: exitStatusLineRange) else {
             // No exit status found means we`re ok
-            return FastlaneParserStatus.success(exitCode: -1)
+            return .success(-1)
         }
 
         guard let regexStatus = try? NSRegularExpression(pattern: "\\[[0-9]+:[0-9]+:[0-9]+]: Exit status: ", options: .caseInsensitive) else {
             LogWarning("Regular Expression Failed")
-            return FastlaneParserStatus.error
+            return .failure(.regularExpressionError)
         }
 
         let statusCodeString = regexStatus.stringByReplacingMatches(in: exitStatusLine, options: [], range: NSMakeRange(0, exitStatusLine.count), withTemplate: "")
         let statusCode = Int(statusCodeString) ?? -1
-        return FastlaneParserStatus.success(exitCode: statusCode)
+        return .success(statusCode)
     }
 
-    func parseExitedWithError(_ content: String) -> FastlaneParserStatus {
+    func parseExitedWithError(_ content: String) -> Result<Int, ParserError> {
         if content.contains("fastlane finished with errors") {
             LogError("Fastlane finished with errors")
-            return FastlaneParserStatus.success(exitCode: Int(ExitCodes.fastlaneFinishedWithErrors.rawValue))
+            return .failure(.fastlaneRunError)
         }
 
-        return FastlaneParserStatus.success(exitCode: -1)
+        return .success(-1)
     }
 }
 
-fileprivate extension FastlaneParser {
+private extension FastlaneParser {
 
     func lineIsWarning(_ line: String) -> Bool {
         let pattern = "⚠️"

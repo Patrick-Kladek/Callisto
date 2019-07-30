@@ -39,22 +39,22 @@ class MainController {
     func run() -> Status {
         let fastlaneParserStatus = self.parser.parse()
 
-        if case .error = fastlaneParserStatus {
+        if case .failure(let error) = fastlaneParserStatus {
             // Status code was unavailible but App should work fine
-            LogError("Error parsing status code from fastlane.")
+            LogError("Error parsing status code from fastlane: \(error)")
         }
 
         if self.reloadCurrentBranch() == false {
             LogWarning("Loading of branch failed, contiune without corrent branch name")
         }
 
-        if self.parser.staticAnalyzerMessages.isEmpty == false {
+        if self.parser.buildWarningMessages.isEmpty == false {
             let slackMessage = self.makeSlackMessage(title: self.currentBranch.title, url: self.currentBranch.url)
             guard let data = slackMessage.jsonDataRepresentation() else { return .warning(code: ExitCodes.jsonConversationFailed.rawValue) }
             self.slackController.post(data: data)
         }
 
-        self.logCompilerMessages(self.parser.staticAnalyzerMessages)
+        self.logCompilerMessages(self.parser.buildWarningMessages)
         self.logCompilerMessages(self.parser.buildErrorMessages)
         self.logUnitTestMessage(self.parser.unitTestMessages)
 
@@ -70,8 +70,8 @@ class MainController {
         if self.parser.buildErrorMessages.isEmpty == false {
             LogError("\(self.parser.buildErrorMessages.count). Build Errors")
         }
-        if self.parser.staticAnalyzerMessages.isEmpty == false {
-            LogWarning("\(self.parser.staticAnalyzerMessages.count). Static Analyzer Warnings")
+        if self.parser.buildWarningMessages.isEmpty == false {
+            LogWarning("\(self.parser.buildWarningMessages.count). Static Analyzer Warnings")
         }
         if self.parser.unitTestMessages.isEmpty == false {
             LogError("\(self.parser.unitTestMessages.count). Unit Test Errors")
@@ -118,7 +118,7 @@ fileprivate extension MainController {
         attachment.titleURL = url
         attachment.footer = "Ignored: \(self.ignore.joined(separator: ", "))"
 
-        for compilerMessage in self.parser.staticAnalyzerMessages {
+        for compilerMessage in self.parser.buildWarningMessages {
             attachment.addField(SlackField(message: compilerMessage))
         }
 

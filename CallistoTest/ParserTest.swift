@@ -23,7 +23,7 @@ class CallistoTest: XCTestCase {
         }
 
         XCTAssertEqual(parser.buildErrorMessages.count, 0)
-        XCTAssertEqual(parser.staticAnalyzerMessages.count, 0)
+        XCTAssertEqual(parser.buildWarningMessages.count, 0)
         XCTAssertEqual(parser.unitTestMessages.count, 4)
     }
 
@@ -40,7 +40,7 @@ class CallistoTest: XCTestCase {
         }
 
         XCTAssertEqual(parser.buildErrorMessages.count, 2) 
-        XCTAssertEqual(parser.staticAnalyzerMessages.count, 0)
+        XCTAssertEqual(parser.buildWarningMessages.count, 0)
         XCTAssertEqual(parser.unitTestMessages.count, 0)
     }
 
@@ -57,7 +57,7 @@ class CallistoTest: XCTestCase {
         }
 
         print(parser.buildErrorMessages)
-        print(parser.staticAnalyzerMessages)
+        print(parser.buildWarningMessages)
         print(parser.unitTestMessages)
     }
 
@@ -74,7 +74,7 @@ class CallistoTest: XCTestCase {
         }
 
         XCTAssertEqual(parser.buildErrorMessages.count, 0)
-        XCTAssertEqual(parser.staticAnalyzerMessages.count, 9)
+        XCTAssertEqual(parser.buildWarningMessages.count, 9)
         XCTAssertEqual(parser.unitTestMessages.count, 1)
     }
 
@@ -91,7 +91,7 @@ class CallistoTest: XCTestCase {
         }
 
         XCTAssertEqual(parser.buildErrorMessages.count, 0)
-        XCTAssertEqual(parser.staticAnalyzerMessages.count, 6)
+        XCTAssertEqual(parser.buildWarningMessages.count, 6)
         XCTAssertEqual(parser.unitTestMessages.count, 1)
     }
 }
