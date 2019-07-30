@@ -8,7 +8,7 @@
 
 import Cocoa
 
-final class UnitTestMessage {
+final class UnitTestMessage: Codable {
 
     let method: String
     let assertType: String

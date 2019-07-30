@@ -37,48 +37,43 @@ class MainController {
     }
 
     func run() -> Status {
+        var warningCount = 0
         let fastlaneParserStatus = self.parser.parse()
 
-        if case .failure(let error) = fastlaneParserStatus {
-            // Status code was unavailible but App should work fine
-            LogError("Error parsing status code from fastlane: \(error)")
+        if fastlaneParserStatus > 0 {
+            // Fastlane finished with error
+            LogError("Error running fastlane. Exit code: \(fastlaneParserStatus)")
+            warningCount += fastlaneParserStatus
         }
 
         if self.reloadCurrentBranch() == false {
             LogWarning("Loading of branch failed, contiune without corrent branch name")
         }
 
-        if self.parser.buildWarningMessages.isEmpty == false {
+        if self.parser.buildSummary.warnings.isEmpty == false {
             let slackMessage = self.makeSlackMessage(title: self.currentBranch.title, url: self.currentBranch.url)
             guard let data = slackMessage.jsonDataRepresentation() else { return .warning(code: ExitCodes.jsonConversationFailed.rawValue) }
-            self.slackController.post(data: data)
+//            self.slackController.post(data: data)
         }
 
-        self.logCompilerMessages(self.parser.buildWarningMessages)
-        self.logCompilerMessages(self.parser.buildErrorMessages)
-        self.logUnitTestMessage(self.parser.unitTestMessages)
-
-        var warningCount = 0
-
-        if case .success(let code) = fastlaneParserStatus {
-            LogWarning("Fastlane exit code: \(code)")
-            warningCount += code
-        }
+        self.logCompilerMessages(self.parser.buildSummary.warnings)
+        self.logCompilerMessages(self.parser.buildSummary.errors)
+        self.logUnitTestMessage(self.parser.buildSummary.unitTests)
 
         LogMessage("--------------------- Summary ---------------------")
         LogMessage("Ignored Keywords: \(self.ignore.joined(separator: ", "))")
-        if self.parser.buildErrorMessages.isEmpty == false {
-            LogError("\(self.parser.buildErrorMessages.count). Build Errors")
+        if self.parser.buildSummary.errors.isEmpty == false {
+            LogError("\(self.parser.buildSummary.errors.count). Build Errors")
         }
-        if self.parser.buildWarningMessages.isEmpty == false {
-            LogWarning("\(self.parser.buildWarningMessages.count). Static Analyzer Warnings")
+        if self.parser.buildSummary.warnings.isEmpty == false {
+            LogWarning("\(self.parser.buildSummary.warnings.count). Static Analyzer Warnings")
         }
-        if self.parser.unitTestMessages.isEmpty == false {
-            LogError("\(self.parser.unitTestMessages.count). Unit Test Errors")
+        if self.parser.buildSummary.unitTests.isEmpty == false {
+            LogError("\(self.parser.buildSummary.unitTests.count). Unit Test Errors")
         }
 
-        warningCount += self.parser.buildErrorMessages.count
-        warningCount += self.parser.unitTestMessages.count
+        warningCount += self.parser.buildSummary.errors.count
+        warningCount += self.parser.buildSummary.unitTests.count
 
         return .success(warningCount: Int32(warningCount))
     }
@@ -118,7 +113,7 @@ fileprivate extension MainController {
         attachment.titleURL = url
         attachment.footer = "Ignored: \(self.ignore.joined(separator: ", "))"
 
-        for compilerMessage in self.parser.buildWarningMessages {
+        for compilerMessage in self.parser.buildSummary.warnings {
             attachment.addField(SlackField(message: compilerMessage))
         }
 

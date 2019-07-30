@@ -10,17 +10,22 @@ import Cocoa
 
 
 enum ParserError: Error {
-    case regularExpressionError
+    case exitStatusNotFound
     case fastlaneRunError
+}
+
+enum FastlaneRunStatus {
+    case success
+    case failure(exitCode: Int)
+    case unknown
 }
 
 class FastlaneParser {
 
     private let content: String
     private let ignoredKeywords: [String]
-    private(set) var buildWarningMessages: [CompilerMessage] = []
-    private(set) var buildErrorMessages: [CompilerMessage] = []
-    private(set) var unitTestMessages: [UnitTestMessage] = []
+    private(set) var buildSummary: BuildInformation = .empty
+    private(set) var fastlaneReturnValue: FastlaneRunStatus = .unknown
 
     init(content: String, ignoredKeywords: [String]) {
         self.content = content
@@ -32,30 +37,36 @@ class FastlaneParser {
         self.init(content: content, ignoredKeywords: ignoredKeywords)
     }
 
-    func parse() -> Result<Int, ParserError> {
+    func parse() -> Int {
         let trimmedContent = self.trimColors(in: self.content)
         let lines = trimmedContent.components(separatedBy: .newlines)
 
-        self.buildErrorMessages.append(contentsOf: self.parseBuildErrors(lines))
-        self.buildWarningMessages.append(contentsOf: self.parseAnalyzerWarnings(lines))
-        self.unitTestMessages.append(contentsOf: self.parseUnitTestWarnings(lines))
+        self.buildSummary = BuildInformation(platform: self.parseSchemeFromFastlane(trimmedContent) ?? "",
+                                             errors: self.parseBuildErrors(lines),
+                                             warnings: self.parseAnalyzerWarnings(lines),
+                                             unitTests: self.parseUnitTestWarnings(lines))
 
-        let exitStatus = self.parseExitStatusFromFastlane(trimmedContent)
-
-        switch exitStatus {
-        case .success(let code):
-            if code == -1 {
-                return self.parseExitedWithError(trimmedContent)
-            } else {
-                return .success(code)
-            }
-        case .failure:
-            return exitStatus
-        }
+        return self.parseExitStatusFromFastlane(trimmedContent)
     }
 }
 
 fileprivate extension FastlaneParser {
+
+    func parseSchemeFromFastlane(_ content: String) -> String? {
+        guard let regex = try? NSRegularExpression(pattern: "\\| scheme[ ]*\\| [a-zA-Z ]*\\|\\n", options: .caseInsensitive) else {
+            print("Regular Expression Failed");
+            return nil
+        }
+
+        let schemeLineRange = regex.rangeOfFirstMatch(in: content, options: .reportCompletion, range: NSMakeRange(0, content.count))
+        guard var schemeLine = content.substring(with: schemeLineRange)?.removeExtraSpaces() else {
+            return nil
+        }
+
+        schemeLine = schemeLine.replacingOccurrences(of: "| scheme | ", with: "")
+        schemeLine = schemeLine.replacingOccurrences(of: " | ", with: "")
+        return schemeLine
+    }
 
     func parseBuildErrors(_ lines: [String]) -> [CompilerMessage] {
         let errorLines = lines.filter { self.lineIsError($0) }
@@ -81,26 +92,26 @@ fileprivate extension FastlaneParser {
         return Array(filteredLines)
     }
 
-    func parseExitStatusFromFastlane(_ content: String) -> Result<Int, ParserError> {
+    func parseExitStatusFromFastlane(_ content: String) -> Int {
         guard let regex = try? NSRegularExpression(pattern: "\\[[0-9]+:[0-9]+:[0-9]+]: Exit status: [0-9]+", options: .caseInsensitive) else {
             print("Regular Expression Failed");
-            return .failure(.regularExpressionError)
+            return 0
         }
 
         let exitStatusLineRange = regex.rangeOfFirstMatch(in: content, options: .reportCompletion, range: NSMakeRange(0, content.count))
         guard let exitStatusLine = content.substring(with: exitStatusLineRange) else {
             // No exit status found means we`re ok
-            return .success(-1)
+            return 0
         }
 
         guard let regexStatus = try? NSRegularExpression(pattern: "\\[[0-9]+:[0-9]+:[0-9]+]: Exit status: ", options: .caseInsensitive) else {
             LogWarning("Regular Expression Failed")
-            return .failure(.regularExpressionError)
+            return 0
         }
 
         let statusCodeString = regexStatus.stringByReplacingMatches(in: exitStatusLine, options: [], range: NSMakeRange(0, exitStatusLine.count), withTemplate: "")
-        let statusCode = Int(statusCodeString) ?? -1
-        return .success(statusCode)
+        let statusCode = Int(statusCodeString) ?? 0
+        return statusCode
     }
 
     func parseExitedWithError(_ content: String) -> Result<Int, ParserError> {
@@ -166,4 +177,12 @@ private extension FastlaneParser {
         let matches = regex.matches(in: line, options: .reportCompletion, range: range)
         return matches.count > 0
     }
+}
+
+private extension String {
+
+    func removeExtraSpaces() -> String {
+        return self.replacingOccurrences(of: "[\\s\n]+", with: " ", options: .regularExpression, range: nil)
+    }
+
 }

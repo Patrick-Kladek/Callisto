@@ -8,13 +8,15 @@
 
 import Cocoa
 
-class CompilerMessage {
+class CompilerMessage: Codable {
 
     public let fileName: String
     public let url: URL
     public let line: NSInteger
     public let column: NSInteger
     public let message: String
+
+    // MARK: Lifecycle
 
     init?(message: String) {
         guard let slashRange = message.range(of: "/") else { return nil }
