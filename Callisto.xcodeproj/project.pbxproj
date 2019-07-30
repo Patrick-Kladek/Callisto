@@ -24,7 +24,6 @@
 		CD4901232008EFB6000F5F08 /* SlackCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE01EE009C600E8EE2E /* SlackCommunicationController.swift */; };
 		CD512D8E2008C1F9002EB718 /* ios_build_4822.log in Resources */ = {isa = PBXBuildFile; fileRef = CD512D8D2008C1F9002EB718 /* ios_build_4822.log */; };
 		CD512D902008C257002EB718 /* GithubCommunicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD512D8F2008C257002EB718 /* GithubCommunicationTests.swift */; };
-		CD512D942008C374002EB718 /* githubSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD512D932008C374002EB718 /* githubSettings.plist */; };
 		CD512D952008C5A1002EB718 /* GitHubCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */; };
 		CD512D962008C5C5002EB718 /* GithubAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */; };
 		CD512D972008C5D7002EB718 /* URLSession+synchronousTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */; };
@@ -47,6 +46,10 @@
 		CD8BBDF11EE009C600E8EE2E /* SlackField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE11EE009C600E8EE2E /* SlackField.swift */; };
 		CD8BBDF21EE009C600E8EE2E /* SlackMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */; };
 		CD8BBDF31EE009C600E8EE2E /* URLSession+synchronousTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */; };
+		CDF007082074FAC200257FCC /* mac_build_8731.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF007062074FAC200257FCC /* mac_build_8731.log */; };
+		CDF007092074FAC200257FCC /* ios_build_8731.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF007072074FAC200257FCC /* ios_build_8731.log */; };
+		CDF0070E20760B1900257FCC /* ios_build_8745.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF0070C20760B1900257FCC /* ios_build_8745.log */; };
+		CDF0070F20760B1900257FCC /* mac_build_8745.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF0070D20760B1900257FCC /* mac_build_8745.log */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -69,7 +72,6 @@
 		CD49011F2008EF5E000F5F08 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		CD512D8D2008C1F9002EB718 /* ios_build_4822.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_4822.log; sourceTree = "<group>"; };
 		CD512D8F2008C257002EB718 /* GithubCommunicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubCommunicationTests.swift; sourceTree = "<group>"; };
-		CD512D932008C374002EB718 /* githubSettings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = githubSettings.plist; sourceTree = "<group>"; };
 		CD8320FE1EE7DF640029DBE0 /* CallistoTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CallistoTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD8321001EE7DF640029DBE0 /* ParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTest.swift; sourceTree = "<group>"; };
 		CD8321021EE7DF640029DBE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,6 +92,10 @@
 		CD8BBDE11EE009C600E8EE2E /* SlackField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackField.swift; sourceTree = "<group>"; };
 		CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackMessage.swift; sourceTree = "<group>"; };
 		CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+synchronousTask.swift"; sourceTree = "<group>"; };
+		CDF007062074FAC200257FCC /* mac_build_8731.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mac_build_8731.log; sourceTree = "<group>"; };
+		CDF007072074FAC200257FCC /* ios_build_8731.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_8731.log; sourceTree = "<group>"; };
+		CDF0070C20760B1900257FCC /* ios_build_8745.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_8745.log; sourceTree = "<group>"; };
+		CDF0070D20760B1900257FCC /* mac_build_8745.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mac_build_8745.log; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,18 +116,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CD7691761F1CB29C00E4DC16 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		CD8320FF1EE7DF640029DBE0 /* CallistoTest */ = {
 			isa = PBXGroup;
 			children = (
 				CD8321001EE7DF640029DBE0 /* ParserTest.swift */,
-				CD512D932008C374002EB718 /* githubSettings.plist */,
 				CD512D8F2008C257002EB718 /* GithubCommunicationTests.swift */,
 				CD4901172008EEC6000F5F08 /* SlackCommunicationTests.swift */,
 				CD8321091EE7DFBF0029DBE0 /* Resources */,
@@ -141,6 +139,10 @@
 		CD83210A1EE7DFC40029DBE0 /* Sample Logs */ = {
 			isa = PBXGroup;
 			children = (
+				CDF0070C20760B1900257FCC /* ios_build_8745.log */,
+				CDF0070D20760B1900257FCC /* mac_build_8745.log */,
+				CDF007072074FAC200257FCC /* ios_build_8731.log */,
+				CDF007062074FAC200257FCC /* mac_build_8731.log */,
 				CD081CBD1EE7F1D700F537B3 /* mac_build_4454.log */,
 				CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */,
 				CD512D8D2008C1F9002EB718 /* ios_build_4822.log */,
@@ -174,7 +176,6 @@
 				CD8BBDFA1EE00A8E00E8EE2E /* Parser */,
 				CD8BBDF41EE00A2500E8EE2E /* Communication Controller */,
 				CD8BBDF91EE00A7B00E8EE2E /* Helper */,
-				CD7691761F1CB29C00E4DC16 /* Supporting Files */,
 				CD49011F2008EF5E000F5F08 /* Common.swift */,
 			);
 			path = Callisto;
@@ -331,9 +332,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDF007082074FAC200257FCC /* mac_build_8731.log in Resources */,
+				CDF007092074FAC200257FCC /* ios_build_8731.log in Resources */,
 				CD512D8E2008C1F9002EB718 /* ios_build_4822.log in Resources */,
+				CDF0070F20760B1900257FCC /* mac_build_8745.log in Resources */,
+				CDF0070E20760B1900257FCC /* ios_build_8745.log in Resources */,
 				CD081CBE1EE7F1D700F537B3 /* mac_build_4454.log in Resources */,
-				CD512D942008C374002EB718 /* githubSettings.plist in Resources */,
 				CD081CBC1EE7F19100F537B3 /* ios_build_4454.log in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
