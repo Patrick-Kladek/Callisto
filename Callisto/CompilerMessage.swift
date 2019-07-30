@@ -53,8 +53,10 @@ extension CompilerMessage: Hashable {
             left.message == right.message
     }
 
-    var hashValue: Int {
-        return (self.fileName + String(self.line) + self.message).hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.fileName)
+        hasher.combine(self.line)
+        hasher.combine(self.message)
     }
 }
 

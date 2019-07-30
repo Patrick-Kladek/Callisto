@@ -60,7 +60,7 @@ fileprivate extension FastlaneParser {
     }
 
     func parseAnalyzerWarnings(_ lines: [String]) -> [CompilerMessage] {
-        let warningLines = lines.filter { self.lineIsAnalyser($0) }
+        let warningLines = lines.filter { self.lineIsWarning($0) }
         return self.compilerMessages(from: warningLines)
     }
 
@@ -96,8 +96,8 @@ fileprivate extension FastlaneParser {
         }
 
         let statusCodeString = regexStatus.stringByReplacingMatches(in: exitStatusLine, options: [], range: NSMakeRange(0, exitStatusLine.count), withTemplate: "")
-
-        return FastlaneParserStatus.success(exitCode: Int(statusCodeString) ?? -1)
+        let statusCode = Int(statusCodeString) ?? -1
+        return FastlaneParserStatus.success(exitCode: statusCode)
     }
 
     func parseExitedWithError(_ content: String) -> FastlaneParserStatus {
@@ -112,7 +112,7 @@ fileprivate extension FastlaneParser {
 
 fileprivate extension FastlaneParser {
 
-    func lineIsAnalyser(_ line: String) -> Bool {
+    func lineIsWarning(_ line: String) -> Bool {
         let pattern = "⚠️"
         return self.check(line: line, withRegex: pattern)
     }

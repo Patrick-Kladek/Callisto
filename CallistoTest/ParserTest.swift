@@ -73,9 +73,9 @@ class CallistoTest: XCTestCase {
             XCTFail()
         }
 
-        XCTAssertEqual(parser.buildErrorMessages.count, 1)
-        XCTAssertEqual(parser.staticAnalyzerMessages.count, 10)
-        XCTAssertEqual(parser.unitTestMessages.count, 0)
+        XCTAssertEqual(parser.buildErrorMessages.count, 0)
+        XCTAssertEqual(parser.staticAnalyzerMessages.count, 9)
+        XCTAssertEqual(parser.unitTestMessages.count, 1)
     }
 
     func testXcode9_3_DesktopParser() {
@@ -85,13 +85,13 @@ class CallistoTest: XCTestCase {
         let parser = FastlaneParser(content: fastlaneContent, ignoredKeywords: ["todo"])
 
         if case .success(let code) = parser.parse() {
-            XCTAssertEqual(code, -1)
+            XCTAssertEqual(code, 65)
         } else {
             XCTFail()
         }
 
         XCTAssertEqual(parser.buildErrorMessages.count, 0)
         XCTAssertEqual(parser.staticAnalyzerMessages.count, 6)
-        XCTAssertEqual(parser.unitTestMessages.count, 0)
+        XCTAssertEqual(parser.unitTestMessages.count, 1)
     }
 }

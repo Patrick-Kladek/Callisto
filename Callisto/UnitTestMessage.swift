@@ -38,12 +38,14 @@ extension UnitTestMessage: Hashable {
 
     static func == (left: UnitTestMessage, right: UnitTestMessage) -> Bool {
         return
-                left.method == right.method &&
-                left.assertType == right.assertType &&
-                left.explanation == right.explanation
+            left.method == right.method &&
+            left.assertType == right.assertType &&
+            left.explanation == right.explanation
     }
 
-    var hashValue: Int {
-        return (self.method + self.assertType + self.explanation).hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.method)
+        hasher.combine(self.assertType)
+        hasher.combine(self.explanation)
     }
 }
