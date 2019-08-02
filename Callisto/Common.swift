@@ -9,6 +9,7 @@
 import Foundation
 
 enum ExitCodes: Int32 {
+    case success = 0
     case invalidFile = -1
     case invalidBranch = -2
     case invalidGithubUsername = -3
@@ -57,6 +58,8 @@ extension ExitCodes: CustomStringConvertible {
             return "No action specified"
         case .savingFailed:
             return "Unable to save file"
+        case .success:
+            return ""
         }
     }
 }
@@ -81,7 +84,9 @@ func LogMessage(_ message: String) {
     print("\(time()) [\u{001B}[0;32mMESSAGE\u{001B}[0;0m] \(message)")
 }
 
-func quit(_ code: ExitCodes) -> Never {
-    LogError(code.description)
+func quit(_ code: ExitCodes = .internalError) -> Never {
+    if code != .success {
+        LogError(code.description)
+    }
     exit(code.rawValue)
 }

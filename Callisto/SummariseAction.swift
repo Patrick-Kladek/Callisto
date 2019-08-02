@@ -22,12 +22,30 @@ final class SummariseAction: NSObject {
         self.defaults = defaults
 	}
 
-    // MARK: - NSObject
-
     // MARK: - SummariseAction
 
-    func run() {
-        
+    func run() -> Never {
+        let url = defaults.fastlaneOutputURL
+        let ignoredKeywords = defaults.ignoredKeywords
+
+        guard let extractController = ExtractBuildInformationController(contentsOfFile: url, ignoredKeywords: ignoredKeywords) else { exit(ExitCodes.internalError.rawValue) }
+
+        switch extractController.run() {
+        case .success:
+            let tempURL = URL.tempURL(extractController.buildInfo.platform)
+            let result = extractController.save(to: tempURL)
+            switch result {
+            case .success:
+                print("Succesfully saved summarized output at: \(tempURL)")
+                quit(.success)
+            case .failure(let error):
+                LogError("Saving summary failed: \(error)")
+                quit(.savingFailed)
+            }
+
+        case .failure:
+            quit(.parsingFailed)
+        }
     }
 }
 
