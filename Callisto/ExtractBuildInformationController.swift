@@ -44,10 +44,13 @@ final class ExtractBuildInformationController: NSObject {
 
     func save(to url: URL) -> Result<Int, Error> {
         let buildSummary = self.parser.buildSummary
-        guard let data = try? JSONEncoder().encode(buildSummary) else { return .failure(ExtractError.encodingError)}
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
+        guard let data = try? encoder.encode(buildSummary) else { return .failure(ExtractError.encodingError)}
 
         do {
-            try data.write(to: url, options: [.atomicWrite])
+            try FileManager().createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
+            try data.write(to: url, options: [.atomic])
         } catch {
             return .failure(error)
         }

@@ -16,8 +16,13 @@ func main() {
     let defaults = UserDefaults.standard
 
     if (CommandLine.arguments.contains("-help") || CommandLine.arguments.contains("-info")) {
-        LogMessage("Callisto \(AppInfo.version) (Build: \(AppInfo.build))")
+        LogMessage("Callisto \(AppInfo.version))")
         exit(0)
+    }
+
+    guard let action = defaults.string(forKey: "action") else {
+        LogError("No action specified")
+        exit(ExitCodes.invalidAction.rawValue)
     }
 
     guard let url = defaults.url(forKey: "fastlane") else {
@@ -56,6 +61,33 @@ func main() {
     }
 
     let ignoredKeywords = defaults.string(forKey: "ignore")?.components(separatedBy: ", ") ?? []
+
+    switch action {
+    case "summarize":
+        guard let extractController = ExtractBuildInformationController(contentsOfFile: url, ignoredKeywords: ignoredKeywords) else { exit(-8) }
+
+        switch extractController.run() {
+        case .success:
+            let tempURL = URL.tempURL(extractController.buildInfo.platform)
+            let result = extractController.save(to: tempURL)
+            switch result {
+            case .success:
+                print("Succesfully saved summarized output at: \(tempURL)")
+                exit(0)
+            case .failure(let error):
+                LogError("Saving summary failed: \(error)")
+                exit(ExitCodes.savingFailed.rawValue)
+            }
+
+        case .failure:
+            LogError("Parsing of fastlane output failed")
+            exit(ExitCodes.parsingFailed.rawValue)
+        }
+        
+    default:
+        break
+    }
+
 
     let account = GithubAccount(username: githubUsername, token: githubToken)
     guard let controller = MainController(contentsOfFile: url, branch: branch, account: account, organisation: githubOrganisation, repository: githubRepository, slack: slackURL, ignoredKeywords: ignoredKeywords) else { exit(-8) }

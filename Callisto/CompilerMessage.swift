@@ -10,7 +10,7 @@ import Cocoa
 
 class CompilerMessage: Codable {
 
-    public let fileName: String
+    public let file: String
     public let url: URL
     public let line: NSInteger
     public let column: NSInteger
@@ -31,7 +31,7 @@ class CompilerMessage: Codable {
         let message = components.dropFirst(3).joined(separator: ":")
 
         self.url = URL(fileURLWithPath: path)
-        self.fileName = self.url.lastPathComponent
+        self.file = self.url.lastPathComponent
         self.line = Int(line) ?? -1
         self.column = Int(column) ?? -1
         self.message = message
@@ -41,7 +41,7 @@ class CompilerMessage: Codable {
 extension CompilerMessage: CustomStringConvertible {
 
     var description: String {
-        return "\(self.fileName) [Line: \(self.line)] \(self.message)"
+        return "\(self.file) [Line: \(self.line)] \(self.message)"
     }
 }
 
@@ -49,14 +49,14 @@ extension CompilerMessage: Hashable {
 
     static func == (left: CompilerMessage, right: CompilerMessage) -> Bool {
         return
-            left.fileName == right.fileName &&
+            left.file == right.file &&
             left.line == right.line &&
             left.column == right.column &&
             left.message == right.message
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(self.fileName)
+        hasher.combine(self.file)
         hasher.combine(self.line)
         hasher.combine(self.message)
     }

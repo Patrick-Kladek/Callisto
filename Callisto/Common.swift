@@ -20,11 +20,12 @@ enum ExitCodes: Int32 {
     case reloadBranchFailed = -11
     case jsonConversationFailed = -12
     case fastlaneFinishedWithErrors = -13
+    case invalidAction = -14
+    case savingFailed = -15
 }
 
 struct AppInfo {
-    static let version = "1.0"
-    static let build = 2
+    static let version = "1.1"
 }
 
 func time() -> String {

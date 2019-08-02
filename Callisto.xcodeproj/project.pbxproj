@@ -24,6 +24,7 @@
 		CD4901212008EF6D000F5F08 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49011F2008EF5E000F5F08 /* Common.swift */; };
 		CD4901222008EF96000F5F08 /* NSColor+NSColorHexadecimalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */; };
 		CD4901232008EFB6000F5F08 /* SlackCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE01EE009C600E8EE2E /* SlackCommunicationController.swift */; };
+		CD4E0F6622F429BB00C31E08 /* URL+Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6522F429BB00C31E08 /* URL+Temp.swift */; };
 		CD512D8E2008C1F9002EB718 /* ios_build_4822.log in Resources */ = {isa = PBXBuildFile; fileRef = CD512D8D2008C1F9002EB718 /* ios_build_4822.log */; };
 		CD512D902008C257002EB718 /* GithubCommunicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD512D8F2008C257002EB718 /* GithubCommunicationTests.swift */; };
 		CD512D952008C5A1002EB718 /* GitHubCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */; };
@@ -75,6 +76,7 @@
 		CD33AF7022F07DF9002EC27C /* BuildInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildInformation.swift; sourceTree = "<group>"; };
 		CD4901172008EEC6000F5F08 /* SlackCommunicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackCommunicationTests.swift; sourceTree = "<group>"; };
 		CD49011F2008EF5E000F5F08 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		CD4E0F6522F429BB00C31E08 /* URL+Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Temp.swift"; sourceTree = "<group>"; };
 		CD512D8D2008C1F9002EB718 /* ios_build_4822.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_4822.log; sourceTree = "<group>"; };
 		CD512D8F2008C257002EB718 /* GithubCommunicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubCommunicationTests.swift; sourceTree = "<group>"; };
 		CD8320FE1EE7DF640029DBE0 /* CallistoTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CallistoTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -242,6 +244,7 @@
 				CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */,
 				CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */,
 				CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */,
+				CD4E0F6522F429BB00C31E08 /* URL+Temp.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				CD4901202008EF5E000F5F08 /* Common.swift in Sources */,
 				CD33AF6F22F0766E002EC27C /* ExtractBuildInformationController.swift in Sources */,
 				CD8BBDE91EE009C600E8EE2E /* GithubAccount.swift in Sources */,
+				CD4E0F6622F429BB00C31E08 /* URL+Temp.swift in Sources */,
 				CD8BBDF01EE009C600E8EE2E /* SlackCommunicationController.swift in Sources */,
 				CD33AF7122F07DF9002EC27C /* BuildInformation.swift in Sources */,
 				CD8BBDEE1EE009C600E8EE2E /* SlackAction.swift in Sources */,
@@ -483,7 +487,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -536,7 +540,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
