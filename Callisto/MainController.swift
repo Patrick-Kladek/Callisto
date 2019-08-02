@@ -24,11 +24,10 @@ class MainController {
     fileprivate var slackController: SlackCommunicationController
     fileprivate var ignore: [String]
 
-    init?(contentsOfFile url: URL, branch: String, account: GithubAccount, organisation: String, repository: String, slack: URL, ignoredKeywords: [String]) {
-        self.currentBranch = Branch()
-        self.currentBranch.name = branch
+    init?(contentsOfFile url: URL, branch: String, account: GithubAccount, repository: GithubRepository, slack: URL, ignoredKeywords: [String]) {
+        self.currentBranch = Branch(name: branch)
         self.gitAccount = account
-        self.githubController = GitHubCommunicationController(account: account, organisation: organisation, repository: repository)
+        self.githubController = GitHubCommunicationController(account: account, repository: repository)
         self.slackController = SlackCommunicationController(url: slack)
         self.ignore = ignoredKeywords
 

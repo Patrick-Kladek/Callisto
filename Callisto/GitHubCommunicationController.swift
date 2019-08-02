@@ -11,14 +11,12 @@ import Cocoa
 class GitHubCommunicationController {
 
     public let account: GithubAccount
-    public let organisation: String
-    public let repository: String
+    public let repository: GithubRepository
 
     fileprivate let baseUrl = URL(string: "https://api.github.com")
 
-    init(account: GithubAccount, organisation: String, repository: String) {
+    init(account: GithubAccount, repository: GithubRepository) {
         self.account = account
-        self.organisation = organisation
         self.repository = repository
     }
 
@@ -34,10 +32,10 @@ class GitHubCommunicationController {
 
 fileprivate extension GitHubCommunicationController {
 
-    func makeUrl(organisation: String, repository: String) -> URL? {
+    func makeUrl(repository: GithubRepository) -> URL? {
         guard let baseUrl = self.baseUrl else { return nil }
 
-        return baseUrl.appendingPathComponent("repos").appendingPathComponent(organisation).appendingPathComponent(repository)
+        return baseUrl.appendingPathComponent("repos").appendingPathComponent(repository.organisation).appendingPathComponent(repository.repository)
     }
 }
 
@@ -63,7 +61,7 @@ enum GithubError: Error {
 extension GitHubCommunicationController {
 
     func allPullRequests() -> [[String: Any]] {
-        guard let repositoryUrl = self.makeUrl(organisation: self.organisation, repository: self.repository) else { return [] }
+        guard let repositoryUrl = self.makeUrl(repository: self.repository) else { return [] }
         let pullRequestUrl = repositoryUrl.appendingPathComponent("pulls")
 
         do {

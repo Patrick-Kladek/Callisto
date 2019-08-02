@@ -25,6 +25,8 @@
 		CD4901222008EF96000F5F08 /* NSColor+NSColorHexadecimalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */; };
 		CD4901232008EFB6000F5F08 /* SlackCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE01EE009C600E8EE2E /* SlackCommunicationController.swift */; };
 		CD4E0F6622F429BB00C31E08 /* URL+Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6522F429BB00C31E08 /* URL+Temp.swift */; };
+		CD4E0F6822F43DC500C31E08 /* SummariseAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */; };
+		CD4E0F6A22F4421700C31E08 /* GithubRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6922F4421700C31E08 /* GithubRepository.swift */; };
 		CD512D8E2008C1F9002EB718 /* ios_build_4822.log in Resources */ = {isa = PBXBuildFile; fileRef = CD512D8D2008C1F9002EB718 /* ios_build_4822.log */; };
 		CD512D902008C257002EB718 /* GithubCommunicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD512D8F2008C257002EB718 /* GithubCommunicationTests.swift */; };
 		CD512D952008C5A1002EB718 /* GitHubCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */; };
@@ -77,6 +79,8 @@
 		CD4901172008EEC6000F5F08 /* SlackCommunicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackCommunicationTests.swift; sourceTree = "<group>"; };
 		CD49011F2008EF5E000F5F08 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		CD4E0F6522F429BB00C31E08 /* URL+Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Temp.swift"; sourceTree = "<group>"; };
+		CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummariseAction.swift; sourceTree = "<group>"; };
+		CD4E0F6922F4421700C31E08 /* GithubRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepository.swift; sourceTree = "<group>"; };
 		CD512D8D2008C1F9002EB718 /* ios_build_4822.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_4822.log; sourceTree = "<group>"; };
 		CD512D8F2008C257002EB718 /* GithubCommunicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubCommunicationTests.swift; sourceTree = "<group>"; };
 		CD8320FE1EE7DF640029DBE0 /* CallistoTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CallistoTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				CD8BBDDB1EE009C600E8EE2E /* main.swift */,
+				CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */,
 				CD33AF6E22F0766E002EC27C /* ExtractBuildInformationController.swift */,
 				CD8BBDDC1EE009C600E8EE2E /* MainController.swift */,
 				CD8BBDFA1EE00A8E00E8EE2E /* Parser */,
@@ -232,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */,
+				CD4E0F6922F4421700C31E08 /* GithubRepository.swift */,
 				CD8BBDD41EE009C600E8EE2E /* Branch.swift */,
 			);
 			name = Properties;
@@ -387,9 +393,11 @@
 			files = (
 				CD8BBDE61EE009C600E8EE2E /* Dictionary+Optional.swift in Sources */,
 				CD8BBDE71EE009C600E8EE2E /* DictionaryConvertable.swift in Sources */,
+				CD4E0F6822F43DC500C31E08 /* SummariseAction.swift in Sources */,
 				CD8BBDEB1EE009C600E8EE2E /* main.swift in Sources */,
 				CD081CB91EE7EDCD00F537B3 /* UnitTestMessage.swift in Sources */,
 				CD4901202008EF5E000F5F08 /* Common.swift in Sources */,
+				CD4E0F6A22F4421700C31E08 /* GithubRepository.swift in Sources */,
 				CD33AF6F22F0766E002EC27C /* ExtractBuildInformationController.swift in Sources */,
 				CD8BBDE91EE009C600E8EE2E /* GithubAccount.swift in Sources */,
 				CD4E0F6622F429BB00C31E08 /* URL+Temp.swift in Sources */,
