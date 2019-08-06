@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Darwin // needed for exit()
+
 
 enum ExitCodes: Int32 {
     case success = 0

@@ -14,10 +14,15 @@ extension UserDefaults {
     enum Action: String, CaseIterable {
         case summarize
         case upload
+        case help
         case unknown
     }
 
     var action: Action {
+        if CommandLine.arguments.contains("-help") {
+            return .help
+        }
+
         switch self.string(forKey: "action") {
         case "summarize":
             return .summarize
