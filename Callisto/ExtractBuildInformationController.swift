@@ -28,8 +28,8 @@ final class ExtractBuildInformationController: NSObject {
 
     // MARK: - Lifecycle
 
-    init?(contentsOfFile url: URL, ignoredKeywords: [String]) {
-        guard let parser = FastlaneParser(url: url, ignoredKeywords: ignoredKeywords) else { return nil }
+    init(contentsOfFile url: URL, ignoredKeywords: [String]) throws {
+        let parser = try FastlaneParser(url: url, ignoredKeywords: ignoredKeywords)
 
         self.parser = parser
         self.ignore = ignoredKeywords

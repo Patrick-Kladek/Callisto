@@ -49,7 +49,7 @@ extension ExitCodes: CustomStringConvertible {
         case .invalidSlackWebhook:
             return "invalid Slack Webhook URL. Usage -slack \"slackURL\""
         case .internalError:
-            return "Unknown Error occurred. Here is the stack trace:\n\(Thread.callStackSymbols)"
+            return "Unknown Error occurred. Here is the stack trace:\n\(Thread.callStackSymbols.joined(separator: "\n"))"
         case .parsingFailed:
             return "Unable to parse file"
         case .reloadBranchFailed:

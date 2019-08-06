@@ -15,7 +15,8 @@ func main() {
 
     switch defaults.action {
     case .help:
-        LogMessage("Callisto \(AppInfo.version))")
+        LogMessage("Version \(AppInfo.version)")
+        LogMessage("Usage: \(UserDefaults.Action.possibleValues)")
         exit(0)
 
     case .summarize:

@@ -12,10 +12,14 @@ import Foundation
 extension UserDefaults {
 
     enum Action: String, CaseIterable {
+        case help
         case summarize
         case upload
-        case help
         case unknown
+
+        static var possibleValues: String {
+            return "[\(Action.allCases.filter { $0 != .unknown }.map { $0.rawValue }.joined(separator: "|"))]"
+        }
     }
 
     var action: Action {
@@ -23,13 +27,13 @@ extension UserDefaults {
             return .help
         }
 
-        switch self.string(forKey: "action") {
+        switch CommandLine.arguments.optionalValue(at: 1) {
         case "summarize":
             return .summarize
         case "upload":
             return .upload
         default:
-            LogError("No action specified. Possible values are: \(Action.allCases.filter { $0 != .unknown }.map { $0.rawValue })")
+            LogError("No action specified. Possible values are: \(Action.possibleValues)")
             exit(ExitCodes.invalidAction.rawValue)
         }
     }
@@ -61,5 +65,16 @@ extension UserDefaults {
 
     var ignoredKeywords: [String] {
         return self.string(forKey: "ignore")?.components(separatedBy: ", ") ?? []
+    }
+}
+
+private extension Array {
+
+    func optionalValue(at index: Int) -> Element? {
+        if self.count - 1 < index {
+            return nil
+        }
+
+        return self[index]
     }
 }

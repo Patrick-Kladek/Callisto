@@ -31,7 +31,7 @@ class MainController {
         self.slackController = SlackCommunicationController(url: slack)
         self.ignore = ignoredKeywords
 
-        guard let parser = FastlaneParser(url: url, ignoredKeywords: ignoredKeywords) else { return nil }
+        guard let parser = try? FastlaneParser(url: url, ignoredKeywords: ignoredKeywords) else { return nil }
         self.parser = parser
     }
 

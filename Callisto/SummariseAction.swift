@@ -28,7 +28,14 @@ final class SummariseAction: NSObject {
         let url = defaults.fastlaneOutputURL
         let ignoredKeywords = defaults.ignoredKeywords
 
-        guard let extractController = ExtractBuildInformationController(contentsOfFile: url, ignoredKeywords: ignoredKeywords) else { exit(ExitCodes.internalError.rawValue) }
+        let extractController: ExtractBuildInformationController
+
+        do {
+            try extractController = ExtractBuildInformationController(contentsOfFile: url, ignoredKeywords: ignoredKeywords)
+        } catch {
+            LogError("\(error.localizedDescription)")
+            quit(.parsingFailed)
+        }
 
         switch extractController.run() {
         case .success:
@@ -36,7 +43,7 @@ final class SummariseAction: NSObject {
             let result = extractController.save(to: tempURL)
             switch result {
             case .success:
-                print("Succesfully saved summarized output at: \(tempURL)")
+                LogMessage("Succesfully saved summarized output at: \(tempURL)")
                 quit(.success)
             case .failure(let error):
                 LogError("Saving summary failed: \(error)")

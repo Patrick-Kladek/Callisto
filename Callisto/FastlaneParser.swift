@@ -32,8 +32,8 @@ class FastlaneParser {
         self.ignoredKeywords = ignoredKeywords
     }
 
-    convenience init?(url: URL, ignoredKeywords: [String]) {
-        guard let content = try? String(contentsOf: url) else { return nil }
+    convenience init(url: URL, ignoredKeywords: [String]) throws {
+        let content = try String(contentsOf: url)
         self.init(content: content, ignoredKeywords: ignoredKeywords)
     }
 
