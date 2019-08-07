@@ -12,7 +12,7 @@ import Darwin // needed for exit()
 
 enum ExitCodes: Int32 {
     case success = 0
-    case invalidFile = -1
+    case invalidFastlaneFile = -1
     case invalidBranch = -2
     case invalidGithubUsername = -3
     case invalidGithubCredentials = -4
@@ -26,15 +26,18 @@ enum ExitCodes: Int32 {
     case fastlaneFinishedWithErrors = -13
     case invalidAction = -14
     case savingFailed = -15
+    case invalidBuildInformationFile = -16
 }
 
 extension ExitCodes: CustomStringConvertible {
 
     var description: String {
         switch self {
+        case .success:
+            return ""
         case .fastlaneFinishedWithErrors:
             return ""
-        case .invalidFile:
+        case .invalidFastlaneFile:
             return "invalid file. Usage -fastfile \"/path/to/file\""
         case .invalidBranch:
             return "invalid Branch"
@@ -60,8 +63,8 @@ extension ExitCodes: CustomStringConvertible {
             return "No action specified"
         case .savingFailed:
             return "Unable to save file"
-        case .success:
-            return ""
+        case .invalidBuildInformationFile:
+            return "invalid file. Usage -files \"/path/to/file\""
         }
     }
 }

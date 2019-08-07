@@ -24,15 +24,13 @@ class MainController {
     fileprivate var slackController: SlackCommunicationController
     fileprivate var ignore: [String]
 
-    init?(contentsOfFile url: URL, branch: String, account: GithubAccount, repository: GithubRepository, slack: URL, ignoredKeywords: [String]) {
+    init(contentsOfFile url: URL, branch: String, account: GithubAccount, repository: GithubRepository, slack: URL, ignoredKeywords: [String]) throws {
         self.currentBranch = Branch(name: branch)
         self.gitAccount = account
         self.githubController = GitHubCommunicationController(account: account, repository: repository)
         self.slackController = SlackCommunicationController(url: slack)
         self.ignore = ignoredKeywords
-
-        guard let parser = try? FastlaneParser(url: url, ignoredKeywords: ignoredKeywords) else { return nil }
-        self.parser = parser
+        self.parser = try FastlaneParser(url: url, ignoredKeywords: ignoredKeywords)
     }
 
     func run() -> Status {

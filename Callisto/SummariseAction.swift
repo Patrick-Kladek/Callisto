@@ -14,8 +14,6 @@ final class SummariseAction: NSObject {
 
     private let defaults: UserDefaults
 
-    // MARK: - Properties
-
     // MARK: - Lifecycle
 	
     init(defaults: UserDefaults) {
@@ -53,21 +51,5 @@ final class SummariseAction: NSObject {
         case .failure:
             quit(.parsingFailed)
         }
-    }
-}
-
-// MARK: - Private
-
-private extension SummariseAction {
-
-    
-}
-
-// MARK: - Strings
-
-private extension SummariseAction {
-
-    enum Strings {
-    	
     }
 }

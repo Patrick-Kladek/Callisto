@@ -39,7 +39,7 @@ extension UserDefaults {
     }
 
     var fastlaneOutputURL: URL {
-        return self.url(forKey: "fastlane") ?? { quit(.invalidFile) }()
+        return self.url(forKey: "fastlane") ?? { quit(.invalidFastlaneFile) }()
     }
 
     var branch: String {
