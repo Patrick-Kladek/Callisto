@@ -7,52 +7,65 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CD081CB71EE7E10D00F537B3 /* CompilerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */; };
-		CD081CB91EE7EDCD00F537B3 /* UnitTestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */; };
-		CD081CBA1EE7EDCD00F537B3 /* UnitTestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */; };
 		CD081CBC1EE7F19100F537B3 /* ios_build_4454.log in Resources */ = {isa = PBXBuildFile; fileRef = CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */; };
 		CD081CBE1EE7F1D700F537B3 /* mac_build_4454.log in Resources */ = {isa = PBXBuildFile; fileRef = CD081CBD1EE7F1D700F537B3 /* mac_build_4454.log */; };
-		CD33AF6F22F0766E002EC27C /* ExtractBuildInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD33AF6E22F0766E002EC27C /* ExtractBuildInformationController.swift */; };
-		CD33AF7122F07DF9002EC27C /* BuildInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD33AF7022F07DF9002EC27C /* BuildInformation.swift */; };
-		CD4901182008EEC6000F5F08 /* SlackCommunicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4901172008EEC6000F5F08 /* SlackCommunicationTests.swift */; };
-		CD4901192008EEF5000F5F08 /* SlackMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */; };
-		CD49011A2008EEF9000F5F08 /* SlackAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDF1EE009C600E8EE2E /* SlackAttachment.swift */; };
-		CD49011B2008EEFD000F5F08 /* SlackField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE11EE009C600E8EE2E /* SlackField.swift */; };
-		CD49011C2008EF03000F5F08 /* SlackAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDE1EE009C600E8EE2E /* SlackAction.swift */; };
-		CD49011D2008EF1F000F5F08 /* DictionaryConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */; };
-		CD4901202008EF5E000F5F08 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49011F2008EF5E000F5F08 /* Common.swift */; };
-		CD4901212008EF6D000F5F08 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49011F2008EF5E000F5F08 /* Common.swift */; };
-		CD4901222008EF96000F5F08 /* NSColor+NSColorHexadecimalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */; };
-		CD4901232008EFB6000F5F08 /* SlackCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE01EE009C600E8EE2E /* SlackCommunicationController.swift */; };
-		CD4E0F6622F429BB00C31E08 /* URL+Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6522F429BB00C31E08 /* URL+Temp.swift */; };
-		CD4E0F6822F43DC500C31E08 /* SummariseAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */; };
-		CD4E0F6A22F4421700C31E08 /* GithubRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6922F4421700C31E08 /* GithubRepository.swift */; };
-		CD4E0F6C22F445ED00C31E08 /* UserDefaults+LaunchParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6B22F445ED00C31E08 /* UserDefaults+LaunchParameters.swift */; };
-		CD4E0F6E22F4475A00C31E08 /* UploadAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6D22F4475A00C31E08 /* UploadAction.swift */; };
 		CD512D8E2008C1F9002EB718 /* ios_build_4822.log in Resources */ = {isa = PBXBuildFile; fileRef = CD512D8D2008C1F9002EB718 /* ios_build_4822.log */; };
-		CD512D902008C257002EB718 /* GithubCommunicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD512D8F2008C257002EB718 /* GithubCommunicationTests.swift */; };
-		CD512D952008C5A1002EB718 /* GitHubCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */; };
-		CD512D962008C5C5002EB718 /* GithubAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */; };
-		CD512D972008C5D7002EB718 /* URLSession+synchronousTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */; };
-		CD512D982008C5F8002EB718 /* Dictionary+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */; };
-		CD8321011EE7DF640029DBE0 /* ParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8321001EE7DF640029DBE0 /* ParserTest.swift */; };
-		CD8321061EE7DFA70029DBE0 /* FastlaneParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */; };
-		CD8BBDE41EE009C600E8EE2E /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD41EE009C600E8EE2E /* Branch.swift */; };
-		CD8BBDE51EE009C600E8EE2E /* CompilerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */; };
-		CD8BBDE61EE009C600E8EE2E /* Dictionary+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */; };
-		CD8BBDE71EE009C600E8EE2E /* DictionaryConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */; };
-		CD8BBDE81EE009C600E8EE2E /* FastlaneParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */; };
-		CD8BBDE91EE009C600E8EE2E /* GithubAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */; };
-		CD8BBDEA1EE009C600E8EE2E /* GitHubCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */; };
-		CD8BBDEB1EE009C600E8EE2E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDB1EE009C600E8EE2E /* main.swift */; };
-		CD8BBDEC1EE009C600E8EE2E /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDC1EE009C600E8EE2E /* MainController.swift */; };
-		CD8BBDED1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */; };
 		CD8BBDEE1EE009C600E8EE2E /* SlackAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDE1EE009C600E8EE2E /* SlackAction.swift */; };
 		CD8BBDEF1EE009C600E8EE2E /* SlackAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDF1EE009C600E8EE2E /* SlackAttachment.swift */; };
 		CD8BBDF01EE009C600E8EE2E /* SlackCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE01EE009C600E8EE2E /* SlackCommunicationController.swift */; };
 		CD8BBDF11EE009C600E8EE2E /* SlackField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE11EE009C600E8EE2E /* SlackField.swift */; };
 		CD8BBDF21EE009C600E8EE2E /* SlackMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */; };
-		CD8BBDF31EE009C600E8EE2E /* URLSession+synchronousTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */; };
+		CD9DF11122FC16D300779F6F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDB1EE009C600E8EE2E /* main.swift */; };
+		CD9DF11222FC16D300779F6F /* SummariseAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */; };
+		CD9DF11322FC16D300779F6F /* UploadAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6D22F4475A00C31E08 /* UploadAction.swift */; };
+		CD9DF11422FC16D300779F6F /* ExtractBuildInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD33AF6E22F0766E002EC27C /* ExtractBuildInformationController.swift */; };
+		CD9DF11522FC16D300779F6F /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDC1EE009C600E8EE2E /* MainController.swift */; };
+		CD9DF11622FC16D300779F6F /* FastlaneParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */; };
+		CD9DF11722FC16D300779F6F /* CompilerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */; };
+		CD9DF11822FC16D300779F6F /* UnitTestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */; };
+		CD9DF11922FC16D300779F6F /* BuildInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD33AF7022F07DF9002EC27C /* BuildInformation.swift */; };
+		CD9DF11A22FC16D300779F6F /* GitHubCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */; };
+		CD9DF11B22FC16D300779F6F /* GithubAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */; };
+		CD9DF11C22FC16D300779F6F /* GithubRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6922F4421700C31E08 /* GithubRepository.swift */; };
+		CD9DF11D22FC16D300779F6F /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD41EE009C600E8EE2E /* Branch.swift */; };
+		CD9DF11E22FC16D300779F6F /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF10D22FC102800779F6F /* Annotation.swift */; };
+		CD9DF11F22FC16D300779F6F /* URLSession+synchronousTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */; };
+		CD9DF12022FC16D300779F6F /* UserDefaults+LaunchParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6B22F445ED00C31E08 /* UserDefaults+LaunchParameters.swift */; };
+		CD9DF12122FC16D300779F6F /* DictionaryConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */; };
+		CD9DF12222FC16D300779F6F /* Dictionary+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */; };
+		CD9DF12322FC16D300779F6F /* NSColor+NSColorHexadecimalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */; };
+		CD9DF12422FC16D300779F6F /* URL+Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6522F429BB00C31E08 /* URL+Temp.swift */; };
+		CD9DF12522FC16D300779F6F /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49011F2008EF5E000F5F08 /* Common.swift */; };
+		CD9DF12622FC16EF00779F6F /* ParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8321001EE7DF640029DBE0 /* ParserTest.swift */; };
+		CD9DF12722FC16EF00779F6F /* GithubCommunicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD512D8F2008C257002EB718 /* GithubCommunicationTests.swift */; };
+		CD9DF12822FC16EF00779F6F /* SlackCommunicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4901172008EEC6000F5F08 /* SlackCommunicationTests.swift */; };
+		CD9DF12922FC16EF00779F6F /* GithubModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF10F22FC15AB00779F6F /* GithubModelTests.swift */; };
+		CD9DF12A22FC1C6F00779F6F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDB1EE009C600E8EE2E /* main.swift */; };
+		CD9DF12B22FC1C6F00779F6F /* SummariseAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */; };
+		CD9DF12C22FC1C6F00779F6F /* UploadAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6D22F4475A00C31E08 /* UploadAction.swift */; };
+		CD9DF12D22FC1C6F00779F6F /* ExtractBuildInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD33AF6E22F0766E002EC27C /* ExtractBuildInformationController.swift */; };
+		CD9DF12E22FC1C6F00779F6F /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDC1EE009C600E8EE2E /* MainController.swift */; };
+		CD9DF12F22FC1C6F00779F6F /* FastlaneParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */; };
+		CD9DF13022FC1C6F00779F6F /* CompilerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */; };
+		CD9DF13122FC1C6F00779F6F /* UnitTestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */; };
+		CD9DF13222FC1C6F00779F6F /* BuildInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD33AF7022F07DF9002EC27C /* BuildInformation.swift */; };
+		CD9DF13322FC1C6F00779F6F /* GitHubCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */; };
+		CD9DF13422FC1C6F00779F6F /* GithubAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */; };
+		CD9DF13522FC1C6F00779F6F /* GithubRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6922F4421700C31E08 /* GithubRepository.swift */; };
+		CD9DF13622FC1C6F00779F6F /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD41EE009C600E8EE2E /* Branch.swift */; };
+		CD9DF13722FC1C6F00779F6F /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF10D22FC102800779F6F /* Annotation.swift */; };
+		CD9DF13822FC1C6F00779F6F /* URLSession+synchronousTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */; };
+		CD9DF13922FC1C6F00779F6F /* UserDefaults+LaunchParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6B22F445ED00C31E08 /* UserDefaults+LaunchParameters.swift */; };
+		CD9DF13A22FC1C6F00779F6F /* DictionaryConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */; };
+		CD9DF13B22FC1C6F00779F6F /* Dictionary+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */; };
+		CD9DF13C22FC1C6F00779F6F /* NSColor+NSColorHexadecimalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */; };
+		CD9DF13D22FC1C6F00779F6F /* URL+Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6522F429BB00C31E08 /* URL+Temp.swift */; };
+		CD9DF13E22FC1C6F00779F6F /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49011F2008EF5E000F5F08 /* Common.swift */; };
+		CD9DF13F22FC1C9100779F6F /* SlackCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE01EE009C600E8EE2E /* SlackCommunicationController.swift */; };
+		CD9DF14022FC1C9100779F6F /* SlackMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */; };
+		CD9DF14122FC1C9100779F6F /* SlackAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDF1EE009C600E8EE2E /* SlackAttachment.swift */; };
+		CD9DF14222FC1C9100779F6F /* SlackField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE11EE009C600E8EE2E /* SlackField.swift */; };
+		CD9DF14322FC1C9100779F6F /* SlackAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDE1EE009C600E8EE2E /* SlackAction.swift */; };
 		CDF007082074FAC200257FCC /* mac_build_8731.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF007062074FAC200257FCC /* mac_build_8731.log */; };
 		CDF007092074FAC200257FCC /* ios_build_8731.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF007072074FAC200257FCC /* ios_build_8731.log */; };
 		CDF0070E20760B1900257FCC /* ios_build_8745.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF0070C20760B1900257FCC /* ios_build_8745.log */; };
@@ -107,6 +120,8 @@
 		CD8BBDE11EE009C600E8EE2E /* SlackField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackField.swift; sourceTree = "<group>"; };
 		CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackMessage.swift; sourceTree = "<group>"; };
 		CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+synchronousTask.swift"; sourceTree = "<group>"; };
+		CD9DF10D22FC102800779F6F /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
+		CD9DF10F22FC15AB00779F6F /* GithubModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubModelTests.swift; sourceTree = "<group>"; };
 		CDF007062074FAC200257FCC /* mac_build_8731.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mac_build_8731.log; sourceTree = "<group>"; };
 		CDF007072074FAC200257FCC /* ios_build_8731.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_8731.log; sourceTree = "<group>"; };
 		CDF0070C20760B1900257FCC /* ios_build_8745.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_8745.log; sourceTree = "<group>"; };
@@ -137,6 +152,7 @@
 				CD8321001EE7DF640029DBE0 /* ParserTest.swift */,
 				CD512D8F2008C257002EB718 /* GithubCommunicationTests.swift */,
 				CD4901172008EEC6000F5F08 /* SlackCommunicationTests.swift */,
+				CD9DF10F22FC15AB00779F6F /* GithubModelTests.swift */,
 				CD8321091EE7DFBF0029DBE0 /* Resources */,
 				CD8321021EE7DF640029DBE0 /* Info.plist */,
 			);
@@ -244,6 +260,7 @@
 				CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */,
 				CD4E0F6922F4421700C31E08 /* GithubRepository.swift */,
 				CD8BBDD41EE009C600E8EE2E /* Branch.swift */,
+				CD9DF10D22FC102800779F6F /* Annotation.swift */,
 			);
 			name = Properties;
 			sourceTree = "<group>";
@@ -372,24 +389,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD4901212008EF6D000F5F08 /* Common.swift in Sources */,
-				CD49011B2008EEFD000F5F08 /* SlackField.swift in Sources */,
-				CD512D902008C257002EB718 /* GithubCommunicationTests.swift in Sources */,
-				CD4901192008EEF5000F5F08 /* SlackMessage.swift in Sources */,
-				CD081CB71EE7E10D00F537B3 /* CompilerMessage.swift in Sources */,
-				CD081CBA1EE7EDCD00F537B3 /* UnitTestMessage.swift in Sources */,
-				CD4901222008EF96000F5F08 /* NSColor+NSColorHexadecimalValue.swift in Sources */,
-				CD8321061EE7DFA70029DBE0 /* FastlaneParser.swift in Sources */,
-				CD8321011EE7DF640029DBE0 /* ParserTest.swift in Sources */,
-				CD4901182008EEC6000F5F08 /* SlackCommunicationTests.swift in Sources */,
-				CD49011C2008EF03000F5F08 /* SlackAction.swift in Sources */,
-				CD4901232008EFB6000F5F08 /* SlackCommunicationController.swift in Sources */,
-				CD49011A2008EEF9000F5F08 /* SlackAttachment.swift in Sources */,
-				CD49011D2008EF1F000F5F08 /* DictionaryConvertable.swift in Sources */,
-				CD512D962008C5C5002EB718 /* GithubAccount.swift in Sources */,
-				CD512D982008C5F8002EB718 /* Dictionary+Optional.swift in Sources */,
-				CD512D972008C5D7002EB718 /* URLSession+synchronousTask.swift in Sources */,
-				CD512D952008C5A1002EB718 /* GitHubCommunicationController.swift in Sources */,
+				CD9DF12622FC16EF00779F6F /* ParserTest.swift in Sources */,
+				CD9DF13C22FC1C6F00779F6F /* NSColor+NSColorHexadecimalValue.swift in Sources */,
+				CD9DF12A22FC1C6F00779F6F /* main.swift in Sources */,
+				CD9DF13822FC1C6F00779F6F /* URLSession+synchronousTask.swift in Sources */,
+				CD9DF13922FC1C6F00779F6F /* UserDefaults+LaunchParameters.swift in Sources */,
+				CD9DF13622FC1C6F00779F6F /* Branch.swift in Sources */,
+				CD9DF13B22FC1C6F00779F6F /* Dictionary+Optional.swift in Sources */,
+				CD9DF12722FC16EF00779F6F /* GithubCommunicationTests.swift in Sources */,
+				CD9DF12822FC16EF00779F6F /* SlackCommunicationTests.swift in Sources */,
+				CD9DF14222FC1C9100779F6F /* SlackField.swift in Sources */,
+				CD9DF13A22FC1C6F00779F6F /* DictionaryConvertable.swift in Sources */,
+				CD9DF13522FC1C6F00779F6F /* GithubRepository.swift in Sources */,
+				CD9DF13022FC1C6F00779F6F /* CompilerMessage.swift in Sources */,
+				CD9DF13322FC1C6F00779F6F /* GitHubCommunicationController.swift in Sources */,
+				CD9DF13E22FC1C6F00779F6F /* Common.swift in Sources */,
+				CD9DF13D22FC1C6F00779F6F /* URL+Temp.swift in Sources */,
+				CD9DF13122FC1C6F00779F6F /* UnitTestMessage.swift in Sources */,
+				CD9DF12E22FC1C6F00779F6F /* MainController.swift in Sources */,
+				CD9DF14322FC1C9100779F6F /* SlackAction.swift in Sources */,
+				CD9DF13F22FC1C9100779F6F /* SlackCommunicationController.swift in Sources */,
+				CD9DF12B22FC1C6F00779F6F /* SummariseAction.swift in Sources */,
+				CD9DF13222FC1C6F00779F6F /* BuildInformation.swift in Sources */,
+				CD9DF12C22FC1C6F00779F6F /* UploadAction.swift in Sources */,
+				CD9DF12922FC16EF00779F6F /* GithubModelTests.swift in Sources */,
+				CD9DF12F22FC1C6F00779F6F /* FastlaneParser.swift in Sources */,
+				CD9DF12D22FC1C6F00779F6F /* ExtractBuildInformationController.swift in Sources */,
+				CD9DF13722FC1C6F00779F6F /* Annotation.swift in Sources */,
+				CD9DF14022FC1C9100779F6F /* SlackMessage.swift in Sources */,
+				CD9DF13422FC1C6F00779F6F /* GithubAccount.swift in Sources */,
+				CD9DF14122FC1C9100779F6F /* SlackAttachment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,31 +426,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD8BBDE61EE009C600E8EE2E /* Dictionary+Optional.swift in Sources */,
-				CD8BBDE71EE009C600E8EE2E /* DictionaryConvertable.swift in Sources */,
-				CD4E0F6E22F4475A00C31E08 /* UploadAction.swift in Sources */,
-				CD4E0F6822F43DC500C31E08 /* SummariseAction.swift in Sources */,
-				CD8BBDEB1EE009C600E8EE2E /* main.swift in Sources */,
-				CD081CB91EE7EDCD00F537B3 /* UnitTestMessage.swift in Sources */,
-				CD4901202008EF5E000F5F08 /* Common.swift in Sources */,
-				CD4E0F6A22F4421700C31E08 /* GithubRepository.swift in Sources */,
-				CD4E0F6C22F445ED00C31E08 /* UserDefaults+LaunchParameters.swift in Sources */,
-				CD33AF6F22F0766E002EC27C /* ExtractBuildInformationController.swift in Sources */,
-				CD8BBDE91EE009C600E8EE2E /* GithubAccount.swift in Sources */,
-				CD4E0F6622F429BB00C31E08 /* URL+Temp.swift in Sources */,
+				CD9DF11722FC16D300779F6F /* CompilerMessage.swift in Sources */,
+				CD9DF11D22FC16D300779F6F /* Branch.swift in Sources */,
+				CD9DF12522FC16D300779F6F /* Common.swift in Sources */,
+				CD9DF11322FC16D300779F6F /* UploadAction.swift in Sources */,
 				CD8BBDF01EE009C600E8EE2E /* SlackCommunicationController.swift in Sources */,
-				CD33AF7122F07DF9002EC27C /* BuildInformation.swift in Sources */,
 				CD8BBDEE1EE009C600E8EE2E /* SlackAction.swift in Sources */,
-				CD8BBDF31EE009C600E8EE2E /* URLSession+synchronousTask.swift in Sources */,
-				CD8BBDEC1EE009C600E8EE2E /* MainController.swift in Sources */,
+				CD9DF11122FC16D300779F6F /* main.swift in Sources */,
+				CD9DF11522FC16D300779F6F /* MainController.swift in Sources */,
 				CD8BBDF11EE009C600E8EE2E /* SlackField.swift in Sources */,
-				CD8BBDED1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift in Sources */,
+				CD9DF11822FC16D300779F6F /* UnitTestMessage.swift in Sources */,
+				CD9DF12122FC16D300779F6F /* DictionaryConvertable.swift in Sources */,
+				CD9DF12422FC16D300779F6F /* URL+Temp.swift in Sources */,
+				CD9DF11E22FC16D300779F6F /* Annotation.swift in Sources */,
+				CD9DF11C22FC16D300779F6F /* GithubRepository.swift in Sources */,
 				CD8BBDEF1EE009C600E8EE2E /* SlackAttachment.swift in Sources */,
-				CD8BBDE51EE009C600E8EE2E /* CompilerMessage.swift in Sources */,
-				CD8BBDE81EE009C600E8EE2E /* FastlaneParser.swift in Sources */,
-				CD8BBDEA1EE009C600E8EE2E /* GitHubCommunicationController.swift in Sources */,
+				CD9DF11422FC16D300779F6F /* ExtractBuildInformationController.swift in Sources */,
+				CD9DF11622FC16D300779F6F /* FastlaneParser.swift in Sources */,
+				CD9DF11F22FC16D300779F6F /* URLSession+synchronousTask.swift in Sources */,
+				CD9DF11922FC16D300779F6F /* BuildInformation.swift in Sources */,
+				CD9DF12222FC16D300779F6F /* Dictionary+Optional.swift in Sources */,
+				CD9DF12022FC16D300779F6F /* UserDefaults+LaunchParameters.swift in Sources */,
 				CD8BBDF21EE009C600E8EE2E /* SlackMessage.swift in Sources */,
-				CD8BBDE41EE009C600E8EE2E /* Branch.swift in Sources */,
+				CD9DF11222FC16D300779F6F /* SummariseAction.swift in Sources */,
+				CD9DF12322FC16D300779F6F /* NSColor+NSColorHexadecimalValue.swift in Sources */,
+				CD9DF11B22FC16D300779F6F /* GithubAccount.swift in Sources */,
+				CD9DF11A22FC16D300779F6F /* GitHubCommunicationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
