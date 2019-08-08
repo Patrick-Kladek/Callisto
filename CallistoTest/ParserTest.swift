@@ -8,6 +8,7 @@
 
 import XCTest
 
+
 class CallistoTest: XCTestCase {
     
     func testFastlaneMobileParser() {
@@ -15,16 +16,11 @@ class CallistoTest: XCTestCase {
         guard let fastlaneContent = try? String.init(contentsOf: fastlaneOutputURL, encoding: .utf8) else { XCTFail(); return; }
 
         let parser = FastlaneParser(content: fastlaneContent, ignoredKeywords: ["todo"])
+        XCTAssertEqual(65, parser.parse())
 
-        if case .success(let code) = parser.parse() {
-            XCTAssertEqual(code, 65)
-        } else {
-            XCTFail()
-        }
-
-        XCTAssertEqual(parser.buildErrorMessages.count, 0)
-        XCTAssertEqual(parser.buildWarningMessages.count, 0)
-        XCTAssertEqual(parser.unitTestMessages.count, 4)
+        XCTAssertEqual(parser.buildSummary.errors.count, 0)
+        XCTAssertEqual(parser.buildSummary.warnings.count, 0)
+        XCTAssertEqual(parser.buildSummary.unitTests.count, 4)
     }
 
     func testFastlaneDesktopParser() {
@@ -32,16 +28,11 @@ class CallistoTest: XCTestCase {
         guard let fastlaneContent = try? String.init(contentsOf: fastlaneOutputURL, encoding: .utf8) else { XCTFail(); return; }
 
         let parser = FastlaneParser(content: fastlaneContent, ignoredKeywords: ["todo"])
+        XCTAssertEqual(65, parser.parse())
 
-        if case .success(let code) = parser.parse() {
-            XCTAssertEqual(code, 65)
-        } else {
-            XCTFail()
-        }
-
-        XCTAssertEqual(parser.buildErrorMessages.count, 2) 
-        XCTAssertEqual(parser.buildWarningMessages.count, 0)
-        XCTAssertEqual(parser.unitTestMessages.count, 0)
+        XCTAssertEqual(parser.buildSummary.errors.count, 2)
+        XCTAssertEqual(parser.buildSummary.warnings.count, 0)
+        XCTAssertEqual(parser.buildSummary.unitTests.count, 0)
     }
 
     func testIgnoreFile() {
@@ -49,16 +40,11 @@ class CallistoTest: XCTestCase {
         guard let fastlaneContent = try? String.init(contentsOf: fastlaneOutputURL, encoding: .utf8) else { XCTFail(); return; }
 
         let parser = FastlaneParser(content: fastlaneContent, ignoredKeywords: ["BITCrashManager", "todo"])
+        XCTAssertEqual(-1, parser.parse())
 
-        if case .success(let code) = parser.parse() {
-            XCTAssertEqual(code, -1)
-        } else {
-            XCTFail()
-        }
-
-        print(parser.buildErrorMessages)
-        print(parser.buildWarningMessages)
-        print(parser.unitTestMessages)
+        print(parser.buildSummary.errors.count)
+        print(parser.buildSummary.warnings.count)
+        print(parser.buildSummary.unitTests.count)
     }
 
     func testXcode9_3_MobileParser() {
@@ -66,16 +52,11 @@ class CallistoTest: XCTestCase {
         guard let fastlaneContent = try? String.init(contentsOf: fastlaneOutputURL, encoding: .utf8) else { XCTFail(); return; }
 
         let parser = FastlaneParser(content: fastlaneContent, ignoredKeywords: ["todo"])
+        XCTAssertEqual(65, parser.parse())
 
-        if case .success(let code) = parser.parse() {
-            XCTAssertEqual(code, 65)
-        } else {
-            XCTFail()
-        }
-
-        XCTAssertEqual(parser.buildErrorMessages.count, 0)
-        XCTAssertEqual(parser.buildWarningMessages.count, 9)
-        XCTAssertEqual(parser.unitTestMessages.count, 1)
+        XCTAssertEqual(parser.buildSummary.errors.count, 0)
+        XCTAssertEqual(parser.buildSummary.warnings.count, 9)
+        XCTAssertEqual(parser.buildSummary.unitTests.count, 1)
     }
 
     func testXcode9_3_DesktopParser() {
@@ -83,15 +64,10 @@ class CallistoTest: XCTestCase {
         guard let fastlaneContent = try? String.init(contentsOf: fastlaneOutputURL, encoding: .utf8) else { XCTFail(); return; }
 
         let parser = FastlaneParser(content: fastlaneContent, ignoredKeywords: ["todo"])
+        XCTAssertEqual(65, parser.parse())
 
-        if case .success(let code) = parser.parse() {
-            XCTAssertEqual(code, 65)
-        } else {
-            XCTFail()
-        }
-
-        XCTAssertEqual(parser.buildErrorMessages.count, 0)
-        XCTAssertEqual(parser.buildWarningMessages.count, 6)
-        XCTAssertEqual(parser.unitTestMessages.count, 1)
+        XCTAssertEqual(parser.buildSummary.errors.count, 0)
+        XCTAssertEqual(parser.buildSummary.warnings.count, 6)
+        XCTAssertEqual(parser.buildSummary.unitTests.count, 1)
     }
 }
