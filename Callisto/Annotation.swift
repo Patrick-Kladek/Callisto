@@ -22,7 +22,6 @@ struct Annotation: Codable {
     let endLine: Int
     let level: Level
     let message: String
-
     let title: String?
     let details: String?
 
