@@ -48,19 +48,15 @@ final class UploadAction: NSObject {
 
         let coreInfos = self.commonInfos(infos)
         let stripped = self.stripInfos(coreInfos, from: infos)
-        self.logBuildInfo([coreInfos])
+        self.logBuildInfo([coreInfos].compactMap { $0 })
         self.logBuildInfo(stripped)
 
-        let currentBranch: Branch
-        switch self.loadCurrentBranch(name: defaults.branch) {
-        case .success(let branch):
-            currentBranch = branch
-        case .failure(let error):
-            LogError(error.localizedDescription)
-            quit(.reloadBranchFailed)
-        }
-
+        let currentBranch = self.loadCurrentBranch()
         print(currentBranch)
+
+//        print(MarkdownTable(info: infos[0]).markdownString )
+        print(self.markdownText(from: infos[0]))
+        print(self.markdownText(from: infos[1]))
 
         quit(.success)
     }
@@ -70,7 +66,19 @@ final class UploadAction: NSObject {
 
 private extension UploadAction {
 
-    func commonInfos(_ infos: [BuildInformation]) -> BuildInformation {
+    func loadCurrentBranch() -> Branch {
+        switch self.loadCurrentBranch(name: defaults.branch) {
+        case .success(let branch):
+            return branch
+        case .failure(let error):
+            LogError(error.localizedDescription)
+            quit(.reloadBranchFailed)
+        }
+    }
+
+    func commonInfos(_ infos: [BuildInformation]) -> BuildInformation? {
+        guard infos.count > 1 else { return nil }
+
         let commonErrors = infos[0].errors.filter { infos[1].errors.contains($0) }
         let commonWarnings = infos[0].warnings.filter { infos[1].warnings.contains($0) }
         let commonUnitTests = infos[0].unitTests.filter { infos[1].unitTests.contains($0) }
@@ -81,7 +89,9 @@ private extension UploadAction {
                                 unitTests: commonUnitTests)
     }
 
-    func stripInfos(_ strip: BuildInformation, from: [BuildInformation]) -> [BuildInformation] {
+    func stripInfos(_ strip: BuildInformation?, from: [BuildInformation]) -> [BuildInformation] {
+        guard let strip = strip else { return from }
+
         return from.map { info -> BuildInformation in
             BuildInformation(platform: info.platform,
                              errors: info.errors.deleting(strip.errors),
@@ -118,6 +128,26 @@ private extension UploadAction {
                 LogWarning(unitTest.description)
             }
         }
+    }
+
+    func markdownText(from info: BuildInformation) -> String {
+        var string = "### \(info.platform)"
+
+        if info.errors.hasElements {
+            string += "\n\n"
+            string += info.errors.map { ":error: `\($0.file):\($0.line)`\n\($0.message)" }.joined(separator: "\n")
+        }
+
+        if info.warnings.hasElements {
+            string += "\n\n"
+            string += info.warnings.map { ":warning: `\($0.file):\($0.line)`\n\($0.message)" }.joined(separator: "\n")
+        }
+
+        if info.unitTests.hasElements {
+            string += "\n\n"
+            string += info.unitTests.map { ":large_blue_circle: `\($0.method)`\n\($0.explanation)" }.joined(separator: "\n")
+        }
+        return string
     }
 }
 
@@ -165,18 +195,9 @@ private extension CommandLine {
     }
 }
 
-// MARK: - Private
+private extension Collection {
 
-private extension UploadAction {
-
-    
-}
-
-// MARK: - Strings
-
-private extension UploadAction {
-
-    enum Strings {
-    	
+    var hasElements: Bool {
+        return self.isEmpty == false
     }
 }

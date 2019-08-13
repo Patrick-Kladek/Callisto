@@ -38,7 +38,7 @@ extension ExitCodes: CustomStringConvertible {
         case .fastlaneFinishedWithErrors:
             return ""
         case .invalidFastlaneFile:
-            return "invalid file. Usage -fastfile \"/path/to/file\""
+            return "invalid file. Usage -fastlane \"/path/to/file\""
         case .invalidBranch:
             return "invalid Branch"
         case .invalidGithubUsername:

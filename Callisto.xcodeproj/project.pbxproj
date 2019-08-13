@@ -69,9 +69,6 @@
 		CD9DF3A722FC294E00779F6F /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3A622FC294E00779F6F /* Output.swift */; };
 		CD9DF3A922FC2A1A00779F6F /* Check.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3A822FC2A1A00779F6F /* Check.swift */; };
 		CD9DF3AB22FC4AEF00779F6F /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3AA22FC4AEF00779F6F /* Comment.swift */; };
-		CD9DF3AE22FD4A5700779F6F /* MarkdownTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3AD22FD4A5700779F6F /* MarkdownTable.swift */; };
-		CD9DF3B022FD4C2C00779F6F /* MarkdownModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3AF22FD4C2C00779F6F /* MarkdownModelTests.swift */; };
-		CD9DF3B122FD4C5700779F6F /* MarkdownTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3AD22FD4A5700779F6F /* MarkdownTable.swift */; };
 		CDF007082074FAC200257FCC /* mac_build_8731.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF007062074FAC200257FCC /* mac_build_8731.log */; };
 		CDF007092074FAC200257FCC /* ios_build_8731.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF007072074FAC200257FCC /* ios_build_8731.log */; };
 		CDF0070E20760B1900257FCC /* ios_build_8745.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF0070C20760B1900257FCC /* ios_build_8745.log */; };
@@ -131,8 +128,6 @@
 		CD9DF3A622FC294E00779F6F /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
 		CD9DF3A822FC2A1A00779F6F /* Check.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Check.swift; sourceTree = "<group>"; };
 		CD9DF3AA22FC4AEF00779F6F /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		CD9DF3AD22FD4A5700779F6F /* MarkdownTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownTable.swift; sourceTree = "<group>"; };
-		CD9DF3AF22FD4C2C00779F6F /* MarkdownModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownModelTests.swift; sourceTree = "<group>"; };
 		CDF007062074FAC200257FCC /* mac_build_8731.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mac_build_8731.log; sourceTree = "<group>"; };
 		CDF007072074FAC200257FCC /* ios_build_8731.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_8731.log; sourceTree = "<group>"; };
 		CDF0070C20760B1900257FCC /* ios_build_8745.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_8745.log; sourceTree = "<group>"; };
@@ -164,7 +159,6 @@
 				CD512D8F2008C257002EB718 /* GithubCommunicationTests.swift */,
 				CD4901172008EEC6000F5F08 /* SlackCommunicationTests.swift */,
 				CD9DF10F22FC15AB00779F6F /* GithubModelTests.swift */,
-				CD9DF3AF22FD4C2C00779F6F /* MarkdownModelTests.swift */,
 				CD8321091EE7DFBF0029DBE0 /* Resources */,
 				CD8321021EE7DF640029DBE0 /* Info.plist */,
 			);
@@ -308,7 +302,6 @@
 		CD9DF3AC22FD4A4300779F6F /* Markdown */ = {
 			isa = PBXGroup;
 			children = (
-				CD9DF3AD22FD4A5700779F6F /* MarkdownTable.swift */,
 			);
 			name = Markdown;
 			sourceTree = "<group>";
@@ -420,7 +413,6 @@
 				CD9DF13922FC1C6F00779F6F /* UserDefaults+LaunchParameters.swift in Sources */,
 				CD9DF13622FC1C6F00779F6F /* Branch.swift in Sources */,
 				CD9DF13B22FC1C6F00779F6F /* Dictionary+Optional.swift in Sources */,
-				CD9DF3B022FD4C2C00779F6F /* MarkdownModelTests.swift in Sources */,
 				CD9DF12722FC16EF00779F6F /* GithubCommunicationTests.swift in Sources */,
 				CD9DF12822FC16EF00779F6F /* SlackCommunicationTests.swift in Sources */,
 				CD9DF14222FC1C9100779F6F /* SlackField.swift in Sources */,
@@ -438,7 +430,6 @@
 				CD9DF13222FC1C6F00779F6F /* BuildInformation.swift in Sources */,
 				CD9DF12C22FC1C6F00779F6F /* UploadAction.swift in Sources */,
 				CD9DF12922FC16EF00779F6F /* GithubModelTests.swift in Sources */,
-				CD9DF3B122FD4C5700779F6F /* MarkdownTable.swift in Sources */,
 				CD9DF12F22FC1C6F00779F6F /* FastlaneParser.swift in Sources */,
 				CD9DF12D22FC1C6F00779F6F /* ExtractBuildInformationController.swift in Sources */,
 				CD9DF13722FC1C6F00779F6F /* Annotation.swift in Sources */,
@@ -457,7 +448,6 @@
 				CD9DF11D22FC16D300779F6F /* Branch.swift in Sources */,
 				CD9DF12522FC16D300779F6F /* Common.swift in Sources */,
 				CD9DF11322FC16D300779F6F /* UploadAction.swift in Sources */,
-				CD9DF3AE22FD4A5700779F6F /* MarkdownTable.swift in Sources */,
 				CD8BBDF01EE009C600E8EE2E /* SlackCommunicationController.swift in Sources */,
 				CD8BBDEE1EE009C600E8EE2E /* SlackAction.swift in Sources */,
 				CD9DF11122FC16D300779F6F /* main.swift in Sources */,
