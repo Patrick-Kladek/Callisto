@@ -66,7 +66,24 @@ class MarkdownModelTests: XCTestCase {
         """
 
         XCTAssertEqual(referenceString, table.markdownString)
+    }
 
-        print(table.markdownString)
+    func testHeaderEqualRows() {
+        let table = MarkdownTable(header: ["Type", "File", "Message"], rows: [
+            ["Warning", "README.md", "Typo in line 243"],
+            ["UnitTest", "", "testImageRepresentationWithScaling"],
+            ["Hello", "World", "This"]
+        ])
+
+        let referenceString =
+        """
+        | Type | File | Message |
+        | --- | --- | --- |
+        | Warning | README.md | Typo in line 243 |
+        | UnitTest |  | testImageRepresentationWithScaling |
+        | Hello | World | This |
+        """
+
+        XCTAssertEqual(referenceString, table.markdownString)
     }
 }
