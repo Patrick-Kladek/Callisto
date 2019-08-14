@@ -34,7 +34,7 @@ class CompilerMessage: Codable {
         self.file = self.url.lastPathComponent
         self.line = Int(line) ?? -1
         self.column = Int(column) ?? -1
-        self.message = message.dropWarningFlag().trim()
+        self.message = message.dropWarningFlag().trim().replacingOccurrences(of: "'", with: "`")
     }
 }
 

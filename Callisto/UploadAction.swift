@@ -36,7 +36,7 @@ final class UploadAction: NSObject {
             quit(.invalidBuildInformationFile)
         }
 
-        let infos = inputFiles.map { BuildInformation.read(url: $0) }.compactMap { result -> BuildInformation? in
+        let infos = self.filteredBuildInfos(inputFiles.map { BuildInformation.read(url: $0) }.compactMap { result -> BuildInformation? in
             switch result {
             case .success(let info):
                 return info
@@ -44,19 +44,14 @@ final class UploadAction: NSObject {
                 LogError("\(error)")
                 return nil
             }
-        }
-
-        let coreInfos = self.commonInfos(infos)
-        let stripped = self.stripInfos(coreInfos, from: infos)
-        self.logBuildInfo([coreInfos].compactMap { $0 })
-        self.logBuildInfo(stripped)
+        })
 
         let currentBranch = self.loadCurrentBranch()
         print(currentBranch)
 
-//        print(MarkdownTable(info: infos[0]).markdownString )
-        print(self.markdownText(from: infos[0]))
-        print(self.markdownText(from: infos[1]))
+        for info in infos {
+            print(self.markdownText(from: info) ?? "nil")
+        }
 
         quit(.success)
     }
@@ -65,6 +60,18 @@ final class UploadAction: NSObject {
 // MARK: - Private
 
 private extension UploadAction {
+
+    func filteredBuildInfos(_ infos: [BuildInformation]) -> [BuildInformation] {
+        let coreInfos = self.commonInfos(infos)
+        let stripped = self.stripInfos(coreInfos, from: infos)
+
+        var allBuildInfos = stripped
+        if let coreInfos = coreInfos {
+            allBuildInfos.append(coreInfos)
+        }
+
+        return allBuildInfos
+    }
 
     func loadCurrentBranch() -> Branch {
         switch self.loadCurrentBranch(name: defaults.branch) {
@@ -130,23 +137,29 @@ private extension UploadAction {
         }
     }
 
-    func markdownText(from info: BuildInformation) -> String {
+    func markdownText(from info: BuildInformation) -> String? {
+        guard info.errors.hasElements ||
+            info.warnings.hasElements ||
+            info.unitTests.hasElements else { return nil }
+
         var string = "### \(info.platform)"
 
         if info.errors.hasElements {
             string += "\n\n"
-            string += info.errors.map { ":error: `\($0.file):\($0.line)`\n\($0.message)" }.joined(separator: "\n")
+            string += info.errors.map { ":red_circle: **\($0.file):\($0.line)**\n\($0.message)" }.joined(separator: "\n\n")
         }
 
         if info.warnings.hasElements {
             string += "\n\n"
-            string += info.warnings.map { ":warning: `\($0.file):\($0.line)`\n\($0.message)" }.joined(separator: "\n")
+            string += info.warnings.map { ":warning: **\($0.file):\($0.line)**\n\($0.message)" }.joined(separator: "\n\n")
         }
 
         if info.unitTests.hasElements {
             string += "\n\n"
-            string += info.unitTests.map { ":large_blue_circle: `\($0.method)`\n\($0.explanation)" }.joined(separator: "\n")
+            string += info.unitTests.map { ":large_blue_circle: `\($0.method)`\n\($0.explanation)" }.joined(separator: "\n\n")
         }
+
+        string += "\n\n"
         return string
     }
 }
