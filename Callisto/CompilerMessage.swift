@@ -34,7 +34,7 @@ class CompilerMessage: Codable {
         self.file = self.url.lastPathComponent
         self.line = Int(line) ?? -1
         self.column = Int(column) ?? -1
-        self.message = message
+        self.message = message.dropWarningFlag().trim()
     }
 }
 
@@ -84,18 +84,34 @@ fileprivate extension CompilerMessage {
         return nil
     }
 }
+private extension String {
 
-extension String {
+    func dropWarningFlag() -> String {
+        let string = self as NSString
 
-    /// An `NSRange` that represents the full range of the string.
-    var nsrange: NSRange {
-        return NSRange(location: 0, length: utf16.count)
+        let begin = string.range(of: "[-W")
+        let end = string.range(of: "]")
+
+        guard begin.location != NSNotFound, end.location != NSNotFound else { return self }
+
+        let range = begin.extend(to: end)
+        return string.replacingCharacters(in: range, with: "")
+    }
+}
+
+private extension NSRange {
+
+    init(begin: Int, end: Int) {
+        self = .init(location: begin, length: end - begin)
     }
 
-    /// Returns a substring with the given `NSRange`,
-    /// or `nil` if the range can't be converted.
-    func substring(with nsrange: NSRange) -> String? {
-        guard let range = Range(nsrange, in: self) else { return nil }
-        return String(self[range])
+    func extend(to range: NSRange) -> NSRange {
+        guard self.endPosition < range.endPosition else { return self }
+
+        return NSRange(begin: self.location, end: range.endPosition)
+    }
+
+    var endPosition: NSInteger {
+        return self.location + self.length
     }
 }

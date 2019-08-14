@@ -69,6 +69,7 @@
 		CD9DF3A722FC294E00779F6F /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3A622FC294E00779F6F /* Output.swift */; };
 		CD9DF3A922FC2A1A00779F6F /* Check.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3A822FC2A1A00779F6F /* Check.swift */; };
 		CD9DF3AB22FC4AEF00779F6F /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3AA22FC4AEF00779F6F /* Comment.swift */; };
+		CDB22D312303F985002A1EF3 /* String+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB22D302303F985002A1EF3 /* String+Sugar.swift */; };
 		CDF007082074FAC200257FCC /* mac_build_8731.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF007062074FAC200257FCC /* mac_build_8731.log */; };
 		CDF007092074FAC200257FCC /* ios_build_8731.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF007072074FAC200257FCC /* ios_build_8731.log */; };
 		CDF0070E20760B1900257FCC /* ios_build_8745.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF0070C20760B1900257FCC /* ios_build_8745.log */; };
@@ -128,6 +129,7 @@
 		CD9DF3A622FC294E00779F6F /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
 		CD9DF3A822FC2A1A00779F6F /* Check.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Check.swift; sourceTree = "<group>"; };
 		CD9DF3AA22FC4AEF00779F6F /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		CDB22D302303F985002A1EF3 /* String+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Sugar.swift"; sourceTree = "<group>"; };
 		CDF007062074FAC200257FCC /* mac_build_8731.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mac_build_8731.log; sourceTree = "<group>"; };
 		CDF007072074FAC200257FCC /* ios_build_8731.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_8731.log; sourceTree = "<group>"; };
 		CDF0070C20760B1900257FCC /* ios_build_8745.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_8745.log; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */,
 				CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */,
 				CD4E0F6522F429BB00C31E08 /* URL+Temp.swift */,
+				CDB22D302303F985002A1EF3 /* String+Sugar.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				CD9DF12422FC16D300779F6F /* URL+Temp.swift in Sources */,
 				CD9DF11E22FC16D300779F6F /* Annotation.swift in Sources */,
 				CD9DF3A722FC294E00779F6F /* Output.swift in Sources */,
+				CDB22D312303F985002A1EF3 /* String+Sugar.swift in Sources */,
 				CD9DF11C22FC16D300779F6F /* GithubRepository.swift in Sources */,
 				CD8BBDEF1EE009C600E8EE2E /* SlackAttachment.swift in Sources */,
 				CD9DF11422FC16D300779F6F /* ExtractBuildInformationController.swift in Sources */,

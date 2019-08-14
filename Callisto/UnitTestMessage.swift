@@ -21,16 +21,16 @@ final class UnitTestMessage: Codable {
         let components = validMessage.components(separatedBy: CharacterSet(charactersIn: ",-"))
         guard components.count >= 3 else { return nil }
 
-        self.method = components[0]
-        self.assertType = components[1]
-        self.explanation = components[2]
+        self.method = String(components[0].dropFirst(2))
+        self.assertType = components[1].trim()
+        self.explanation = components[2].trim()
     }
 }
 
 extension UnitTestMessage: CustomStringConvertible {
 
     var description: String {
-        return self.method
+        return "\(self.method), \(self.assertType) - \(self.explanation)"
     }
 }
 
