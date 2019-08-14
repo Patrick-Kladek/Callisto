@@ -13,7 +13,7 @@ extension UserDefaults {
 
     enum Action: String, CaseIterable {
         case help
-        case summarize
+        case summarise
         case upload
         case unknown
 
@@ -28,8 +28,8 @@ extension UserDefaults {
         }
 
         switch CommandLine.arguments.optionalValue(at: 1) {
-        case "summarize":
-            return .summarize
+        case "summarise":
+            return .summarise
         case "upload":
             return .upload
         default:

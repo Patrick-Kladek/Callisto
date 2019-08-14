@@ -19,7 +19,7 @@ func main() {
         LogMessage("Usage: \(UserDefaults.Action.possibleValues)")
         exit(0)
 
-    case .summarize:
+    case .summarise:
         let action = SummariseAction(defaults: defaults)
         action.run()
 

@@ -41,7 +41,7 @@ final class SummariseAction: NSObject {
             let result = extractController.save(to: tempURL)
             switch result {
             case .success:
-                LogMessage("Succesfully saved summarized output at: \(tempURL)")
+                LogMessage("Succesfully saved summarised output at: \(tempURL)")
                 quit(.success)
             case .failure(let error):
                 LogError("Saving summary failed: \(error)")

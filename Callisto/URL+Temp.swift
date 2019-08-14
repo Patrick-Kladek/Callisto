@@ -12,7 +12,10 @@ import Foundation
 public extension URL {
 
     static func tempURL(_ name: String) -> URL {
-        let folder = URL(fileURLWithPath:NSTemporaryDirectory())
+        let folder = try! FileManager().url(for: .cachesDirectory,
+                                                      in: .userDomainMask,
+                                                      appropriateFor: nil,
+                                                      create: false)
             .appendingPathComponent("Callisto")
 
         do {

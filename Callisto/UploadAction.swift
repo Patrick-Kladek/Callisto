@@ -43,24 +43,41 @@ final class UploadAction: NSObject {
             }
         })
 
+        guard infos.hasElements else { quit(.invalidBuildInformationFile) }
+
         let currentBranch = self.loadCurrentBranch()
-        print(currentBranch)
+        LogMessage("Did load Branch:")
+        LogMessage(" * \(currentBranch.title ?? "<nil>") \(currentBranch.number ?? -1)")
+        LogMessage(" * \(currentBranch.url?.absoluteString ?? "<nil>")")
 
         if self.defaults.deletePreviousComments {
             let result = self.githubController.fetchPreviousComments(on: currentBranch)
             switch result {
             case .failure(let error):
-                print(error)
+                LogError(error.localizedDescription)
             case .success(let comments):
                 let commentsToDelete = comments.filter { $0.isCallistoComment }
-                _ = commentsToDelete.map { self.githubController.deleteComment(comment: $0) }
+                if commentsToDelete.hasElements {
+                    LogMessage("Found \(commentsToDelete.count) outdated build comment\(commentsToDelete.count > 1 ? "s" : ""). Deleting ...")
+                }
+                _ = commentsToDelete.map { comment in
+                    switch self.githubController.deleteComment(comment: comment) {
+                    case .success:
+                        LogMessage("Deleted comment with ID: \(comment.id!)")
+                    case .failure(let error):
+                        LogError(error.localizedDescription)
+                    }
+                }
             }
         }
 
         if infos.filter({ $0.isEmpty == false }).hasElements {
             let message = "# Build Summary\n\(infos.compactMap { self.markdownText(from: $0) }.joined(separator: "\n"))"
-            if case let .failure(error) = self.githubController.postComment(on: currentBranch, comment: Comment(body: message, id: nil)) {
-                print(error)
+            switch self.githubController.postComment(on: currentBranch, comment: Comment(body: message, id: nil)) {
+            case .success:
+                LogMessage("Successfully posted BuildReport to GitHub:")
+            case .failure(let error):
+                LogError(error.localizedDescription)
             }
         }
 
@@ -178,11 +195,19 @@ private extension UploadAction {
 
     func deleteInputFiles(_ files: [URL]) {
         let fileManager = FileManager()
+
         for url in files {
-            try? fileManager.removeItem(at: url)
+            do {
+                try fileManager.removeItem(at: url)
+
+                LogMessage("Successfully removed file at: \(url.path)")
+            } catch {
+                LogError(error.localizedDescription)
+            }
         }
     }
 }
+
 
 private extension CommandLine {
 

@@ -39,7 +39,7 @@ class GitHubCommunicationController {
             let taskResult = try URLSession.shared.synchronousDataTask(with: request)
 
             if taskResult.response?.statusCode != 201 {
-                print(taskResult.response ?? "<nil>")
+                LogError(taskResult.response.debugDescription)
                 throw StatusCodeError.noResponse
             }
 
@@ -61,7 +61,7 @@ class GitHubCommunicationController {
             let taskResult = try URLSession.shared.synchronousDataTask(with: request)
 
             if taskResult.response?.statusCode != 200 {
-                print(taskResult.response ?? "<nil>")
+                LogError(taskResult.response.debugDescription)
                 throw StatusCodeError.noResponse
             }
 
@@ -84,7 +84,7 @@ class GitHubCommunicationController {
             let taskResult = try URLSession.shared.synchronousDataTask(with: request)
 
             if taskResult.response?.statusCode != 204 {
-                print(taskResult.response ?? "<nil>")
+                LogError(taskResult.response.debugDescription)
                 throw StatusCodeError.noResponse
             }
 
@@ -172,7 +172,7 @@ extension GitHubCommunicationController {
                 throw StatusCodeError.noData
             }
         } catch {
-            print(error.localizedDescription)
+            LogError(error.localizedDescription)
             return []
         }
     }
