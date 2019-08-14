@@ -29,9 +29,6 @@ final class UploadAction: NSObject {
 
     func run() -> Never {
         let inputFiles = CommandLine.parameters(forKey: "files").map { URL(fileURLWithPath: $0) }
-//        let slackURL = self.defaults.slackURL
-//        let ignoredKeywords = self.defaults.ignoredKeywords
-
         guard inputFiles.count > 0 else {
             quit(.invalidBuildInformationFile)
         }
@@ -49,10 +46,25 @@ final class UploadAction: NSObject {
         let currentBranch = self.loadCurrentBranch()
         print(currentBranch)
 
-        for info in infos {
-            print(self.markdownText(from: info) ?? "nil")
+        if self.defaults.deletePreviousComments {
+            let result = self.githubController.fetchPreviousComments(on: currentBranch)
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let comments):
+                let commentsToDelete = comments.filter { $0.isCallistoComment }
+                _ = commentsToDelete.map { self.githubController.deleteComment(comment: $0) }
+            }
         }
 
+        if infos.filter({ $0.isEmpty == false }).hasElements {
+            let message = "# Build Summary\n\(infos.compactMap { self.markdownText(from: $0) }.joined(separator: "\n"))"
+            if case let .failure(error) = self.githubController.postComment(on: currentBranch, comment: Comment(body: message, id: nil)) {
+                print(error)
+            }
+        }
+
+        self.deleteInputFiles(inputFiles)
         quit(.success)
     }
 }
@@ -113,7 +125,8 @@ private extension UploadAction {
             try dict = self.githubController.pullRequest(forBranch: name)
             guard let branchPath = dict["html_url"] as? String, let title = dict["title"] as? String else { throw GithubError.pullRequestNoURL }
 
-            return .success(Branch(title: title, name: name, url: URL(string: branchPath)))
+            let prNumber = dict["number"] as? Int
+            return .success(Branch(title: title, name: name, url: URL(string: branchPath), number: prNumber))
         } catch {
             LogError("Something happend when collecting information about Pull Requests")
             return .failure(error)
@@ -162,32 +175,12 @@ private extension UploadAction {
         string += "\n\n"
         return string
     }
-}
 
-private extension Array where Element: Equatable {
-
-    mutating func delete(_ object: Element) {
-        guard let index = self.firstIndex(of: object) else { return }
-
-        self.remove(at: index)
-    }
-
-    func deleting(_ object: Element) -> Array<Element> {
-        var array = self
-        array.delete(object)
-        return array
-    }
-
-    mutating func delete(_ objects: [Element]) {
-        for object in objects {
-            self.delete(object)
+    func deleteInputFiles(_ files: [URL]) {
+        let fileManager = FileManager()
+        for url in files {
+            try? fileManager.removeItem(at: url)
         }
-    }
-
-    func deleting(_ objects: [Element]) -> Array<Element> {
-        var array = self
-        array.delete(objects)
-        return array
     }
 }
 
@@ -208,9 +201,12 @@ private extension CommandLine {
     }
 }
 
-private extension Collection {
+private extension Comment {
 
-    var hasElements: Bool {
-        return self.isEmpty == false
+    var isCallistoComment: Bool {
+        guard self.id != nil else { return false }
+
+        let text = self.body as NSString
+        return text.range(of: "# Build Summary\n").location == 0
     }
 }

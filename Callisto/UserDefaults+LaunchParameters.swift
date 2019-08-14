@@ -66,6 +66,10 @@ extension UserDefaults {
     var ignoredKeywords: [String] {
         return self.string(forKey: "ignore")?.components(separatedBy: ", ") ?? []
     }
+
+    var deletePreviousComments: Bool {
+        return CommandLine.arguments.contains("deletePreviousComments")
+    }
 }
 
 private extension Array {

@@ -29,6 +29,10 @@ extension BuildInformation {
         case encodingError
     }
 
+    var isEmpty: Bool {
+        return self.errors.isEmpty && self.warnings.isEmpty && self.unitTests.isEmpty
+    }
+
     func write(to url: URL) -> Result<Int, Error> {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]

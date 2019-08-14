@@ -34,7 +34,7 @@ class CompilerMessage: Codable {
         self.file = self.url.lastPathComponent
         self.line = Int(line) ?? -1
         self.column = Int(column) ?? -1
-        self.message = message.dropWarningFlag().trim().replacingOccurrences(of: "'", with: "`")
+        self.message = message.dropWarningFlag().trim().replacingOccurrences(of: "'", with: "`").condenseWhitespace()
     }
 }
 
@@ -87,31 +87,6 @@ fileprivate extension CompilerMessage {
 private extension String {
 
     func dropWarningFlag() -> String {
-        let string = self as NSString
-
-        let begin = string.range(of: "[-W")
-        let end = string.range(of: "]")
-
-        guard begin.location != NSNotFound, end.location != NSNotFound else { return self }
-
-        let range = begin.extend(to: end)
-        return string.replacingCharacters(in: range, with: "")
-    }
-}
-
-private extension NSRange {
-
-    init(begin: Int, end: Int) {
-        self = .init(location: begin, length: end - begin)
-    }
-
-    func extend(to range: NSRange) -> NSRange {
-        guard self.endPosition < range.endPosition else { return self }
-
-        return NSRange(begin: self.location, end: range.endPosition)
-    }
-
-    var endPosition: NSInteger {
-        return self.location + self.length
+        return self.trim(from: "[-W", to: "]")
     }
 }

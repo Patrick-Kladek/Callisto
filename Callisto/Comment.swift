@@ -8,6 +8,8 @@
 
 import Foundation
 
+
 struct Comment: Codable {
     let body: String
+    let id: Int?
 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CD081CBC1EE7F19100F537B3 /* ios_build_4454.log in Resources */ = {isa = PBXBuildFile; fileRef = CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */; };
 		CD081CBE1EE7F1D700F537B3 /* mac_build_4454.log in Resources */ = {isa = PBXBuildFile; fileRef = CD081CBD1EE7F1D700F537B3 /* mac_build_4454.log */; };
+		CD0E20D923040AFE001D9159 /* Result+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0E20D823040AFE001D9159 /* Result+Sugar.swift */; };
+		CD0E20DB230447E8001D9159 /* Collection+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0E20DA230447E8001D9159 /* Collection+Sugar.swift */; };
 		CD512D8E2008C1F9002EB718 /* ios_build_4822.log in Resources */ = {isa = PBXBuildFile; fileRef = CD512D8D2008C1F9002EB718 /* ios_build_4822.log */; };
 		CD8BBDEE1EE009C600E8EE2E /* SlackAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDE1EE009C600E8EE2E /* SlackAction.swift */; };
 		CD8BBDEF1EE009C600E8EE2E /* SlackAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDF1EE009C600E8EE2E /* SlackAttachment.swift */; };
@@ -92,7 +94,9 @@
 		CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTestMessage.swift; sourceTree = "<group>"; };
 		CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_4454.log; sourceTree = "<group>"; };
 		CD081CBD1EE7F1D700F537B3 /* mac_build_4454.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mac_build_4454.log; sourceTree = "<group>"; };
-		CD33AF6D22F073D1002EC27C /* ios_output_failing.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_output_failing.txt; sourceTree = "<group>"; };
+		CD0E20D823040AFE001D9159 /* Result+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Sugar.swift"; sourceTree = "<group>"; };
+		CD0E20DA230447E8001D9159 /* Collection+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Sugar.swift"; sourceTree = "<group>"; };
+		CD33AF6D22F073D1002EC27C /* ios_output_failing.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_output_failing.txt; path = CallistoTest/ios_output_failing.txt; sourceTree = SOURCE_ROOT; };
 		CD33AF6E22F0766E002EC27C /* ExtractBuildInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractBuildInformationController.swift; sourceTree = "<group>"; };
 		CD33AF7022F07DF9002EC27C /* BuildInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildInformation.swift; sourceTree = "<group>"; };
 		CD4901172008EEC6000F5F08 /* SlackCommunicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackCommunicationTests.swift; sourceTree = "<group>"; };
@@ -287,6 +291,8 @@
 				CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */,
 				CD4E0F6522F429BB00C31E08 /* URL+Temp.swift */,
 				CDB22D302303F985002A1EF3 /* String+Sugar.swift */,
+				CD0E20D823040AFE001D9159 /* Result+Sugar.swift */,
+				CD0E20DA230447E8001D9159 /* Collection+Sugar.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -446,6 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD0E20D923040AFE001D9159 /* Result+Sugar.swift in Sources */,
 				CD9DF3A922FC2A1A00779F6F /* Check.swift in Sources */,
 				CD9DF11722FC16D300779F6F /* CompilerMessage.swift in Sources */,
 				CD9DF11D22FC16D300779F6F /* Branch.swift in Sources */,
@@ -455,6 +462,7 @@
 				CD8BBDEE1EE009C600E8EE2E /* SlackAction.swift in Sources */,
 				CD9DF11122FC16D300779F6F /* main.swift in Sources */,
 				CD9DF11522FC16D300779F6F /* MainController.swift in Sources */,
+				CD0E20DB230447E8001D9159 /* Collection+Sugar.swift in Sources */,
 				CD8BBDF11EE009C600E8EE2E /* SlackField.swift in Sources */,
 				CD9DF11822FC16D300779F6F /* UnitTestMessage.swift in Sources */,
 				CD9DF12122FC16D300779F6F /* DictionaryConvertable.swift in Sources */,

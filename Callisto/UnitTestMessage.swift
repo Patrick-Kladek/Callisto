@@ -23,7 +23,7 @@ final class UnitTestMessage: Codable {
 
         self.method = String(components[0].dropFirst(2))
         self.assertType = components[1].trim()
-        self.explanation = components[2].trim()
+        self.explanation = components[2].trim().strippingLocalInfos.condenseWhitespace()
     }
 }
 
@@ -47,5 +47,15 @@ extension UnitTestMessage: Hashable {
         hasher.combine(self.method)
         hasher.combine(self.assertType)
         hasher.combine(self.explanation)
+    }
+}
+
+private extension String {
+
+    /// Deletes informations like: <__NSArrayM: 0x60000184dfb0>
+    /// Before: "*** Collection <__NSArrayM: 0x60000184dfb0> was mutated while being enumerated."
+    /// After "*** Collection was mutated while being enumerated."
+    var strippingLocalInfos: String {
+        return self.trim(from: "<", to: ">")
     }
 }
