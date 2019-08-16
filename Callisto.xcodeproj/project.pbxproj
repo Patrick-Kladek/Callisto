@@ -21,7 +21,6 @@
 		CD9DF11222FC16D300779F6F /* SummariseAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */; };
 		CD9DF11322FC16D300779F6F /* UploadAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6D22F4475A00C31E08 /* UploadAction.swift */; };
 		CD9DF11422FC16D300779F6F /* ExtractBuildInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD33AF6E22F0766E002EC27C /* ExtractBuildInformationController.swift */; };
-		CD9DF11522FC16D300779F6F /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDC1EE009C600E8EE2E /* MainController.swift */; };
 		CD9DF11622FC16D300779F6F /* FastlaneParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */; };
 		CD9DF11722FC16D300779F6F /* CompilerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */; };
 		CD9DF11822FC16D300779F6F /* UnitTestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */; };
@@ -46,7 +45,6 @@
 		CD9DF12B22FC1C6F00779F6F /* SummariseAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */; };
 		CD9DF12C22FC1C6F00779F6F /* UploadAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6D22F4475A00C31E08 /* UploadAction.swift */; };
 		CD9DF12D22FC1C6F00779F6F /* ExtractBuildInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD33AF6E22F0766E002EC27C /* ExtractBuildInformationController.swift */; };
-		CD9DF12E22FC1C6F00779F6F /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDC1EE009C600E8EE2E /* MainController.swift */; };
 		CD9DF12F22FC1C6F00779F6F /* FastlaneParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */; };
 		CD9DF13022FC1C6F00779F6F /* CompilerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */; };
 		CD9DF13122FC1C6F00779F6F /* UnitTestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */; };
@@ -120,7 +118,6 @@
 		CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubAccount.swift; sourceTree = "<group>"; };
 		CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubCommunicationController.swift; sourceTree = "<group>"; };
 		CD8BBDDB1EE009C600E8EE2E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = Callisto/main.swift; sourceTree = SOURCE_ROOT; };
-		CD8BBDDC1EE009C600E8EE2E /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+NSColorHexadecimalValue.swift"; sourceTree = "<group>"; };
 		CD8BBDDE1EE009C600E8EE2E /* SlackAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackAction.swift; sourceTree = "<group>"; };
 		CD8BBDDF1EE009C600E8EE2E /* SlackAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackAttachment.swift; sourceTree = "<group>"; };
@@ -219,7 +216,6 @@
 				CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */,
 				CD4E0F6D22F4475A00C31E08 /* UploadAction.swift */,
 				CD33AF6E22F0766E002EC27C /* ExtractBuildInformationController.swift */,
-				CD8BBDDC1EE009C600E8EE2E /* MainController.swift */,
 				CD8BBDFA1EE00A8E00E8EE2E /* Parser */,
 				CD8BBDF41EE00A2500E8EE2E /* Communication Controller */,
 				CD8BBDF91EE00A7B00E8EE2E /* Helper */,
@@ -432,7 +428,6 @@
 				CD9DF13E22FC1C6F00779F6F /* Common.swift in Sources */,
 				CD9DF13D22FC1C6F00779F6F /* URL+Temp.swift in Sources */,
 				CD9DF13122FC1C6F00779F6F /* UnitTestMessage.swift in Sources */,
-				CD9DF12E22FC1C6F00779F6F /* MainController.swift in Sources */,
 				CD9DF14322FC1C9100779F6F /* SlackAction.swift in Sources */,
 				CD9DF13F22FC1C9100779F6F /* SlackCommunicationController.swift in Sources */,
 				CD9DF12B22FC1C6F00779F6F /* SummariseAction.swift in Sources */,
@@ -461,7 +456,6 @@
 				CD8BBDF01EE009C600E8EE2E /* SlackCommunicationController.swift in Sources */,
 				CD8BBDEE1EE009C600E8EE2E /* SlackAction.swift in Sources */,
 				CD9DF11122FC16D300779F6F /* main.swift in Sources */,
-				CD9DF11522FC16D300779F6F /* MainController.swift in Sources */,
 				CD0E20DB230447E8001D9159 /* Collection+Sugar.swift in Sources */,
 				CD8BBDF11EE009C600E8EE2E /* SlackField.swift in Sources */,
 				CD9DF11822FC16D300779F6F /* UnitTestMessage.swift in Sources */,

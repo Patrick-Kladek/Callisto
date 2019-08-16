@@ -179,7 +179,6 @@ extension GitHubCommunicationController {
 
     func defaultRequest(url: URL) -> URLRequest {
         var request = URLRequest(url: url)
-//        request.addValue("application/vnd.github.loki-preview+json", forHTTPHeaderField: "Accept")
         request.addValue("application/vnd.github.antiope-preview+json", forHTTPHeaderField: "Accept")
 
         let loginString = String(format: "%@:%@", self.account.username, self.account.token)
@@ -199,6 +198,6 @@ private extension Branch {
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.host = "api.github.com"
 
-        return Branch(title: self.title, name: self.name, url: urlComponents?.url)
+        return Branch(title: self.title, name: self.name, url: urlComponents?.url, number: nil)
     }
 }
