@@ -38,8 +38,12 @@ extension UserDefaults {
         }
     }
 
-    var fastlaneOutputURL: URL {
+    var fastlaneInputURL: URL {
         return self.url(forKey: "fastlane") ?? { quit(.invalidFastlaneFile) }()
+    }
+    
+    var reportOutputURL: URL {
+        return self.url(forKey: "output") ?? { quit(.invalidOutputFile) }()
     }
 
     var branch: String {

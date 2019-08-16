@@ -215,7 +215,7 @@ private extension CommandLine {
         var inputFiles: [String] = []
         for i in 0...CommandLine.arguments.count - 1 {
             if CommandLine.arguments[i] == "-\(key)" {
-                for j in (i + 1)...(CommandLine.arguments.count - i - 1) {
+                for j in (i + 1)...(CommandLine.arguments.count - 1) {
                     let argument = CommandLine.arguments[j]
                     if argument.first == "-" { break }
                     inputFiles.append(argument)

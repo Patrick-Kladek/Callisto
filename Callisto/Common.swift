@@ -27,6 +27,7 @@ enum ExitCodes: Int32 {
     case invalidAction = -14
     case savingFailed = -15
     case invalidBuildInformationFile = -16
+    case invalidOutputFile = -17
 }
 
 extension ExitCodes: CustomStringConvertible {
@@ -65,6 +66,8 @@ extension ExitCodes: CustomStringConvertible {
             return "Unable to save file"
         case .invalidBuildInformationFile:
             return "invalid file. Usage -files \"/path/to/file\""
+        case .invalidOutputFile:
+            return "invalid output file. Usage -output \"/path/to/file\""
         }
     }
 }

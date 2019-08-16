@@ -23,7 +23,7 @@ final class SummariseAction: NSObject {
     // MARK: - SummariseAction
 
     func run() -> Never {
-        let url = defaults.fastlaneOutputURL
+        let url = defaults.fastlaneInputURL
         let ignoredKeywords = defaults.ignoredKeywords
 
         let extractController: ExtractBuildInformationController
@@ -37,11 +37,12 @@ final class SummariseAction: NSObject {
 
         switch extractController.run() {
         case .success:
-            let tempURL = URL.tempURL(extractController.buildInfo.platform)
+            let snakeCasePlatform = extractController.buildInfo.platform.replacingOccurrences(of: " ", with: "_")
+            let tempURL = self.defaults.reportOutputURL.appendingPathComponent(snakeCasePlatform).appendingPathExtension("buildReport")
             let result = extractController.save(to: tempURL)
             switch result {
             case .success:
-                LogMessage("Succesfully saved summarised output at: \(tempURL)")
+                LogMessage("Succesfully saved summarised output at: \(tempURL.path)")
                 quit(.success)
             case .failure(let error):
                 LogError("Saving summary failed: \(error)")
