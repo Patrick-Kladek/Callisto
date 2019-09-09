@@ -72,7 +72,7 @@ extension UserDefaults {
     }
 
     var deletePreviousComments: Bool {
-        return CommandLine.arguments.contains("deletePreviousComments")
+        return self.bool(forKey: "deletePreviousComments")
     }
 }
 
