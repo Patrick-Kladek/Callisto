@@ -36,14 +36,14 @@ final class SummariseAction: NSObject {
         }
 
         switch extractController.run() {
-        case .success:
+        case .success(let fastlaneStatusCode):
             let snakeCasePlatform = extractController.buildInfo.platform.replacingOccurrences(of: " ", with: "_")
             let tempURL = self.defaults.reportOutputURL.appendingPathComponent(snakeCasePlatform).appendingPathExtension("buildReport")
             let result = extractController.save(to: tempURL)
             switch result {
             case .success:
                 LogMessage("Succesfully saved summarised output at: \(tempURL.path)")
-                quit(.success)
+                quit(fastlaneStatusCode == 0 ? .success : .fastlaneFinishedWithErrors)
             case .failure(let error):
                 LogError("Saving summary failed: \(error)")
                 quit(.savingFailed)
