@@ -33,6 +33,17 @@ extension BuildInformation {
         return self.errors.isEmpty && self.warnings.isEmpty && self.unitTests.isEmpty
     }
 
+    var githubSummaryTitle: String {
+        func descriptionCount(of array: [AnyHashable]) -> String {
+            if array.isEmpty {
+                return "no"
+            } else {
+                return "\(array.count)"
+            }
+        }
+        return "### \(self.platform) - \(descriptionCount(of: self.warnings)) warnings, \(descriptionCount(of: self.errors)) errors"
+    }
+
     func write(to url: URL) -> Result<Int, Error> {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]

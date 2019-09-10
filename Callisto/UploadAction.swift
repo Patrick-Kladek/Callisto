@@ -172,7 +172,8 @@ private extension UploadAction {
             info.warnings.hasElements ||
             info.unitTests.hasElements else { return nil }
 
-        var string = "### \(info.platform)"
+        var string = info.githubSummaryTitle
+        string += "\n\n"
 
         if info.errors.hasElements {
             string += "\n\n"
