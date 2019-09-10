@@ -180,11 +180,7 @@ extension GitHubCommunicationController {
     func defaultRequest(url: URL) -> URLRequest {
         var request = URLRequest(url: url)
         request.addValue("application/vnd.github.antiope-preview+json", forHTTPHeaderField: "Accept")
-
-        let loginString = String(format: "%@:%@", self.account.username, self.account.token)
-        let loginData = loginString.data(using: String.Encoding.utf8)!
-        let base64LoginString = loginData.base64EncodedString()
-        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        request.setValue("token \(self.account.token)", forHTTPHeaderField: "Authorization")
 
         return request
     }

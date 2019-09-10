@@ -51,9 +51,8 @@ extension UserDefaults {
     }
 
     var githubAccount: GithubAccount {
-        let username = self.string(forKey: "githubUsername") ?? { quit(.invalidGithubUsername) }()
         let token = self.string(forKey: "githubToken") ?? { quit(.invalidGithubCredentials) }()
-        return GithubAccount(username: username, token: token)
+        return GithubAccount(token: token)
     }
 
     var githubRepository: GithubRepository {
