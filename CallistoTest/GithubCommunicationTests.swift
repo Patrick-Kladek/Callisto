@@ -8,6 +8,7 @@
 
 import XCTest
 
+
 class GithubCommunicationTests: XCTestCase {
 
     func testGithubCommunication() {
@@ -44,6 +45,6 @@ private extension GithubCommunicationTests {
 
 
         let account = GithubAccount(username: username, token: token)
-        return GitHubCommunicationController(account: account, organisation: organisation, repository: repository)
+        return GitHubCommunicationController(account: account, repository: GithubRepository(organisation: organisation, repository: repository))
     }
 }

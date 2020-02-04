@@ -8,13 +8,15 @@
 
 import Cocoa
 
-class CompilerMessage {
+class CompilerMessage: Codable {
 
-    public let fileName: String
+    public let file: String
     public let url: URL
     public let line: NSInteger
     public let column: NSInteger
     public let message: String
+
+    // MARK: Lifecycle
 
     init?(message: String) {
         guard let slashRange = message.range(of: "/") else { return nil }
@@ -29,17 +31,17 @@ class CompilerMessage {
         let message = components.dropFirst(3).joined(separator: ":")
 
         self.url = URL(fileURLWithPath: path)
-        self.fileName = self.url.lastPathComponent
+        self.file = self.url.lastPathComponent
         self.line = Int(line) ?? -1
         self.column = Int(column) ?? -1
-        self.message = message
+        self.message = message.dropWarningFlag().trim().replacingOccurrences(of: "'", with: "`").condenseWhitespace()
     }
 }
 
 extension CompilerMessage: CustomStringConvertible {
 
     var description: String {
-        return "\(self.fileName) [Line: \(self.line)] \(self.message)"
+        return "\(self.file) [Line: \(self.line)] \(self.message)"
     }
 }
 
@@ -47,14 +49,16 @@ extension CompilerMessage: Hashable {
 
     static func == (left: CompilerMessage, right: CompilerMessage) -> Bool {
         return
-            left.fileName == right.fileName &&
+            left.file == right.file &&
             left.line == right.line &&
             left.column == right.column &&
             left.message == right.message
     }
 
-    var hashValue: Int {
-        return (self.fileName + String(self.line) + self.message).hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.file)
+        hasher.combine(self.line)
+        hasher.combine(self.message)
     }
 }
 
@@ -80,18 +84,9 @@ fileprivate extension CompilerMessage {
         return nil
     }
 }
+private extension String {
 
-extension String {
-
-    /// An `NSRange` that represents the full range of the string.
-    var nsrange: NSRange {
-        return NSRange(location: 0, length: utf16.count)
-    }
-
-    /// Returns a substring with the given `NSRange`,
-    /// or `nil` if the range can't be converted.
-    func substring(with nsrange: NSRange) -> String? {
-        guard let range = Range(nsrange, in: self) else { return nil }
-        return String(self[range])
+    func dropWarningFlag() -> String {
+        return self.trim(from: "[-W", to: "]")
     }
 }

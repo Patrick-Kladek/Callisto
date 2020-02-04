@@ -10,6 +10,5 @@ import Cocoa
 
 struct GithubAccount {
 
-    let username: String
     let token: String
 }

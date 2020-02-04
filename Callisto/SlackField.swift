@@ -21,7 +21,7 @@ class SlackField {
     }
 
     convenience init(message: CompilerMessage) {
-        let title = "\(message.fileName) [Line: \(message.line)]"
+        let title = "\(message.file) [Line: \(message.line)]"
         self.init(title: title, value: message.message)
     }
 }

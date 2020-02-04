@@ -13,4 +13,5 @@ struct Branch {
     public var title: String?
     public var name: String?
     public var url: URL?
+    public var number: Int?
 }

@@ -8,6 +8,7 @@
 
 import XCTest
 
+
 class SlackCommunicationTests: XCTestCase {
 
     func testBasicMessage() {

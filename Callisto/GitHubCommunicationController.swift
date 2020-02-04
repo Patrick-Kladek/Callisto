@@ -11,14 +11,12 @@ import Cocoa
 class GitHubCommunicationController {
 
     public let account: GithubAccount
-    public let organisation: String
-    public let repository: String
+    public let repository: GithubRepository
 
     fileprivate let baseUrl = URL(string: "https://api.github.com")
 
-    init(account: GithubAccount, organisation: String, repository: String) {
+    init(account: GithubAccount, repository: GithubRepository) {
         self.account = account
-        self.organisation = organisation
         self.repository = repository
     }
 
@@ -30,20 +28,111 @@ class GitHubCommunicationController {
             return pullRequestBranch == branch
         } ?? [:]
     }
+
+    func postComment(on branch: Branch, comment: Comment) -> Result<Void, Error> {
+        guard let url = self.makeCommentURL(for: branch) else { return .failure(StatusCodeError.noPullRequestURL) }
+
+        do {
+            var request = self.defaultRequest(url: url)
+            request.httpMethod = "POST"
+            request.httpBody = try JSONEncoder().encode(comment)
+            let taskResult = try URLSession.shared.synchronousDataTask(with: request)
+
+            if taskResult.response?.statusCode != 201 {
+                LogError(taskResult.response.debugDescription)
+                throw StatusCodeError.noResponse
+            }
+
+            if taskResult.data == nil {
+                throw StatusCodeError.noData
+            }
+
+            return .success
+        } catch {
+            return .failure(error)
+        }
+    }
+
+    func fetchPreviousComments(on branch: Branch) -> Result<[Comment], Error> {
+        guard let url = self.makeCommentURL(for: branch) else { return .failure(StatusCodeError.noPullRequestURL) }
+
+        do {
+            let request = self.defaultRequest(url: url)
+            let taskResult = try URLSession.shared.synchronousDataTask(with: request)
+
+            if taskResult.response?.statusCode != 200 {
+                LogError(taskResult.response.debugDescription)
+                throw StatusCodeError.noResponse
+            }
+
+            guard let data = taskResult.data else { throw StatusCodeError.noData }
+
+            let comments = try JSONDecoder().decode([Comment].self, from: data)
+            return .success(comments)
+        } catch {
+            return .failure(error)
+        }
+    }
+
+    func deleteComment(comment: Comment) -> Result<Void, Error> {
+        guard let id = comment.id else { return .failure(StatusCodeError.noPullRequestURL )}
+        guard let url = self.makeDeleteCommentURL(for: id) else { return .failure(StatusCodeError.noPullRequestURL) }
+
+        do {
+            var request = self.defaultRequest(url: url)
+            request.httpMethod = "DELETE"
+            let taskResult = try URLSession.shared.synchronousDataTask(with: request)
+
+            if taskResult.response?.statusCode != 204 {
+                LogError(taskResult.response.debugDescription)
+                throw StatusCodeError.noResponse
+            }
+
+            return .success
+        } catch {
+            return .failure(error)
+        }
+    }
 }
 
 fileprivate extension GitHubCommunicationController {
 
-    func makeUrl(organisation: String, repository: String) -> URL? {
+    func makeUrl(repository: GithubRepository) -> URL? {
         guard let baseUrl = self.baseUrl else { return nil }
 
-        return baseUrl.appendingPathComponent("repos").appendingPathComponent(organisation).appendingPathComponent(repository)
+        return baseUrl.appendingPathComponent("repos").appendingPathComponent(repository.organisation).appendingPathComponent(repository.repository)
+    }
+
+    func makeCommentURL(for branch: Branch) -> URL? {
+        guard let prNumber = branch.number else { return nil }
+
+        var url = self.baseUrl
+        url?.appendPathComponent("repos")
+        url?.appendPathComponent(self.repository.organisation.lowercased())
+        url?.appendPathComponent(self.repository.repository.lowercased())
+        url?.appendPathComponent("issues")
+        url?.appendPathComponent("\(prNumber)")
+        url?.appendPathComponent("comments")
+
+        return url
+    }
+
+    func makeDeleteCommentURL(for issue: Int) -> URL? {
+        var url = self.baseUrl
+        url?.appendPathComponent("repos")
+        url?.appendPathComponent(self.repository.organisation.lowercased())
+        url?.appendPathComponent(self.repository.repository.lowercased())
+        url?.appendPathComponent("issues")
+        url?.appendPathComponent("comments")
+        url?.appendPathComponent("\(issue)")
+        return url
     }
 }
 
 enum StatusCodeError: Error {
     case noResponse
     case noData
+    case noPullRequestURL
 
     var localizedDescription: String {
         switch self {
@@ -51,6 +140,8 @@ enum StatusCodeError: Error {
             return "Could not parse data from github"
         case .noResponse:
             return "Github did not respond to request"
+        case .noPullRequestURL:
+            return "Could not find Github PullRequest URL"
         }
     }
 }
@@ -63,7 +154,7 @@ enum GithubError: Error {
 extension GitHubCommunicationController {
 
     func allPullRequests() -> [[String: Any]] {
-        guard let repositoryUrl = self.makeUrl(organisation: self.organisation, repository: self.repository) else { return [] }
+        guard let repositoryUrl = self.makeUrl(repository: self.repository) else { return [] }
         let pullRequestUrl = repositoryUrl.appendingPathComponent("pulls")
 
         do {
@@ -81,20 +172,28 @@ extension GitHubCommunicationController {
                 throw StatusCodeError.noData
             }
         } catch {
-            print(error.localizedDescription)
+            LogError(error.localizedDescription)
             return []
         }
     }
 
     func defaultRequest(url: URL) -> URLRequest {
         var request = URLRequest(url: url)
-        request.addValue("application/vnd.github.loki-preview+json", forHTTPHeaderField: "Accept")
-
-        let loginString = String(format: "%@:%@", self.account.username, self.account.token)
-        let loginData = loginString.data(using: String.Encoding.utf8)!
-        let base64LoginString = loginData.base64EncodedString()
-        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/vnd.github.antiope-preview+json", forHTTPHeaderField: "Accept")
+        request.setValue("token \(self.account.token)", forHTTPHeaderField: "Authorization")
 
         return request
+    }
+}
+
+private extension Branch {
+
+    var withAPIHost: Branch? {
+        guard let url = url else { return nil }
+
+        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        urlComponents?.host = "api.github.com"
+
+        return Branch(title: self.title, name: self.name, url: urlComponents?.url, number: nil)
     }
 }
