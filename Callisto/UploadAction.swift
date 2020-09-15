@@ -187,7 +187,7 @@ private extension UploadAction {
 
         if info.unitTests.hasElements {
             string += "\n\n"
-            string += info.unitTests.map { ":large_blue_circle: `\($0.method)`\n\($0.explanation)" }.joined(separator: "\n\n")
+            string += info.unitTests.map { ":large_blue_circle: `\($0.method)`\n\($0.assertType)\n\($0.explanation)" }.joined(separator: "\n\n")
         }
 
         string += "\n\n"
