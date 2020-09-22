@@ -15,6 +15,7 @@ extension UserDefaults {
         case help
         case summarise
         case upload
+        case slack
         case unknown
 
         static var possibleValues: String {
@@ -32,6 +33,8 @@ extension UserDefaults {
             return .summarise
         case "upload":
             return .upload
+        case "slack":
+            return .slack
         default:
             LogError("No action specified. Possible values are: \(Action.possibleValues)")
             exit(ExitCodes.invalidAction.rawValue)
@@ -62,7 +65,7 @@ extension UserDefaults {
     }
 
     var slackURL: URL {
-        let slackPath = self.string(forKey: "slack") ?? { quit(.invalidSlackWebhook) }()
+        let slackPath = self.string(forKey: "slackURL") ?? { quit(.invalidSlackWebhook) }()
         return URL(string: slackPath) ?? { quit(.invalidSlackWebhook) }()
     }
 
@@ -83,5 +86,22 @@ private extension Array {
         }
 
         return self[index]
+    }
+}
+
+extension CommandLine {
+
+    static func parameters(forKey key: String) -> [String] {
+        var inputFiles: [String] = []
+        for i in 0...CommandLine.arguments.count - 1 {
+            if CommandLine.arguments[i] == "-\(key)" {
+                for j in (i + 1)...(CommandLine.arguments.count - 1) {
+                    let argument = CommandLine.arguments[j]
+                    if argument.first == "-" { break }
+                    inputFiles.append(argument)
+                }
+            }
+        }
+        return inputFiles
     }
 }

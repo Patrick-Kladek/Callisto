@@ -15,8 +15,6 @@ final class UploadAction: NSObject {
     let defaults: UserDefaults
     let githubController: GitHubCommunicationController
 
-    // MARK: - Properties
-
     // MARK: - Lifecycle
 	
     init(defaults: UserDefaults) {
@@ -29,9 +27,7 @@ final class UploadAction: NSObject {
 
     func run() -> Never {
         let inputFiles = CommandLine.parameters(forKey: "files").map { URL(fileURLWithPath: $0) }
-        guard inputFiles.count > 0 else {
-            quit(.invalidBuildInformationFile)
-        }
+        guard inputFiles.count > 0 else { quit(.invalidBuildInformationFile) }
 
         let infos = self.filteredBuildInfos(inputFiles.map { BuildInformation.read(url: $0) }.compactMap { result -> BuildInformation? in
             switch result {
@@ -103,7 +99,7 @@ private extension UploadAction {
     }
 
     func loadCurrentBranch() -> Branch {
-        switch self.loadCurrentBranch(name: defaults.branch) {
+        switch self.githubController.branch(named: defaults.branch) {
         case .success(let branch):
             return branch
         case .failure(let error):
@@ -133,20 +129,6 @@ private extension UploadAction {
                              errors: info.errors.deleting(strip.errors),
                              warnings: info.warnings.deleting(strip.warnings),
                              unitTests: info.unitTests.deleting(strip.unitTests))
-        }
-    }
-
-    func loadCurrentBranch(name: String) -> Result<Branch, Error> {
-        do {
-            let dict: [String: Any]
-            try dict = self.githubController.pullRequest(forBranch: name)
-            guard let branchPath = dict["html_url"] as? String, let title = dict["title"] as? String else { throw GithubError.pullRequestNoURL }
-
-            let prNumber = dict["number"] as? Int
-            return .success(Branch(title: title, name: name, url: URL(string: branchPath), number: prNumber))
-        } catch {
-            LogError("Something happend when collecting information about Pull Requests")
-            return .failure(error)
         }
     }
 
@@ -206,24 +188,6 @@ private extension UploadAction {
                 LogError(error.localizedDescription)
             }
         }
-    }
-}
-
-
-private extension CommandLine {
-
-    static func parameters(forKey key: String) -> [String] {
-        var inputFiles: [String] = []
-        for i in 0...CommandLine.arguments.count - 1 {
-            if CommandLine.arguments[i] == "-\(key)" {
-                for j in (i + 1)...(CommandLine.arguments.count - 1) {
-                    let argument = CommandLine.arguments[j]
-                    if argument.first == "-" { break }
-                    inputFiles.append(argument)
-                }
-            }
-        }
-        return inputFiles
     }
 }
 

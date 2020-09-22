@@ -29,6 +29,20 @@ class GitHubCommunicationController {
         } ?? [:]
     }
 
+    func branch(named name: String) -> Result<Branch, Error> {
+        do {
+            let dict: [String: Any]
+            try dict = self.pullRequest(forBranch: name)
+            guard let branchPath = dict["html_url"] as? String, let title = dict["title"] as? String else { throw GithubError.pullRequestNoURL }
+
+            let prNumber = dict["number"] as? Int
+            return .success(Branch(title: title, name: name, url: URL(string: branchPath), number: prNumber))
+        } catch {
+            LogError("Something happend when collecting information about Pull Requests")
+            return .failure(error)
+        }
+    }
+
     func postComment(on branch: Branch, comment: Comment) -> Result<Void, Error> {
         guard let url = self.makeCommentURL(for: branch) else { return .failure(StatusCodeError.noPullRequestURL) }
 
