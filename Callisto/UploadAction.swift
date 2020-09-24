@@ -77,7 +77,6 @@ final class UploadAction: NSObject {
             }
         }
 
-        self.deleteInputFiles(inputFiles)
         quit(.success)
     }
 }
@@ -174,20 +173,6 @@ private extension UploadAction {
 
         string += "\n\n"
         return string
-    }
-
-    func deleteInputFiles(_ files: [URL]) {
-        let fileManager = FileManager()
-
-        for url in files {
-            do {
-                try fileManager.removeItem(at: url)
-
-                LogMessage("Successfully removed file at: \(url.path)")
-            } catch {
-                LogError(error.localizedDescription)
-            }
-        }
     }
 }
 
