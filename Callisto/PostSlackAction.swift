@@ -63,23 +63,23 @@ final class PostSlackAction: NSObject {
 
 private extension PostSlackAction {
 
-    func currentBranch() -> Branch {
+    func currentBranch() -> Branch? {
         switch self.githubController.branch(named: defaults.branch) {
         case .success(let branch):
             return branch
         case .failure(let error):
-            LogError(error.localizedDescription)
-            quit(.reloadBranchFailed)
+            LogWarning(error.localizedDescription)
+            return nil
         }
     }
 
-    func makeSlackMessage(for branch: Branch, infos: [BuildInformation]) -> SlackMessage {
+    func makeSlackMessage(for branch: Branch?, infos: [BuildInformation]) -> SlackMessage {
         let message = SlackMessage()
 
         // Overview
         let overViewAttachment = SlackAttachment(type: .good)
-        overViewAttachment.title = branch.title
-        overViewAttachment.titleURL = branch.url
+        overViewAttachment.title = branch?.slackTitle ?? "Branch: \(self.defaults.branch)"
+        overViewAttachment.titleURL = branch?.url
         overViewAttachment.footer = "Ignored: \(self.ignore.joined(separator: ", "))"
         message.add(attachment: overViewAttachment)
 
