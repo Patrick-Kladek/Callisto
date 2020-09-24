@@ -33,7 +33,7 @@ final class PostSlackAction: NSObject {
 
     func run() -> Never {
         let inputFiles = CommandLine.parameters(forKey: "files").map { URL(fileURLWithPath: $0) }
-        guard inputFiles.count > 0 else { quit(.invalidBuildInformationFile) }
+        guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 
         let infos = inputFiles.map { BuildInformation.read(url: $0) }.compactMap { result -> BuildInformation? in
             switch result {
@@ -84,35 +84,39 @@ private extension PostSlackAction {
         message.add(attachment: overViewAttachment)
 
         // Errors
-        let errorAttachments = SlackAttachment(type: .danger)
         let errors = infos.flatMap { $0.errors }
-        for compilerMessage in errors {
-            if self.ignore.contains(where: { compilerMessage.description.contains($0)}) { continue }
-
-            errorAttachments.addField(SlackField(message: compilerMessage))
-        }
-        message.add(attachment: errorAttachments)
+        message.add(attachment: self.makeSlackAttachment(errors))
 
         // Warnings
-        let warningAttachments = SlackAttachment(type: .warning)
-        let warnings = infos.flatMap{ $0.warnings }
-        for compilerMessage in warnings {
-            if self.ignore.contains(where: { compilerMessage.description.contains($0)}) { continue }
-
-            warningAttachments.addField(SlackField(message: compilerMessage))
-        }
-        message.add(attachment: warningAttachments)
+        let warnings = infos.flatMap { $0.warnings }
+        message.add(attachment: self.makeSlackAttachment(warnings, type: .warning))
 
         // Unit Tests
-        let unitTestAttachments = SlackAttachment(type: .danger)
-        unitTestAttachments.colorHex = "blue"
         let unitTests = infos.flatMap { $0.unitTests }
-        for compilerMessage in unitTests {
-            if self.ignore.contains(where: { compilerMessage.description.contains($0)}) { continue }
+        let unitTestAttachment = self.makeSlackAttachment(unitTests, type: .warning)
+        unitTestAttachment.colorHex = "0077FF"
+        message.add(attachment: unitTestAttachment)
 
-            unitTestAttachments.addField(SlackField(message: compilerMessage))
-        }
-        message.add(attachment: unitTestAttachments)
         return message
+    }
+
+    func makeSlackAttachment(_ messages: [CompilerMessage], type: SlackAttachmentType = .danger) -> SlackAttachment {
+        let attachment = SlackAttachment(type: type)
+        for message in messages {
+            if self.ignore.contains(where: { message.description.contains($0)}) { continue }
+
+            attachment.addField(SlackField(message: message))
+        }
+        return attachment
+    }
+
+    func makeSlackAttachment(_ messages: [UnitTestMessage], type: SlackAttachmentType = .danger) -> SlackAttachment {
+        let attachment = SlackAttachment(type: type)
+        for message in messages {
+            if self.ignore.contains(where: { message.description.contains($0)}) { continue }
+
+            attachment.addField(SlackField(message: message))
+        }
+        return attachment
     }
 }

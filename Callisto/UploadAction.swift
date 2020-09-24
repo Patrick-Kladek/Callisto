@@ -27,7 +27,7 @@ final class UploadAction: NSObject {
 
     func run() -> Never {
         let inputFiles = CommandLine.parameters(forKey: "files").map { URL(fileURLWithPath: $0) }
-        guard inputFiles.count > 0 else { quit(.invalidBuildInformationFile) }
+        guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 
         let infos = self.filteredBuildInfos(inputFiles.map { BuildInformation.read(url: $0) }.compactMap { result -> BuildInformation? in
             switch result {
