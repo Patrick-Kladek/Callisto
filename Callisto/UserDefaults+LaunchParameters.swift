@@ -23,7 +23,7 @@ extension UserDefaults {
     }
 
     var action: Action {
-        if CommandLine.arguments.contains("-help") {
+        if CommandLine.arguments.contains("help") {
             return .help
         }
 

@@ -146,7 +146,7 @@ private extension FastlaneParser {
         filteredString = filteredString.replacingOccurrences(of: "\r", with: "")
         filteredString = filteredString.replacingOccurrences(of: "\u{1b}", with: "")
 
-        guard let regex = try? NSRegularExpression(pattern: "\\[[0-9]+(m|;)[0-9]*m?", options: .caseInsensitive) else { print("Regular Expression Failed"); return "" }
+        guard let regex = try? NSRegularExpression(pattern: "\\[[0-9]+(m|;)[0-9]*(;)*[0-9]*m?", options: .caseInsensitive) else { print("Regular Expression Failed"); return "" }
         let range = NSMakeRange(0, filteredString.count)
         return regex.stringByReplacingMatches(in: filteredString, options: [], range: range, withTemplate: "")
     }
