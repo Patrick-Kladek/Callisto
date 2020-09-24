@@ -41,7 +41,7 @@ extension ExitCodes: CustomStringConvertible {
         case .invalidFastlaneFile:
             return "invalid file. Usage -fastlane \"/path/to/file\""
         case .invalidBranch:
-            return "invalid Branch"
+            return "invalid Branch. Usage -branch \"branch\""
         case .invalidGithubUsername:
             return "invalid Github username. Usage: -githubUsername \"username\""
         case .invalidGithubCredentials:

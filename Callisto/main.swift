@@ -27,6 +27,10 @@ func main() {
         let action = UploadAction(defaults: defaults)
         action.run()
 
+    case .slack:
+        let action = PostSlackAction(defaults: defaults)
+        action.run()
+
     case .unknown:
         quit()
     }
