@@ -15,3 +15,17 @@ struct Branch {
     public var url: URL?
     public var number: Int?
 }
+
+
+extension Branch {
+
+    var slackTitle: String? {
+        guard let title = self.title else { return nil }
+
+        if let number = self.number {
+            return "\(title) #\(number)"
+        }
+        
+        return title
+    }
+}
