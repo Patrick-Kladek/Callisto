@@ -31,7 +31,6 @@
 		CD9DF11D22FC16D300779F6F /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD41EE009C600E8EE2E /* Branch.swift */; };
 		CD9DF11E22FC16D300779F6F /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF10D22FC102800779F6F /* Annotation.swift */; };
 		CD9DF11F22FC16D300779F6F /* URLSession+synchronousTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */; };
-		CD9DF12022FC16D300779F6F /* UserDefaults+LaunchParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6B22F445ED00C31E08 /* UserDefaults+LaunchParameters.swift */; };
 		CD9DF12122FC16D300779F6F /* DictionaryConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */; };
 		CD9DF12222FC16D300779F6F /* Dictionary+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */; };
 		CD9DF12322FC16D300779F6F /* NSColor+NSColorHexadecimalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */; };
@@ -54,7 +53,6 @@
 		CD9DF13622FC1C6F00779F6F /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD41EE009C600E8EE2E /* Branch.swift */; };
 		CD9DF13722FC1C6F00779F6F /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF10D22FC102800779F6F /* Annotation.swift */; };
 		CD9DF13822FC1C6F00779F6F /* URLSession+synchronousTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */; };
-		CD9DF13922FC1C6F00779F6F /* UserDefaults+LaunchParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6B22F445ED00C31E08 /* UserDefaults+LaunchParameters.swift */; };
 		CD9DF13A22FC1C6F00779F6F /* DictionaryConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */; };
 		CD9DF13B22FC1C6F00779F6F /* Dictionary+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */; };
 		CD9DF13C22FC1C6F00779F6F /* NSColor+NSColorHexadecimalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */; };
@@ -104,7 +102,6 @@
 		CD4E0F6522F429BB00C31E08 /* URL+Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Temp.swift"; sourceTree = "<group>"; };
 		CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummariseAction.swift; sourceTree = "<group>"; };
 		CD4E0F6922F4421700C31E08 /* GithubRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepository.swift; sourceTree = "<group>"; };
-		CD4E0F6B22F445ED00C31E08 /* UserDefaults+LaunchParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+LaunchParameters.swift"; sourceTree = "<group>"; };
 		CD4E0F6D22F4475A00C31E08 /* UploadAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAction.swift; sourceTree = "<group>"; };
 		CD512D8D2008C1F9002EB718 /* ios_build_4822.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_4822.log; sourceTree = "<group>"; };
 		CD512D8F2008C257002EB718 /* GithubCommunicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubCommunicationTests.swift; sourceTree = "<group>"; };
@@ -286,7 +283,6 @@
 			isa = PBXGroup;
 			children = (
 				CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */,
-				CD4E0F6B22F445ED00C31E08 /* UserDefaults+LaunchParameters.swift */,
 				CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */,
 				CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */,
 				CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */,
@@ -427,7 +423,6 @@
 				CD9DF13C22FC1C6F00779F6F /* NSColor+NSColorHexadecimalValue.swift in Sources */,
 				CD9DF12A22FC1C6F00779F6F /* main.swift in Sources */,
 				CD9DF13822FC1C6F00779F6F /* URLSession+synchronousTask.swift in Sources */,
-				CD9DF13922FC1C6F00779F6F /* UserDefaults+LaunchParameters.swift in Sources */,
 				CD9DF13622FC1C6F00779F6F /* Branch.swift in Sources */,
 				CD9DF13B22FC1C6F00779F6F /* Dictionary+Optional.swift in Sources */,
 				CD9DF12722FC16EF00779F6F /* GithubCommunicationTests.swift in Sources */,
@@ -485,7 +480,6 @@
 				CD9DF11F22FC16D300779F6F /* URLSession+synchronousTask.swift in Sources */,
 				CD9DF11922FC16D300779F6F /* BuildInformation.swift in Sources */,
 				CD9DF12222FC16D300779F6F /* Dictionary+Optional.swift in Sources */,
-				CD9DF12022FC16D300779F6F /* UserDefaults+LaunchParameters.swift in Sources */,
 				CD8BBDF21EE009C600E8EE2E /* SlackMessage.swift in Sources */,
 				CD9DF11222FC16D300779F6F /* SummariseAction.swift in Sources */,
 				CD9DF12322FC16D300779F6F /* NSColor+NSColorHexadecimalValue.swift in Sources */,
