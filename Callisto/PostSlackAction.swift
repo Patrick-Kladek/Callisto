@@ -102,13 +102,14 @@ private extension PostSlackAction {
     }
 
     func makeSlackMessage(for branch: Branch?, infos: [BuildInformation]) -> SlackMessage {
+        let ignoredKeywords = infos.flatMap { $0.ignoredKeywords }
         let message = SlackMessage()
 
         // Overview
         let overViewAttachment = SlackAttachment(type: .good)
         overViewAttachment.title = branch?.slackTitle ?? "Branch: \(self.slack.branch)"
         overViewAttachment.titleURL = branch?.url
-//        overViewAttachment.footer = "Ignored: \(self.slack.ignored.joined(separator: ", "))"
+        overViewAttachment.footer = "Ignored: \(ignoredKeywords.joined(separator: ", "))"
         message.add(attachment: overViewAttachment)
 
         // Errors
@@ -131,18 +132,15 @@ private extension PostSlackAction {
     func makeSlackAttachment(_ messages: [CompilerMessage], type: SlackAttachmentType = .danger) -> SlackAttachment {
         let attachment = SlackAttachment(type: type)
         for message in messages {
-//            if self.slack.ignored.contains(where: { message.description.contains($0)}) { continue }
-
             attachment.addField(SlackField(message: message))
         }
+
         return attachment
     }
 
     func makeSlackAttachment(_ messages: [UnitTestMessage], type: SlackAttachmentType = .danger) -> SlackAttachment {
         let attachment = SlackAttachment(type: type)
         for message in messages {
-//            if self.slack.ignored.contains(where: { message.description.contains($0)}) { continue }
-
             attachment.addField(SlackField(message: message))
         }
         return attachment
