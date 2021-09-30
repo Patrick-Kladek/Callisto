@@ -7,32 +7,60 @@
 //
 
 import Foundation
+import ArgumentParser
 
+
+final class Slack: ParsableCommand {
+
+    public static let configuration = CommandConfiguration(abstract: "Post Build Summary to Slack")
+
+    @Argument(help: "Location for .buildReport file", completion: .file(), transform: URL.init(fileURLWithPath:))
+    var files: [URL]
+
+    @Option(help: "URL access Slack", transform: { return URL(string: $0)! })
+    var slackUrl: URL
+
+    @Option(help: "Token to access github")
+    var githubToken: String
+
+    @Option(help: "Organisation Account Name in github")
+    var githubOrganisation: String
+
+    @Option(help: "Github Repository Name")
+    var githubRepository: String
+
+    @Option(help: "Github Branch")
+    var branch: String
+
+    // MARK: - ParsableCommand
+
+    func run() throws {
+        let action = PostSlackAction(slack: self)
+        try action.run()
+    }
+}
 
 /// Responsible to post the parsed build information to Slack
 final class PostSlackAction: NSObject {
 
-    private lazy var ignore: [String] = {
-        return self.defaults.ignoredKeywords
-    }()
-
-    let defaults: UserDefaults
+    let slack: Slack
     let slackController: SlackCommunicationController
     let githubController: GitHubCommunicationController
 
     // MARK: - Lifecycle
 
-    init(defaults: UserDefaults) {
-        self.defaults = defaults
-        self.slackController = SlackCommunicationController(url: defaults.slackURL)
-        self.githubController = GitHubCommunicationController(access: defaults.githubAccess,
-                                                              repository: defaults.githubRepository)
+    init(slack: Slack) {
+        self.slack = slack
+        let repo = GithubRepository(organisation: slack.githubOrganisation, repository: slack.githubRepository)
+        let access = GithubAccess(token: slack.githubToken)
+        self.githubController = GitHubCommunicationController(access: access, repository: repo)
+        self.slackController = SlackCommunicationController(url: slack.slackUrl)
     }
 
     // MARK: - PostSlackAction
 
-    func run() -> Never {
-        let inputFiles = CommandLine.parameters(forKey: "files").map { URL(fileURLWithPath: $0) }
+    func run() throws {
+        let inputFiles = self.slack.files
         guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 
         let infos = inputFiles.map { BuildInformation.read(url: $0) }.compactMap { result -> BuildInformation? in
@@ -64,7 +92,7 @@ final class PostSlackAction: NSObject {
 private extension PostSlackAction {
 
     func currentBranch() -> Branch? {
-        switch self.githubController.branch(named: defaults.branch) {
+        switch self.githubController.branch(named: self.slack.branch) {
         case .success(let branch):
             return branch
         case .failure(let error):
@@ -78,9 +106,9 @@ private extension PostSlackAction {
 
         // Overview
         let overViewAttachment = SlackAttachment(type: .good)
-        overViewAttachment.title = branch?.slackTitle ?? "Branch: \(self.defaults.branch)"
+        overViewAttachment.title = branch?.slackTitle ?? "Branch: \(self.slack.branch)"
         overViewAttachment.titleURL = branch?.url
-        overViewAttachment.footer = "Ignored: \(self.ignore.joined(separator: ", "))"
+//        overViewAttachment.footer = "Ignored: \(self.slack.ignored.joined(separator: ", "))"
         message.add(attachment: overViewAttachment)
 
         // Errors
@@ -103,7 +131,7 @@ private extension PostSlackAction {
     func makeSlackAttachment(_ messages: [CompilerMessage], type: SlackAttachmentType = .danger) -> SlackAttachment {
         let attachment = SlackAttachment(type: type)
         for message in messages {
-            if self.ignore.contains(where: { message.description.contains($0)}) { continue }
+//            if self.slack.ignored.contains(where: { message.description.contains($0)}) { continue }
 
             attachment.addField(SlackField(message: message))
         }
@@ -113,7 +141,7 @@ private extension PostSlackAction {
     func makeSlackAttachment(_ messages: [UnitTestMessage], type: SlackAttachmentType = .danger) -> SlackAttachment {
         let attachment = SlackAttachment(type: type)
         for message in messages {
-            if self.ignore.contains(where: { message.description.contains($0)}) { continue }
+//            if self.slack.ignored.contains(where: { message.description.contains($0)}) { continue }
 
             attachment.addField(SlackField(message: message))
         }
