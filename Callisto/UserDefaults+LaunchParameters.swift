@@ -53,9 +53,9 @@ extension UserDefaults {
         return self.string(forKey: "branch") ?? { quit(.invalidBranch) }()
     }
 
-    var githubAccount: GithubAccount {
+    var githubAccess: GithubAccess {
         let token = self.string(forKey: "githubToken") ?? { quit(.invalidGithubCredentials) }()
-        return GithubAccount(token: token)
+        return GithubAccess(token: token)
     }
 
     var githubRepository: GithubRepository {

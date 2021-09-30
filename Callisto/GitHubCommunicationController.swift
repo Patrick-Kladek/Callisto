@@ -10,13 +10,13 @@ import Cocoa
 
 class GitHubCommunicationController {
 
-    public let account: GithubAccount
+    public let account: GithubAccess
     public let repository: GithubRepository
 
     fileprivate let baseUrl = URL(string: "https://api.github.com")
 
-    init(account: GithubAccount, repository: GithubRepository) {
-        self.account = account
+    init(access: GithubAccess, repository: GithubRepository) {
+        self.account = access
         self.repository = repository
     }
 

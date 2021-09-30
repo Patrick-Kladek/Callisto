@@ -7,26 +7,57 @@
 //
 
 import Foundation
+import ArgumentParser
 
 
 /// Responsible to read the build summaries and post them to github
-final class UploadAction: NSObject {
+final class Upload: ParsableCommand {
 
-    let defaults: UserDefaults
+    public static let configuration = CommandConfiguration(abstract: "Upload Build Summary to Github")
+
+    @Option(help: "Token to access github")
+    var githubToken: String
+
+    @Option(help: "Organisation Account Name in github")
+    var githubOrganisation: String
+
+    @Option(help: "Github Repository Name")
+    var githubRepository: String
+
+    @Option(help: "Github Branch")
+    var branch: String
+
+    @Flag(help: "Delete previously postet comments from pull qequest")
+    var deletePreviousComments: Bool = false
+
+    @Argument(help: "Location for .buildReport file", completion: .file(), transform: URL.init(fileURLWithPath:))
+    var files: [URL] = []
+
+    func run() throws {
+        let uploadAction = UploadAction(upload: self)
+        try uploadAction.run()
+    }
+}
+
+final class UploadAction {
+
     let githubController: GitHubCommunicationController
+    let upload: Upload
 
     // MARK: - Lifecycle
-	
-    init(defaults: UserDefaults) {
-        self.defaults = defaults
-        self.githubController = GitHubCommunicationController(account: defaults.githubAccount,
-                                                              repository: defaults.githubRepository)
-	}
+
+    init(upload: Upload) {
+        self.upload = upload
+
+        let repo = GithubRepository(organisation: upload.githubOrganisation, repository: upload.githubRepository)
+        let access = GithubAccess(token: upload.githubToken)
+        self.githubController = GitHubCommunicationController(access: access, repository: repo)
+    }
 
     // MARK: - UploadAction
 
-    func run() -> Never {
-        let inputFiles = CommandLine.parameters(forKey: "files").map { URL(fileURLWithPath: $0) }
+    func run() throws {
+        let inputFiles = self.upload.files
         guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 
         let infos = self.filteredBuildInfos(inputFiles.map { BuildInformation.read(url: $0) }.compactMap { result -> BuildInformation? in
@@ -46,7 +77,7 @@ final class UploadAction: NSObject {
         LogMessage(" * \(currentBranch.title ?? "<nil>") \(currentBranch.number ?? -1)")
         LogMessage(" * \(currentBranch.url?.absoluteString ?? "<nil>")")
 
-        if self.defaults.deletePreviousComments {
+        if self.upload.deletePreviousComments {
             let result = self.githubController.fetchPreviousComments(on: currentBranch)
             switch result {
             case .failure(let error):
@@ -71,7 +102,7 @@ final class UploadAction: NSObject {
             let message = "# Build Summary\n\(infos.compactMap { self.markdownText(from: $0) }.joined(separator: "\n"))"
             switch self.githubController.postComment(on: currentBranch, comment: Comment(body: message, id: nil)) {
             case .success:
-                LogMessage("Successfully posted BuildReport to GitHub:")
+                LogMessage("Successfully posted BuildReport to GitHub")
             case .failure(let error):
                 LogError(error.localizedDescription)
             }
@@ -98,7 +129,7 @@ private extension UploadAction {
     }
 
     func loadCurrentBranch() -> Branch {
-        switch self.githubController.branch(named: defaults.branch) {
+        switch self.githubController.branch(named: self.upload.branch) {
         case .success(let branch):
             return branch
         case .failure(let error):

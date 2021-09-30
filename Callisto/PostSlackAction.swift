@@ -25,7 +25,7 @@ final class PostSlackAction: NSObject {
     init(defaults: UserDefaults) {
         self.defaults = defaults
         self.slackController = SlackCommunicationController(url: defaults.slackURL)
-        self.githubController = GitHubCommunicationController(account: defaults.githubAccount,
+        self.githubController = GitHubCommunicationController(access: defaults.githubAccess,
                                                               repository: defaults.githubRepository)
     }
 
