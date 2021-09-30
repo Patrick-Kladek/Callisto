@@ -1,5 +1,5 @@
 //
-//  UploadAction.swift
+//  Github.swift
 //  Callisto
 //
 //  Created by Patrick Kladek on 02.08.19.
@@ -11,7 +11,7 @@ import ArgumentParser
 
 
 /// Responsible to read the build summaries and post them to github
-final class Upload: ParsableCommand {
+final class Github: ParsableCommand {
 
     public static let configuration = CommandConfiguration(abstract: "Upload Build Summary to Github")
 
@@ -42,11 +42,11 @@ final class Upload: ParsableCommand {
 final class UploadAction {
 
     let githubController: GitHubCommunicationController
-    let upload: Upload
+    let upload: Github
 
     // MARK: - Lifecycle
 
-    init(upload: Upload) {
+    init(upload: Github) {
         self.upload = upload
 
         let repo = GithubRepository(organisation: upload.githubOrganisation, repository: upload.githubRepository)
