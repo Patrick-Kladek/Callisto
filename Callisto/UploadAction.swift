@@ -144,11 +144,13 @@ private extension UploadAction {
         let commonErrors = infos[0].errors.filter { infos[1].errors.contains($0) }
         let commonWarnings = infos[0].warnings.filter { infos[1].warnings.contains($0) }
         let commonUnitTests = infos[0].unitTests.filter { infos[1].unitTests.contains($0) }
+        let allIgnoredKeywords = infos.flatMap { $0.ignoredKeywords }
 
         return BuildInformation(platform: "Core",
                                 errors: commonErrors,
                                 warnings: commonWarnings,
-                                unitTests: commonUnitTests)
+                                unitTests: commonUnitTests,
+                                ignoredKeywords: allIgnoredKeywords)
     }
 
     func stripInfos(_ strip: BuildInformation?, from: [BuildInformation]) -> [BuildInformation] {
@@ -158,7 +160,8 @@ private extension UploadAction {
             BuildInformation(platform: info.platform,
                              errors: info.errors.deleting(strip.errors),
                              warnings: info.warnings.deleting(strip.warnings),
-                             unitTests: info.unitTests.deleting(strip.unitTests))
+                             unitTests: info.unitTests.deleting(strip.unitTests),
+                             ignoredKeywords: info.ignoredKeywords.deleting(strip.ignoredKeywords))
         }
     }
 

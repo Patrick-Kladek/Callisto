@@ -16,11 +16,13 @@ struct BuildInformation: Codable {
     let errors: [CompilerMessage]
     let warnings: [CompilerMessage]
     let unitTests: [UnitTestMessage]
+    let ignoredKeywords: [String]
 
     static let empty = BuildInformation(platform: "",
                                         errors: [],
                                         warnings: [],
-                                        unitTests: [])
+                                        unitTests: [],
+                                        ignoredKeywords: [])
 }
 
 extension BuildInformation {

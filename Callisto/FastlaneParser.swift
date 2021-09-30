@@ -44,7 +44,8 @@ class FastlaneParser {
         self.buildSummary = BuildInformation(platform: self.parseSchemeFromFastlane(trimmedContent) ?? "",
                                              errors: self.parseBuildErrors(lines),
                                              warnings: self.parseAnalyzerWarnings(lines),
-                                             unitTests: self.parseUnitTestWarnings(lines))
+                                             unitTests: self.parseUnitTestWarnings(lines),
+                                             ignoredKeywords: self.ignoredKeywords)
 
         return self.parseExitStatusFromFastlane(trimmedContent)
     }
