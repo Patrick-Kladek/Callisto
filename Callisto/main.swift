@@ -6,35 +6,42 @@
 //  Copyright © 2017 Patrick Kladek. All rights reserved.
 //
 
-import Foundation
-import Cocoa
+import ArgumentParser
 
+struct Callisto: ParsableCommand {
+    static let configuration = CommandConfiguration(
+        abstract: "A Swift command-line tool to Parse Fastlane Build Output",
+        subcommands: [Summarise.self, Upload.self])
 
-func main() {
-    let defaults = UserDefaults.standard
+    init() { }
+}
 
-    switch defaults.action {
-    case .help:
-        LogMessage("Version \(AppInfo.version)")
-        LogMessage("Usage: \(UserDefaults.Action.possibleValues)")
-        exit(0)
+final class Generate: ParsableCommand {
 
-    case .summarise:
-        let action = SummariseAction(defaults: defaults)
-        action.run()
+    public static let configuration = CommandConfiguration(abstract: "Generate a blog post banner from the given input")
 
-    case .upload:
-        let action = UploadAction(defaults: defaults)
-        action.run()
+    @Argument(help: "The title of the blog post")
+    private var title: String
 
-    case .slack:
-        let action = PostSlackAction(defaults: defaults)
-        action.run()
+    @Option(name: .shortAndLong, help: "The week of the blog post as used in the file name")
+    private var week: Int?
 
-    case .unknown:
-        quit()
+    @Flag(name: .shortAndLong, help: "Show all roll results.")
+    private var verbose
+
+    func run() throws {
+        let weekDescription = week.map { "and week \($0)" }
+        print("Creating a banner for title \"\(title)\" \(weekDescription ?? "")")
     }
 }
 
-main()
+struct Upload: ParsableCommand {
+    public static let configuration = CommandConfiguration(abstract: "Upload blog post banner from the given input")
 
+    func run() throws {
+        print("Run")
+    }
+}
+
+
+Callisto.main()

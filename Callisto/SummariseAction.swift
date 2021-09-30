@@ -7,38 +7,34 @@
 //
 
 import Foundation
+import ArgumentParser
 
 
 /// Handles all steps from parsing the fastlane output to saving it in a temporary location
-final class SummariseAction: NSObject {
+final class Summarise: ParsableCommand {
 
-    private let defaults: UserDefaults
+    public static let configuration = CommandConfiguration(abstract: "Summarize Output from Fastlane")
 
-    // MARK: - Lifecycle
-	
-    init(defaults: UserDefaults) {
-        self.defaults = defaults
-	}
+    @Option(help: "Fastlane Generated Output", completion: .file(), transform: {
+        return URL.init(fileURLWithPath: $0)
+    })
+    var fastlane: URL
+
+    @Option(help: "Location for Output file", completion: .file(), transform: URL.init(fileURLWithPath:))
+    var output: URL
+
+    @Argument(help: "Ignore Messages which contain keywords")
+    var ignore: [String] = []
 
     // MARK: - SummariseAction
 
-    func run() -> Never {
-        let url = defaults.fastlaneInputURL
-        let ignoredKeywords = defaults.ignoredKeywords
-
-        let extractController: ExtractBuildInformationController
-
-        do {
-            try extractController = ExtractBuildInformationController(contentsOfFile: url, ignoredKeywords: ignoredKeywords)
-        } catch {
-            LogError("\(error.localizedDescription)")
-            quit(.parsingFailed)
-        }
+    func run() throws {
+        let extractController = try ExtractBuildInformationController(contentsOfFile: self.fastlane, ignoredKeywords: self.ignore)
 
         switch extractController.run() {
         case .success(let fastlaneStatusCode):
             let snakeCasePlatform = extractController.buildInfo.platform.replacingOccurrences(of: " ", with: "_")
-            let tempURL = self.defaults.reportOutputURL.appendingPathComponent(snakeCasePlatform).appendingPathExtension("buildReport")
+            let tempURL = self.output.appendingPathComponent(snakeCasePlatform).appendingPathExtension("buildReport")
             let result = extractController.save(to: tempURL)
             switch result {
             case .success:
@@ -54,3 +50,4 @@ final class SummariseAction: NSObject {
         }
     }
 }
+
