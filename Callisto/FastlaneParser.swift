@@ -23,18 +23,18 @@ enum FastlaneRunStatus {
 class FastlaneParser {
 
     private let content: String
-    private let ignoredKeywords: [String]
+    private let config: Config
     private(set) var buildSummary: BuildInformation = .empty
     private(set) var fastlaneReturnValue: FastlaneRunStatus = .unknown
 
-    init(content: String, ignoredKeywords: [String]) {
+    init(content: String, config: Config) {
         self.content = content
-        self.ignoredKeywords = ignoredKeywords
+        self.config = config
     }
 
-    convenience init(url: URL, ignoredKeywords: [String]) throws {
+    convenience init(url: URL, config: Config) throws {
         let content = try String(contentsOf: url)
-        self.init(content: content, ignoredKeywords: ignoredKeywords)
+        self.init(content: content, config: config)
     }
 
     func parse() -> Int {
@@ -45,7 +45,7 @@ class FastlaneParser {
                                              errors: self.parseBuildErrors(lines),
                                              warnings: self.parseAnalyzerWarnings(lines),
                                              unitTests: self.parseUnitTestWarnings(lines),
-                                             ignoredKeywords: self.ignoredKeywords)
+                                             config: self.config)
 
         return self.parseExitStatusFromFastlane(trimmedContent)
     }
@@ -71,22 +71,44 @@ fileprivate extension FastlaneParser {
 
     func parseBuildErrors(_ lines: [String]) -> [CompilerMessage] {
         let errorLines = lines.filter { self.lineIsError($0) }
-        return self.compilerMessages(from: errorLines)
+        let errors = self.compilerMessages(from: errorLines)
+
+        let filtered = errors.filter({ message in
+            guard let rule = self.config.ignore.first(where: { key, value in
+                message.url.absoluteString.contains(key)
+            }) else { return true }
+
+            guard let errors = rule.value.errors else { return true }
+
+            return errors.allSatisfy { warning in
+                message.message.contains(warning) == false
+            }
+        })
+        return filtered
     }
 
     func parseAnalyzerWarnings(_ lines: [String]) -> [CompilerMessage] {
         let warningLines = lines.filter { self.lineIsWarning($0) }
-        return self.compilerMessages(from: warningLines)
+        let warnings = self.compilerMessages(from: warningLines)
+
+        let filtered = warnings.filter({ message in
+            guard let rule = self.config.ignore.first(where: { key, value in
+                message.url.absoluteString.contains(key)
+            }) else { return true }
+
+            guard let warnings = rule.value.warnings else { return true }
+
+            return warnings.allSatisfy { warning in
+                message.message.contains(warning) == false
+            }
+        })
+        return filtered
     }
 
     func parseUnitTestWarnings(_ lines: [String]) -> [UnitTestMessage] {
         let unitTestLines = lines.filter { self.lineIsUnitTest($0) }
 
         let filteredLines = Set(unitTestLines.compactMap { line -> UnitTestMessage? in
-            for keyword in self.ignoredKeywords {
-                guard line.lowercased().contains(keyword) == false else { return nil }
-            }
-
             return UnitTestMessage(message: line)
         })
 
@@ -154,10 +176,6 @@ private extension FastlaneParser {
 
     func compilerMessages(from: [String]) -> [CompilerMessage] {
         let filteredLines = Set(from.compactMap { line -> CompilerMessage? in
-            for keyword in self.ignoredKeywords {
-                guard line.lowercased().contains(keyword.lowercased()) == false else { return nil }
-            }
-
             return CompilerMessage(message: line)
         })
 

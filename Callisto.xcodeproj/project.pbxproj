@@ -74,6 +74,7 @@
 		CDF007092074FAC200257FCC /* ios_build_8731.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF007072074FAC200257FCC /* ios_build_8731.log */; };
 		CDF0070E20760B1900257FCC /* ios_build_8745.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF0070C20760B1900257FCC /* ios_build_8745.log */; };
 		CDF0070F20760B1900257FCC /* mac_build_8745.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF0070D20760B1900257FCC /* mac_build_8745.log */; };
+		CDF2AD772706D03B00DED1A1 /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = CDF2AD762706D03B00DED1A1 /* Yams */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -149,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDF2AD772706D03B00DED1A1 /* Yams in Frameworks */,
 				CDAE77812705865A00651B95 /* ArgumentParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +349,7 @@
 			name = Callisto;
 			packageProductDependencies = (
 				CDAE77802705865A00651B95 /* ArgumentParser */,
+				CDF2AD762706D03B00DED1A1 /* Yams */,
 			);
 			productName = Callisto;
 			productReference = CD8BBDCA1EE0093900E8EE2E /* Callisto */;
@@ -386,6 +389,7 @@
 			mainGroup = CD8BBDC11EE0093900E8EE2E;
 			packageReferences = (
 				CDAE777F2705865A00651B95 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+				CDF2AD752706D03B00DED1A1 /* XCRemoteSwiftPackageReference "Yams" */,
 			);
 			productRefGroup = CD8BBDCB1EE0093900E8EE2E /* Products */;
 			projectDirPath = "";
@@ -716,6 +720,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		CDF2AD752706D03B00DED1A1 /* XCRemoteSwiftPackageReference "Yams" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jpsim/Yams";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -723,6 +735,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CDAE777F2705865A00651B95 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
 			productName = ArgumentParser;
+		};
+		CDF2AD762706D03B00DED1A1 /* Yams */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDF2AD752706D03B00DED1A1 /* XCRemoteSwiftPackageReference "Yams" */;
+			productName = Yams;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
