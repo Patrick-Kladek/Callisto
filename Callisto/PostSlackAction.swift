@@ -102,14 +102,20 @@ private extension PostSlackAction {
     }
 
     func makeSlackMessage(for branch: Branch?, infos: [BuildInformation]) -> SlackMessage {
-//        let ignoredKeywords = infos.flatMap { $0.ignoredKeywords }
+        let ignoredKeywords = infos.flatMap {
+            [
+                $0.config.ignore.values.compactMap { $0.warnings},
+                $0.config.ignore.values.compactMap { $0.errors },
+                $0.config.ignore.values.compactMap { $0.tests }
+            ].flatMap { $0 }
+        }.flatMap { $0 }
         let message = SlackMessage()
 
         // Overview
         let overViewAttachment = SlackAttachment(type: .good)
         overViewAttachment.title = branch?.slackTitle ?? "Branch: \(self.slack.branch)"
         overViewAttachment.titleURL = branch?.url
-//        overViewAttachment.footer = "Ignored: \(ignoredKeywords.joined(separator: ", "))"
+        overViewAttachment.footer = "Ignored: \(ignoredKeywords.joined(separator: ", "))"
         message.add(attachment: overViewAttachment)
 
         // Errors
