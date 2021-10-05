@@ -24,7 +24,7 @@ final class Summarise: ParsableCommand {
     @Option(help: "Location for Output file", completion: .file(), transform: URL.init(fileURLWithPath:))
     var output: URL
 
-    @Option(help: "Fine grade configuration", completion: .file(), transform: URL.init(fileURLWithPath:))
+    @Option(help: "YML file to exclude messages from specific files", completion: .file(), transform: URL.init(fileURLWithPath:))
     var config: URL
 
     // MARK: - SummariseAction

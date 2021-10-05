@@ -20,10 +20,10 @@ final class Slack: ParsableCommand {
     @Option(help: "URL access Slack", transform: { return URL(string: $0)! })
     var slackUrl: URL
 
-    @Option(help: "Token to access github")
+    @Option(help: "Personal Access Token for Github")
     var githubToken: String
 
-    @Option(help: "Organisation Account Name in github")
+    @Option(help: "Organisation Account Name in Github")
     var githubOrganisation: String
 
     @Option(help: "Github Repository Name")
