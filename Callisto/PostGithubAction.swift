@@ -11,53 +11,53 @@ import ArgumentParser
 
 
 /// Responsible to read the build summaries and post them to github
-final class Github: ParsableCommand {
+final class PostToGithub: ParsableCommand {
 
-    public static let configuration = CommandConfiguration(abstract: "Upload Build Summary to Github")
+    public static let configuration = CommandConfiguration(commandName: "github", abstract: "Upload Build Summary to Github")
 
-    @Option(help: "Token to access Github")
+    @Option(help: "Your GitHub Access Token")
     var githubToken: String
 
-    @Option(help: "Organisation Account Name in Github")
+    @Option(help: "Your GitHub Organisation Account Name")
     var githubOrganisation: String
 
-    @Option(help: "Github Repository Name")
+    @Option(help: "GitHub Repository Name")
     var githubRepository: String
 
-    @Option(help: "Github Branch")
+    @Option(help: "GitHub Branch")
     var branch: String
 
-    @Flag(help: "Delete previously postet comments from pull qequest")
+    @Flag(help: "Delete previously postet comments from pull request")
     var deletePreviousComments: Bool = false
 
     @Argument(help: "Location for .buildReport file", completion: .file(), transform: URL.init(fileURLWithPath:))
     var files: [URL] = []
 
     func run() throws {
-        let uploadAction = UploadAction(upload: self)
+        let uploadAction = GithubAction(command: self)
         try uploadAction.run()
     }
 }
 
-final class UploadAction {
+final class GithubAction {
 
     let githubController: GitHubCommunicationController
-    let upload: Github
+    let command: PostToGithub
 
     // MARK: - Lifecycle
 
-    init(upload: Github) {
-        self.upload = upload
+    init(command: PostToGithub) {
+        self.command = command
 
-        let repo = GithubRepository(organisation: upload.githubOrganisation, repository: upload.githubRepository)
-        let access = GithubAccess(token: upload.githubToken)
+        let repo = GithubRepository(organisation: command.githubOrganisation, repository: command.githubRepository)
+        let access = GithubAccess(token: command.githubToken)
         self.githubController = GitHubCommunicationController(access: access, repository: repo)
     }
 
     // MARK: - UploadAction
 
     func run() throws {
-        let inputFiles = self.upload.files
+        let inputFiles = self.command.files
         guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 
         let infos = self.filteredBuildInfos(inputFiles.map { BuildInformation.read(url: $0) }.compactMap { result -> BuildInformation? in
@@ -77,7 +77,7 @@ final class UploadAction {
         LogMessage(" * \(currentBranch.title ?? "<nil>") \(currentBranch.number ?? -1)")
         LogMessage(" * \(currentBranch.url?.absoluteString ?? "<nil>")")
 
-        if self.upload.deletePreviousComments {
+        if self.command.deletePreviousComments {
             let result = self.githubController.fetchPreviousComments(on: currentBranch)
             switch result {
             case .failure(let error):
@@ -114,7 +114,7 @@ final class UploadAction {
 
 // MARK: - Private
 
-private extension UploadAction {
+private extension GithubAction {
 
     func filteredBuildInfos(_ infos: [BuildInformation]) -> [BuildInformation] {
         let coreInfos = self.commonInfos(infos)
@@ -129,7 +129,7 @@ private extension UploadAction {
     }
 
     func loadCurrentBranch() -> Branch {
-        switch self.githubController.branch(named: self.upload.branch) {
+        switch self.githubController.branch(named: self.command.branch) {
         case .success(let branch):
             return branch
         case .failure(let error):
