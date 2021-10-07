@@ -13,7 +13,7 @@ import ArgumentParser
 /// Responsible to read the build summaries and post them to github
 final class Github: ParsableCommand {
 
-    public static let configuration = CommandConfiguration(abstract: "Upload Build Summary to Github")
+    public static let configuration = CommandConfiguration(abstract: "Upload Build Summary to GitHub")
 
     @Option(help: "Token to access github")
     var githubToken: String
