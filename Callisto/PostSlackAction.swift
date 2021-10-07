@@ -10,9 +10,9 @@ import Foundation
 import ArgumentParser
 
 
-final class Slack: ParsableCommand {
+final class PostToSlack: ParsableCommand {
 
-    public static let configuration = CommandConfiguration(abstract: "Post Build Summary to Slack")
+    public static let configuration = CommandConfiguration(commandName: "slack", abstract: "Post Build Summary to Slack")
 
     @Argument(help: "Location for .buildReport file", completion: .file(), transform: URL.init(fileURLWithPath:))
     var files: [URL]
@@ -35,7 +35,7 @@ final class Slack: ParsableCommand {
     // MARK: - ParsableCommand
 
     func run() throws {
-        let action = PostSlackAction(slack: self)
+        let action = PostSlackAction(command: self)
         try action.run()
     }
 }
@@ -43,24 +43,24 @@ final class Slack: ParsableCommand {
 /// Responsible to post the parsed build information to Slack
 final class PostSlackAction: NSObject {
 
-    let slack: Slack
+    let command: PostToSlack
     let slackController: SlackCommunicationController
     let githubController: GitHubCommunicationController
 
     // MARK: - Lifecycle
 
-    init(slack: Slack) {
-        self.slack = slack
-        let repo = GithubRepository(organisation: slack.githubOrganisation, repository: slack.githubRepository)
-        let access = GithubAccess(token: slack.githubToken)
+    init(command: PostToSlack) {
+        self.command = command
+        let repo = GithubRepository(organisation: command.githubOrganisation, repository: command.githubRepository)
+        let access = GithubAccess(token: command.githubToken)
         self.githubController = GitHubCommunicationController(access: access, repository: repo)
-        self.slackController = SlackCommunicationController(url: slack.slackUrl)
+        self.slackController = SlackCommunicationController(url: command.slackUrl)
     }
 
     // MARK: - PostSlackAction
 
     func run() throws {
-        let inputFiles = self.slack.files
+        let inputFiles = self.command.files
         guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 
         let infos = inputFiles.map { BuildInformation.read(url: $0) }.compactMap { result -> BuildInformation? in
@@ -92,7 +92,7 @@ final class PostSlackAction: NSObject {
 private extension PostSlackAction {
 
     func currentBranch() -> Branch? {
-        switch self.githubController.branch(named: self.slack.branch) {
+        switch self.githubController.branch(named: self.command.branch) {
         case .success(let branch):
             return branch
         case .failure(let error):
@@ -107,7 +107,7 @@ private extension PostSlackAction {
 
         // Overview
         let overViewAttachment = SlackAttachment(type: .good)
-        overViewAttachment.title = branch?.slackTitle ?? "Branch: \(self.slack.branch)"
+        overViewAttachment.title = branch?.slackTitle ?? "Branch: \(self.command.branch)"
         overViewAttachment.titleURL = branch?.url
         overViewAttachment.footer = "Ignored: \(ignoredKeywords.joined(separator: ", "))"
         message.add(attachment: overViewAttachment)

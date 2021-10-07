@@ -11,14 +11,14 @@ import ArgumentParser
 
 
 /// Responsible to read the build summaries and post them to github
-final class Github: ParsableCommand {
+final class PostToGithub: ParsableCommand {
 
-    public static let configuration = CommandConfiguration(abstract: "Upload Build Summary to Github")
+    public static let configuration = CommandConfiguration(commandName: "github", abstract: "Upload Build Summary to Github")
 
-    @Option(help: "Token to access github")
+    @Option(help: "Token to access Github")
     var githubToken: String
 
-    @Option(help: "Organisation Account Name in github")
+    @Option(help: "Organisation Account Name in Github")
     var githubOrganisation: String
 
     @Option(help: "Github Repository Name")
@@ -34,30 +34,30 @@ final class Github: ParsableCommand {
     var files: [URL] = []
 
     func run() throws {
-        let uploadAction = UploadAction(upload: self)
+        let uploadAction = GithubAction(command: self)
         try uploadAction.run()
     }
 }
 
-final class UploadAction {
+final class GithubAction {
 
     let githubController: GitHubCommunicationController
-    let upload: Github
+    let command: PostToGithub
 
     // MARK: - Lifecycle
 
-    init(upload: Github) {
-        self.upload = upload
+    init(command: PostToGithub) {
+        self.command = command
 
-        let repo = GithubRepository(organisation: upload.githubOrganisation, repository: upload.githubRepository)
-        let access = GithubAccess(token: upload.githubToken)
+        let repo = GithubRepository(organisation: command.githubOrganisation, repository: command.githubRepository)
+        let access = GithubAccess(token: command.githubToken)
         self.githubController = GitHubCommunicationController(access: access, repository: repo)
     }
 
     // MARK: - UploadAction
 
     func run() throws {
-        let inputFiles = self.upload.files
+        let inputFiles = self.command.files
         guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 
         let infos = self.filteredBuildInfos(inputFiles.map { BuildInformation.read(url: $0) }.compactMap { result -> BuildInformation? in
@@ -77,7 +77,7 @@ final class UploadAction {
         LogMessage(" * \(currentBranch.title ?? "<nil>") \(currentBranch.number ?? -1)")
         LogMessage(" * \(currentBranch.url?.absoluteString ?? "<nil>")")
 
-        if self.upload.deletePreviousComments {
+        if self.command.deletePreviousComments {
             let result = self.githubController.fetchPreviousComments(on: currentBranch)
             switch result {
             case .failure(let error):
@@ -114,7 +114,7 @@ final class UploadAction {
 
 // MARK: - Private
 
-private extension UploadAction {
+private extension GithubAction {
 
     func filteredBuildInfos(_ infos: [BuildInformation]) -> [BuildInformation] {
         let coreInfos = self.commonInfos(infos)
@@ -129,7 +129,7 @@ private extension UploadAction {
     }
 
     func loadCurrentBranch() -> Branch {
-        switch self.githubController.branch(named: self.upload.branch) {
+        switch self.githubController.branch(named: self.command.branch) {
         case .success(let branch):
             return branch
         case .failure(let error):
@@ -144,13 +144,12 @@ private extension UploadAction {
         let commonErrors = infos[0].errors.filter { infos[1].errors.contains($0) }
         let commonWarnings = infos[0].warnings.filter { infos[1].warnings.contains($0) }
         let commonUnitTests = infos[0].unitTests.filter { infos[1].unitTests.contains($0) }
-        let allIgnoredKeywords = infos.flatMap { $0.ignoredKeywords }
 
         return BuildInformation(platform: "Core",
                                 errors: commonErrors,
                                 warnings: commonWarnings,
                                 unitTests: commonUnitTests,
-                                ignoredKeywords: allIgnoredKeywords)
+                                config: .empty)
     }
 
     func stripInfos(_ strip: BuildInformation?, from: [BuildInformation]) -> [BuildInformation] {
@@ -161,7 +160,7 @@ private extension UploadAction {
                              errors: info.errors.deleting(strip.errors),
                              warnings: info.warnings.deleting(strip.warnings),
                              unitTests: info.unitTests.deleting(strip.unitTests),
-                             ignoredKeywords: info.ignoredKeywords.deleting(strip.ignoredKeywords))
+                             config: .empty)
         }
     }
 
