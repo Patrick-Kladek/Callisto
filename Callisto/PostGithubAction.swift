@@ -15,19 +15,19 @@ final class PostToGithub: ParsableCommand {
 
     public static let configuration = CommandConfiguration(commandName: "github", abstract: "Upload Build Summary to Github")
 
-    @Option(help: "Token to access Github")
+    @Option(help: "Your GitHub Access Token")
     var githubToken: String
 
-    @Option(help: "Organisation Account Name in Github")
+    @Option(help: "Your GitHub Organisation Account Name")
     var githubOrganisation: String
 
-    @Option(help: "Github Repository Name")
+    @Option(help: "GitHub Repository Name")
     var githubRepository: String
 
-    @Option(help: "Github Branch")
+    @Option(help: "GitHub Branch")
     var branch: String
 
-    @Flag(help: "Delete previously postet comments from pull qequest")
+    @Flag(help: "Delete previously postet comments from pull request")
     var deletePreviousComments: Bool = false
 
     @Argument(help: "Location for .buildReport file", completion: .file(), transform: URL.init(fileURLWithPath:))
@@ -144,12 +144,13 @@ private extension GithubAction {
         let commonErrors = infos[0].errors.filter { infos[1].errors.contains($0) }
         let commonWarnings = infos[0].warnings.filter { infos[1].warnings.contains($0) }
         let commonUnitTests = infos[0].unitTests.filter { infos[1].unitTests.contains($0) }
+        let allIgnoredKeywords = infos.flatMap { $0.ignoredKeywords }
 
         return BuildInformation(platform: "Core",
                                 errors: commonErrors,
                                 warnings: commonWarnings,
                                 unitTests: commonUnitTests,
-                                config: .empty)
+                                ignoredKeywords: allIgnoredKeywords)
     }
 
     func stripInfos(_ strip: BuildInformation?, from: [BuildInformation]) -> [BuildInformation] {
@@ -160,7 +161,7 @@ private extension GithubAction {
                              errors: info.errors.deleting(strip.errors),
                              warnings: info.warnings.deleting(strip.warnings),
                              unitTests: info.unitTests.deleting(strip.unitTests),
-                             config: .empty)
+                             ignoredKeywords: info.ignoredKeywords.deleting(strip.ignoredKeywords))
         }
     }
 
