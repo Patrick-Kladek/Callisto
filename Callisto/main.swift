@@ -10,7 +10,7 @@ import ArgumentParser
 
 struct Callisto: ParsableCommand {
     static let configuration = CommandConfiguration(
-        abstract: "A Swift command-line tool to Parse Fastlane Build Output",
+        abstract: "A Swift command-line tool to parse fastlane build output",
         subcommands: [Summarise.self, Github.self, Slack.self])
 
     init() { }
