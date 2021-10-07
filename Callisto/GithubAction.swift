@@ -18,7 +18,7 @@ final class Github: ParsableCommand {
     @Option(help: "Your GitHub Access Token")
     var githubToken: String
 
-    @Option(help: "Organisation Account Name in github")
+    @Option(help: "Your GitHub Organisation Account Name")
     var githubOrganisation: String
 
     @Option(help: "Github Repository Name")
