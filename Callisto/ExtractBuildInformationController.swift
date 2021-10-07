@@ -9,6 +9,20 @@
 import Foundation
 
 
+struct Config: Codable {
+    typealias File = String
+
+    struct Details: Codable {
+        let warnings: [String]?
+        let errors: [String]?
+        let tests: [String]?
+    }
+
+    let ignore: [File: Details]
+
+    static let empty = Config(ignore: [:])
+}
+
 /// Responsible to extract all build warnings & errors from fastlane
 /// output and save this information to a file
 final class ExtractBuildInformationController: NSObject {
@@ -18,7 +32,7 @@ final class ExtractBuildInformationController: NSObject {
     }
 
     private var parser: FastlaneParser
-    private var ignore: [String]
+    private var config: Config
 
     // MARK: - Properties
 
@@ -28,11 +42,11 @@ final class ExtractBuildInformationController: NSObject {
 
     // MARK: - Lifecycle
 
-    init(contentsOfFile url: URL, ignoredKeywords: [String]) throws {
-        let parser = try FastlaneParser(url: url, ignoredKeywords: ignoredKeywords)
+    init(contentsOfFile url: URL, config: Config) throws {
+        let parser = try FastlaneParser(url: url, config: config)
 
         self.parser = parser
-        self.ignore = ignoredKeywords
+        self.config = config
     }
 
     // MARK: - ExtractBuildInformationController

@@ -20,10 +20,10 @@ final class PostToSlack: ParsableCommand {
     @Option(help: "URL access Slack", transform: { return URL(string: $0)! })
     var slackUrl: URL
 
-    @Option(help: "Token to access github")
+    @Option(help: "Your GitHub Access Token")
     var githubToken: String
 
-    @Option(help: "Organisation Account Name in github")
+    @Option(help: "Your GitHub Organisation Account Name")
     var githubOrganisation: String
 
     @Option(help: "Github Repository Name")
@@ -102,7 +102,13 @@ private extension PostSlackAction {
     }
 
     func makeSlackMessage(for branch: Branch?, infos: [BuildInformation]) -> SlackMessage {
-        let ignoredKeywords = infos.flatMap { $0.ignoredKeywords }
+        let ignoredKeywords = infos.flatMap {
+            [
+                $0.config.ignore.values.compactMap { $0.warnings},
+                $0.config.ignore.values.compactMap { $0.errors },
+                $0.config.ignore.values.compactMap { $0.tests }
+            ].flatMap { $0 }
+        }.flatMap { $0 }
         let message = SlackMessage()
 
         // Overview
