@@ -6,35 +6,15 @@
 //  Copyright © 2017 Patrick Kladek. All rights reserved.
 //
 
-import Foundation
-import Cocoa
+import ArgumentParser
 
+struct Callisto: ParsableCommand {
 
-func main() {
-    let defaults = UserDefaults.standard
+    static let configuration = CommandConfiguration(
+        abstract: "A Swift command-line tool to parse fastlane build output",
+        subcommands: [Summarise.self, PostToGithub.self, PostToSlack.self])
 
-    switch defaults.action {
-    case .help:
-        LogMessage("Version \(AppInfo.version)")
-        LogMessage("Usage: \(UserDefaults.Action.possibleValues)")
-        exit(0)
-
-    case .summarise:
-        let action = SummariseAction(defaults: defaults)
-        action.run()
-
-    case .upload:
-        let action = UploadAction(defaults: defaults)
-        action.run()
-
-    case .slack:
-        let action = PostSlackAction(defaults: defaults)
-        action.run()
-
-    case .unknown:
-        quit()
-    }
+    init() { }
 }
 
-main()
-
+Callisto.main()

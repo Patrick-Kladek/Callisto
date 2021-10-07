@@ -10,13 +10,13 @@ import Cocoa
 
 class GitHubCommunicationController {
 
-    public let account: GithubAccount
+    public let access: GithubAccess
     public let repository: GithubRepository
 
     fileprivate let baseUrl = URL(string: "https://api.github.com")
 
-    init(account: GithubAccount, repository: GithubRepository) {
-        self.account = account
+    init(access: GithubAccess, repository: GithubRepository) {
+        self.access = access
         self.repository = repository
     }
 
@@ -194,7 +194,7 @@ extension GitHubCommunicationController {
     func defaultRequest(url: URL) -> URLRequest {
         var request = URLRequest(url: url)
         request.addValue("application/vnd.github.antiope-preview+json", forHTTPHeaderField: "Accept")
-        request.setValue("token \(self.account.token)", forHTTPHeaderField: "Authorization")
+        request.setValue("token \(self.access.token)", forHTTPHeaderField: "Authorization")
 
         return request
     }

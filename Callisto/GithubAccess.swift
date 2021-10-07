@@ -1,5 +1,5 @@
 //
-//  GithubAccount.swift
+//  GithubAccess.swift
 //  clangParser
 //
 //  Created by Patrick Kladek on 26.04.17.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-struct GithubAccount {
+struct GithubAccess {
 
     let token: String
 }

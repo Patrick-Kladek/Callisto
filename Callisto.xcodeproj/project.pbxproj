@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,19 +19,18 @@
 		CD8BBDF21EE009C600E8EE2E /* SlackMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */; };
 		CD9DF11122FC16D300779F6F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDB1EE009C600E8EE2E /* main.swift */; };
 		CD9DF11222FC16D300779F6F /* SummariseAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */; };
-		CD9DF11322FC16D300779F6F /* UploadAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6D22F4475A00C31E08 /* UploadAction.swift */; };
+		CD9DF11322FC16D300779F6F /* PostGithubAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6D22F4475A00C31E08 /* PostGithubAction.swift */; };
 		CD9DF11422FC16D300779F6F /* ExtractBuildInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD33AF6E22F0766E002EC27C /* ExtractBuildInformationController.swift */; };
 		CD9DF11622FC16D300779F6F /* FastlaneParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */; };
 		CD9DF11722FC16D300779F6F /* CompilerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */; };
 		CD9DF11822FC16D300779F6F /* UnitTestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */; };
 		CD9DF11922FC16D300779F6F /* BuildInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD33AF7022F07DF9002EC27C /* BuildInformation.swift */; };
 		CD9DF11A22FC16D300779F6F /* GitHubCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */; };
-		CD9DF11B22FC16D300779F6F /* GithubAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */; };
+		CD9DF11B22FC16D300779F6F /* GithubAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD91EE009C600E8EE2E /* GithubAccess.swift */; };
 		CD9DF11C22FC16D300779F6F /* GithubRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6922F4421700C31E08 /* GithubRepository.swift */; };
 		CD9DF11D22FC16D300779F6F /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD41EE009C600E8EE2E /* Branch.swift */; };
 		CD9DF11E22FC16D300779F6F /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF10D22FC102800779F6F /* Annotation.swift */; };
 		CD9DF11F22FC16D300779F6F /* URLSession+synchronousTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */; };
-		CD9DF12022FC16D300779F6F /* UserDefaults+LaunchParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6B22F445ED00C31E08 /* UserDefaults+LaunchParameters.swift */; };
 		CD9DF12122FC16D300779F6F /* DictionaryConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */; };
 		CD9DF12222FC16D300779F6F /* Dictionary+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */; };
 		CD9DF12322FC16D300779F6F /* NSColor+NSColorHexadecimalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */; };
@@ -43,19 +42,17 @@
 		CD9DF12922FC16EF00779F6F /* GithubModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF10F22FC15AB00779F6F /* GithubModelTests.swift */; };
 		CD9DF12A22FC1C6F00779F6F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDB1EE009C600E8EE2E /* main.swift */; };
 		CD9DF12B22FC1C6F00779F6F /* SummariseAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */; };
-		CD9DF12C22FC1C6F00779F6F /* UploadAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6D22F4475A00C31E08 /* UploadAction.swift */; };
 		CD9DF12D22FC1C6F00779F6F /* ExtractBuildInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD33AF6E22F0766E002EC27C /* ExtractBuildInformationController.swift */; };
 		CD9DF12F22FC1C6F00779F6F /* FastlaneParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */; };
 		CD9DF13022FC1C6F00779F6F /* CompilerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */; };
 		CD9DF13122FC1C6F00779F6F /* UnitTestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */; };
 		CD9DF13222FC1C6F00779F6F /* BuildInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD33AF7022F07DF9002EC27C /* BuildInformation.swift */; };
 		CD9DF13322FC1C6F00779F6F /* GitHubCommunicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */; };
-		CD9DF13422FC1C6F00779F6F /* GithubAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */; };
+		CD9DF13422FC1C6F00779F6F /* GithubAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD91EE009C600E8EE2E /* GithubAccess.swift */; };
 		CD9DF13522FC1C6F00779F6F /* GithubRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6922F4421700C31E08 /* GithubRepository.swift */; };
 		CD9DF13622FC1C6F00779F6F /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD41EE009C600E8EE2E /* Branch.swift */; };
 		CD9DF13722FC1C6F00779F6F /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF10D22FC102800779F6F /* Annotation.swift */; };
 		CD9DF13822FC1C6F00779F6F /* URLSession+synchronousTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */; };
-		CD9DF13922FC1C6F00779F6F /* UserDefaults+LaunchParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6B22F445ED00C31E08 /* UserDefaults+LaunchParameters.swift */; };
 		CD9DF13A22FC1C6F00779F6F /* DictionaryConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */; };
 		CD9DF13B22FC1C6F00779F6F /* Dictionary+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */; };
 		CD9DF13C22FC1C6F00779F6F /* NSColor+NSColorHexadecimalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */; };
@@ -69,12 +66,15 @@
 		CD9DF3A722FC294E00779F6F /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3A622FC294E00779F6F /* Output.swift */; };
 		CD9DF3A922FC2A1A00779F6F /* Check.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3A822FC2A1A00779F6F /* Check.swift */; };
 		CD9DF3AB22FC4AEF00779F6F /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3AA22FC4AEF00779F6F /* Comment.swift */; };
+		CDAE77812705865A00651B95 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = CDAE77802705865A00651B95 /* ArgumentParser */; };
+		CDAE77842705B68600651B95 /* PostGithubAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6D22F4475A00C31E08 /* PostGithubAction.swift */; };
 		CDB22D312303F985002A1EF3 /* String+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB22D302303F985002A1EF3 /* String+Sugar.swift */; };
 		CDB5A97C251A722D00CC486F /* PostSlackAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB5A97B251A722D00CC486F /* PostSlackAction.swift */; };
 		CDF007082074FAC200257FCC /* mac_build_8731.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF007062074FAC200257FCC /* mac_build_8731.log */; };
 		CDF007092074FAC200257FCC /* ios_build_8731.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF007072074FAC200257FCC /* ios_build_8731.log */; };
 		CDF0070E20760B1900257FCC /* ios_build_8745.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF0070C20760B1900257FCC /* ios_build_8745.log */; };
 		CDF0070F20760B1900257FCC /* mac_build_8745.log in Resources */ = {isa = PBXBuildFile; fileRef = CDF0070D20760B1900257FCC /* mac_build_8745.log */; };
+		CDF2AD772706D03B00DED1A1 /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = CDF2AD762706D03B00DED1A1 /* Yams */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -103,8 +103,7 @@
 		CD4E0F6522F429BB00C31E08 /* URL+Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Temp.swift"; sourceTree = "<group>"; };
 		CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummariseAction.swift; sourceTree = "<group>"; };
 		CD4E0F6922F4421700C31E08 /* GithubRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepository.swift; sourceTree = "<group>"; };
-		CD4E0F6B22F445ED00C31E08 /* UserDefaults+LaunchParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+LaunchParameters.swift"; sourceTree = "<group>"; };
-		CD4E0F6D22F4475A00C31E08 /* UploadAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAction.swift; sourceTree = "<group>"; };
+		CD4E0F6D22F4475A00C31E08 /* PostGithubAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGithubAction.swift; sourceTree = "<group>"; };
 		CD512D8D2008C1F9002EB718 /* ios_build_4822.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_4822.log; sourceTree = "<group>"; };
 		CD512D8F2008C257002EB718 /* GithubCommunicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubCommunicationTests.swift; sourceTree = "<group>"; };
 		CD8320FE1EE7DF640029DBE0 /* CallistoTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CallistoTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,7 +115,7 @@
 		CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Optional.swift"; sourceTree = "<group>"; };
 		CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryConvertable.swift; sourceTree = "<group>"; };
 		CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FastlaneParser.swift; sourceTree = "<group>"; };
-		CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubAccount.swift; sourceTree = "<group>"; };
+		CD8BBDD91EE009C600E8EE2E /* GithubAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubAccess.swift; sourceTree = "<group>"; };
 		CD8BBDDA1EE009C600E8EE2E /* GitHubCommunicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubCommunicationController.swift; sourceTree = "<group>"; };
 		CD8BBDDB1EE009C600E8EE2E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = Callisto/main.swift; sourceTree = SOURCE_ROOT; };
 		CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+NSColorHexadecimalValue.swift"; sourceTree = "<group>"; };
@@ -151,6 +150,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDF2AD772706D03B00DED1A1 /* Yams in Frameworks */,
+				CDAE77812705865A00651B95 /* ArgumentParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,9 +217,8 @@
 			children = (
 				CD8BBDDB1EE009C600E8EE2E /* main.swift */,
 				CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */,
-				CD4E0F6D22F4475A00C31E08 /* UploadAction.swift */,
+				CD4E0F6D22F4475A00C31E08 /* PostGithubAction.swift */,
 				CDB5A97B251A722D00CC486F /* PostSlackAction.swift */,
-				CD33AF6E22F0766E002EC27C /* ExtractBuildInformationController.swift */,
 				CD8BBDFA1EE00A8E00E8EE2E /* Parser */,
 				CD8BBDF41EE00A2500E8EE2E /* Communication Controller */,
 				CD8BBDF91EE00A7B00E8EE2E /* Helper */,
@@ -269,7 +269,7 @@
 		CD8BBDF81EE00A6500E8EE2E /* Properties */ = {
 			isa = PBXGroup;
 			children = (
-				CD8BBDD91EE009C600E8EE2E /* GithubAccount.swift */,
+				CD8BBDD91EE009C600E8EE2E /* GithubAccess.swift */,
 				CD4E0F6922F4421700C31E08 /* GithubRepository.swift */,
 				CD8BBDD41EE009C600E8EE2E /* Branch.swift */,
 				CD9DF10D22FC102800779F6F /* Annotation.swift */,
@@ -284,7 +284,6 @@
 			isa = PBXGroup;
 			children = (
 				CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */,
-				CD4E0F6B22F445ED00C31E08 /* UserDefaults+LaunchParameters.swift */,
 				CD8BBDD71EE009C600E8EE2E /* DictionaryConvertable.swift */,
 				CD8BBDD61EE009C600E8EE2E /* Dictionary+Optional.swift */,
 				CD8BBDDD1EE009C600E8EE2E /* NSColor+NSColorHexadecimalValue.swift */,
@@ -299,6 +298,7 @@
 		CD8BBDFA1EE00A8E00E8EE2E /* Parser */ = {
 			isa = PBXGroup;
 			children = (
+				CD33AF6E22F0766E002EC27C /* ExtractBuildInformationController.swift */,
 				CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */,
 				CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */,
 				CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */,
@@ -347,6 +347,10 @@
 			dependencies = (
 			);
 			name = Callisto;
+			packageProductDependencies = (
+				CDAE77802705865A00651B95 /* ArgumentParser */,
+				CDF2AD762706D03B00DED1A1 /* Yams */,
+			);
 			productName = Callisto;
 			productReference = CD8BBDCA1EE0093900E8EE2E /* Callisto */;
 			productType = "com.apple.product-type.tool";
@@ -383,6 +387,10 @@
 				en,
 			);
 			mainGroup = CD8BBDC11EE0093900E8EE2E;
+			packageReferences = (
+				CDAE777F2705865A00651B95 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+				CDF2AD752706D03B00DED1A1 /* XCRemoteSwiftPackageReference "Yams" */,
+			);
 			productRefGroup = CD8BBDCB1EE0093900E8EE2E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -419,7 +427,6 @@
 				CD9DF13C22FC1C6F00779F6F /* NSColor+NSColorHexadecimalValue.swift in Sources */,
 				CD9DF12A22FC1C6F00779F6F /* main.swift in Sources */,
 				CD9DF13822FC1C6F00779F6F /* URLSession+synchronousTask.swift in Sources */,
-				CD9DF13922FC1C6F00779F6F /* UserDefaults+LaunchParameters.swift in Sources */,
 				CD9DF13622FC1C6F00779F6F /* Branch.swift in Sources */,
 				CD9DF13B22FC1C6F00779F6F /* Dictionary+Optional.swift in Sources */,
 				CD9DF12722FC16EF00779F6F /* GithubCommunicationTests.swift in Sources */,
@@ -436,13 +443,13 @@
 				CD9DF13F22FC1C9100779F6F /* SlackCommunicationController.swift in Sources */,
 				CD9DF12B22FC1C6F00779F6F /* SummariseAction.swift in Sources */,
 				CD9DF13222FC1C6F00779F6F /* BuildInformation.swift in Sources */,
-				CD9DF12C22FC1C6F00779F6F /* UploadAction.swift in Sources */,
 				CD9DF12922FC16EF00779F6F /* GithubModelTests.swift in Sources */,
 				CD9DF12F22FC1C6F00779F6F /* FastlaneParser.swift in Sources */,
 				CD9DF12D22FC1C6F00779F6F /* ExtractBuildInformationController.swift in Sources */,
 				CD9DF13722FC1C6F00779F6F /* Annotation.swift in Sources */,
+				CDAE77842705B68600651B95 /* PostGithubAction.swift in Sources */,
 				CD9DF14022FC1C9100779F6F /* SlackMessage.swift in Sources */,
-				CD9DF13422FC1C6F00779F6F /* GithubAccount.swift in Sources */,
+				CD9DF13422FC1C6F00779F6F /* GithubAccess.swift in Sources */,
 				CD9DF14122FC1C9100779F6F /* SlackAttachment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,7 +464,7 @@
 				CD9DF11722FC16D300779F6F /* CompilerMessage.swift in Sources */,
 				CD9DF11D22FC16D300779F6F /* Branch.swift in Sources */,
 				CD9DF12522FC16D300779F6F /* Common.swift in Sources */,
-				CD9DF11322FC16D300779F6F /* UploadAction.swift in Sources */,
+				CD9DF11322FC16D300779F6F /* PostGithubAction.swift in Sources */,
 				CD8BBDF01EE009C600E8EE2E /* SlackCommunicationController.swift in Sources */,
 				CD8BBDEE1EE009C600E8EE2E /* SlackAction.swift in Sources */,
 				CD9DF11122FC16D300779F6F /* main.swift in Sources */,
@@ -477,11 +484,10 @@
 				CD9DF11F22FC16D300779F6F /* URLSession+synchronousTask.swift in Sources */,
 				CD9DF11922FC16D300779F6F /* BuildInformation.swift in Sources */,
 				CD9DF12222FC16D300779F6F /* Dictionary+Optional.swift in Sources */,
-				CD9DF12022FC16D300779F6F /* UserDefaults+LaunchParameters.swift in Sources */,
 				CD8BBDF21EE009C600E8EE2E /* SlackMessage.swift in Sources */,
 				CD9DF11222FC16D300779F6F /* SummariseAction.swift in Sources */,
 				CD9DF12322FC16D300779F6F /* NSColor+NSColorHexadecimalValue.swift in Sources */,
-				CD9DF11B22FC16D300779F6F /* GithubAccount.swift in Sources */,
+				CD9DF11B22FC16D300779F6F /* GithubAccess.swift in Sources */,
 				CD9DF11A22FC16D300779F6F /* GitHubCommunicationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,7 +501,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = W6L39UYL6Z;
 				INFOPLIST_FILE = CallistoTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ideasoncanvas.callisto.CallistoTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -508,10 +518,15 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = W6L39UYL6Z;
 				INFOPLIST_FILE = CallistoTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ideasoncanvas.callisto.CallistoTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -622,7 +637,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 			};
@@ -634,7 +650,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = W6L39UYL6Z;
 				INFOPLIST_FILE = "$(SRCROOT)/Callisto/Supporting Files/info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ideasoncanvas.callisto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -648,7 +668,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = W6L39UYL6Z;
 				INFOPLIST_FILE = "$(SRCROOT)/Callisto/Supporting Files/info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ideasoncanvas.callisto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -686,6 +710,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CDAE777F2705865A00651B95 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		CDF2AD752706D03B00DED1A1 /* XCRemoteSwiftPackageReference "Yams" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jpsim/Yams";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CDAE77802705865A00651B95 /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDAE777F2705865A00651B95 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+		CDF2AD762706D03B00DED1A1 /* Yams */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDF2AD752706D03B00DED1A1 /* XCRemoteSwiftPackageReference "Yams" */;
+			productName = Yams;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CD8BBDC21EE0093900E8EE2E /* Project object */;
 }
