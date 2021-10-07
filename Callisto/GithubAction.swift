@@ -24,7 +24,7 @@ final class Github: ParsableCommand {
     @Option(help: "GitHub Repository Name")
     var githubRepository: String
 
-    @Option(help: "Github Branch")
+    @Option(help: "GitHub Branch")
     var branch: String
 
     @Flag(help: "Delete previously postet comments from pull request")
