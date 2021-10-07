@@ -15,7 +15,7 @@ final class Github: ParsableCommand {
 
     public static let configuration = CommandConfiguration(abstract: "Upload Build Summary to GitHub")
 
-    @Option(help: "Token to access github")
+    @Option(help: "Your GitHub Access Token")
     var githubToken: String
 
     @Option(help: "Organisation Account Name in github")
