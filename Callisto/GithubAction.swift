@@ -27,7 +27,7 @@ final class Github: ParsableCommand {
     @Option(help: "Github Branch")
     var branch: String
 
-    @Flag(help: "Delete previously postet comments from pull qequest")
+    @Flag(help: "Delete previously postet comments from pull request")
     var deletePreviousComments: Bool = false
 
     @Argument(help: "Location for .buildReport file", completion: .file(), transform: URL.init(fileURLWithPath:))
