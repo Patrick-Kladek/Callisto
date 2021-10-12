@@ -98,7 +98,7 @@ final class GithubAction {
             }
         }
 
-        if infos.filter({ $0.isEmpty == false }).hasElements {
+        if infos.hasElements {
             let message = "# Build Summary\n\(infos.compactMap { self.markdownText(from: $0) }.joined(separator: "\n"))"
             switch self.githubController.postComment(on: currentBranch, comment: Comment(body: message, id: nil)) {
             case .success:
@@ -182,12 +182,13 @@ private extension GithubAction {
     }
 
     func markdownText(from info: BuildInformation) -> String? {
-        guard info.errors.hasElements ||
-            info.warnings.hasElements ||
-            info.unitTests.hasElements else { return nil }
-
         var string = info.githubSummaryTitle
         string += "\n\n"
+
+        if info.errors.isEmpty && info.warnings.isEmpty && info.unitTests.isEmpty {
+            string += "Well done 👍"
+            return string
+        }
 
         if info.errors.hasElements {
             string += "\n\n"
