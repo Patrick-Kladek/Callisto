@@ -30,13 +30,19 @@ final class Dependencies: ParsableCommand {
 
     func run() throws {
         let output = self.shell("pod outdated", currentDirectoryURL: self.project)
+        print(">>> pod outdated ...")
+        print(output)
         let dependencies = PodDependencyParser.parse(content: output)
 
         let filtered = PodDependencyParser.filter(dependencies: dependencies, with: self.ignore)
         let ignored = filtered.difference(from: dependencies)
 
+        print("Outdated Pods: \(filtered)")
+
         let info = DependencyInformation(outdated: filtered, ignored: ignored)
         let summary = SummaryFile.dependencies(info)
+
+        print("Writing to file ...")
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
