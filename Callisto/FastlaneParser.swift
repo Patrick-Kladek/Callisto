@@ -175,11 +175,14 @@ private extension FastlaneParser {
     }
 
     func compilerMessages(from: [String]) -> [CompilerMessage] {
-        let filteredLines = Set(from.compactMap { line -> CompilerMessage? in
+//        let filteredLines = Set(from.compactMap { line -> CompilerMessage? in
+//            return CompilerMessage(message: line)
+//        })
+//
+//        return Array(filteredLines)
+        return from.compactMap { line -> CompilerMessage? in
             return CompilerMessage(message: line)
-        })
-
-        return Array(filteredLines)
+        }
     }
 
     func check(line: String, withRegex pattern: String) -> Bool {

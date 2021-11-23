@@ -8,6 +8,7 @@
 
 import Foundation
 import ArgumentParser
+import MarkdownKit
 
 
 /// Responsible to read the build summaries and post them to github
@@ -60,7 +61,7 @@ final class GithubAction {
         let inputFiles = self.command.files
         guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 
-        let infos = self.filteredBuildInfos(inputFiles.map { BuildInformation.read(url: $0) }.compactMap { result -> BuildInformation? in
+        let summaries = inputFiles.map { SummaryFile.read(url: $0) }.compactMap { result -> SummaryFile? in
             switch result {
             case .success(let info):
                 return info
@@ -68,7 +69,25 @@ final class GithubAction {
                 LogError("\(error)")
                 return nil
             }
+        }
+
+        let infos = self.filteredBuildInfos(summaries.compactMap { file in
+            switch file {
+            case .build(let info):
+                return info
+            default:
+                return nil
+            }
         })
+
+        let dependencies = summaries.compactMap { file -> DependencyInformation? in
+            switch file {
+            case .dependencies(let info):
+                return info
+            default:
+                return nil
+            }
+        }
 
         guard infos.hasElements else { quit(.invalidBuildInformationFile) }
 
@@ -98,14 +117,47 @@ final class GithubAction {
             }
         }
 
+
+        var document = Document()
+
         if infos.hasElements {
-            let message = "# Build Summary\n\(infos.compactMap { self.markdownText(from: $0) }.joined(separator: "\n"))"
-            switch self.githubController.postComment(on: currentBranch, comment: Comment(body: message, id: nil)) {
-            case .success:
-                LogMessage("Successfully posted BuildReport to GitHub")
-            case .failure(let error):
-                LogError(error.localizedDescription)
+            document.addComponent(Title("Build Summary", header: .h1))
+            document.addComponent(EmptyLine())
+
+            for info in infos {
+                document.addComponent(Text(self.markdownText(from: info)))
             }
+        }
+
+        if dependencies.hasElements {
+            document.addComponent(Title("Dependencies", header: .h3))
+            document.addComponent(EmptyLine())
+
+
+            let outdated = dependencies.flatMap ({ $0.outdated })
+            if outdated.hasElements {
+                var table = Table(titles: Table.Row(columns: ["Name", "Current", "New"]))
+                for dependency in outdated {
+                    let row = Table.Row(columns: [
+                        dependency.name,
+                        dependency.currentVersion.description,
+                        dependency.upgradeableVersion.description
+                    ])
+
+                    table.addRow(row)
+                }
+                document.addComponent(table)
+            } else {
+                document.addComponent(Text("Everything Up-to-date 👍"))
+            }
+        }
+
+        let message = document.text()
+        switch self.githubController.postComment(on: currentBranch, comment: Comment(body: message, id: nil)) {
+        case .success:
+            LogMessage("Successfully posted BuildReport to GitHub")
+        case .failure(let error):
+            LogError(error.localizedDescription)
         }
 
         quit(.success)
@@ -181,7 +233,7 @@ private extension GithubAction {
         }
     }
 
-    func markdownText(from info: BuildInformation) -> String? {
+    func markdownText(from info: BuildInformation) -> String {
         var string = info.githubSummaryTitle
         string += "\n\n"
 
@@ -208,6 +260,25 @@ private extension GithubAction {
         string += "\n\n"
         return string
     }
+
+    /*
+    func markdownComponents(from info: BuildInformation) -> [MarkdownConformable] {
+        var components: [MarkdownConformable] = []
+        components.append(info.githubSummaryText)
+        components.append(EmptyLine())
+        components.append(EmptyLine())
+
+        if info.errors.isEmpty && info.warnings.isEmpty && info.unitTests.isEmpty {
+            components.append(Text("Well done 👍"))
+            return components
+        }
+
+        if info.errors.hasElements {
+            string += "\n\n"
+            string += info.errors.map { ":red_circle: **\($0.file):\($0.line)**\n\($0.message)" }.joined(separator: "\n\n")
+        }
+    }
+    */
 }
 
 private extension Comment {

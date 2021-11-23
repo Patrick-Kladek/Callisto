@@ -19,11 +19,15 @@ class CompilerMessage: Codable {
     // MARK: Lifecycle
 
     init?(message: String) {
-        guard let slashRange = message.range(of: "/") else { return nil }
+        guard let slashRange = message.range(of: "/") else {
+            return nil
+        }
 
         let validMessage = message[slashRange.lowerBound...]
         let components = validMessage.components(separatedBy: ":")
-        guard components.count >= 4 else { return nil }
+        guard components.count >= 4 else {
+            return nil
+        }
 
         let path = components[0]
         let line = components[1]
@@ -47,18 +51,22 @@ extension CompilerMessage: CustomStringConvertible {
 
 extension CompilerMessage: Hashable {
 
-    static func == (left: CompilerMessage, right: CompilerMessage) -> Bool {
-        return
-            left.file == right.file &&
-            left.line == right.line &&
-            left.column == right.column &&
-            left.message == right.message
-    }
-
     func hash(into hasher: inout Hasher) {
         hasher.combine(self.file)
         hasher.combine(self.line)
         hasher.combine(self.message)
+    }
+}
+
+extension CompilerMessage: Equatable {
+
+    static func == (left: CompilerMessage, right: CompilerMessage) -> Bool {
+        return (
+            left.file == right.file &&
+            left.line == right.line &&
+            left.column == right.column &&
+            left.message == right.message
+        )
     }
 }
 
