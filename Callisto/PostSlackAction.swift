@@ -63,6 +63,9 @@ final class PostSlackAction: NSObject {
         let inputFiles = self.command.files
         guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 
+        LogMessage("Input Files: ")
+        _ = inputFiles.map { LogMessage($0.absoluteString) }
+
         let summaries = inputFiles.map { SummaryFile.read(url: $0) }.compactMap { result -> SummaryFile? in
             switch result {
             case .success(let info):

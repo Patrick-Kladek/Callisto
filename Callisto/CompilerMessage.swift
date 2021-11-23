@@ -78,7 +78,7 @@ fileprivate extension CompilerMessage {
         do {
             try regex = NSRegularExpression(pattern: pattern, options: .caseInsensitive)
         } catch {
-            print("error: could not create Regex")
+            LogError("error: could not create Regex")
             return nil
         }
 

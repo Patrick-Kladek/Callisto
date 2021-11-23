@@ -55,7 +55,7 @@ fileprivate extension FastlaneParser {
 
     func parseSchemeFromFastlane(_ content: String) -> String? {
         guard let regex = try? NSRegularExpression(pattern: "\\| scheme[ ]*\\| [a-zA-Z ]*\\|\\n", options: .caseInsensitive) else {
-            print("Regular Expression Failed");
+            LogError("Regular Expression Failed");
             return nil
         }
 
@@ -117,7 +117,7 @@ fileprivate extension FastlaneParser {
 
     func parseExitStatusFromFastlane(_ content: String) -> Int {
         guard let regex = try? NSRegularExpression(pattern: "\\[[0-9]+:[0-9]+:[0-9]+]: Exit status: [0-9]+", options: .caseInsensitive) else {
-            print("Regular Expression Failed");
+            LogError("Regular Expression Failed");
             return 0
         }
 
@@ -169,17 +169,16 @@ private extension FastlaneParser {
         filteredString = filteredString.replacingOccurrences(of: "\r", with: "")
         filteredString = filteredString.replacingOccurrences(of: "\u{1b}", with: "")
 
-        guard let regex = try? NSRegularExpression(pattern: "\\[[0-9]+(m|;)[0-9]*(;)*[0-9]*m?", options: .caseInsensitive) else { print("Regular Expression Failed"); return "" }
+        guard let regex = try? NSRegularExpression(pattern: "\\[[0-9]+(m|;)[0-9]*(;)*[0-9]*m?", options: .caseInsensitive) else {
+            LogError("Regular Expression Failed");
+            return ""
+        }
+
         let range = NSMakeRange(0, filteredString.count)
         return regex.stringByReplacingMatches(in: filteredString, options: [], range: range, withTemplate: "")
     }
 
     func compilerMessages(from: [String]) -> [CompilerMessage] {
-//        let filteredLines = Set(from.compactMap { line -> CompilerMessage? in
-//            return CompilerMessage(message: line)
-//        })
-//
-//        return Array(filteredLines)
         return from.compactMap { line -> CompilerMessage? in
             return CompilerMessage(message: line)
         }
@@ -191,7 +190,7 @@ private extension FastlaneParser {
         do {
             try regex = NSRegularExpression(pattern: pattern, options: .caseInsensitive)
         } catch {
-            print("error: could not create Regex")
+            LogError("error: could not create Regex")
             return false
         }
 

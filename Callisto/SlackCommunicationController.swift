@@ -43,6 +43,6 @@ class SlackCommunicationController: NSObject {
 extension SlackCommunicationController: URLSessionDelegate {
 
     func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
-        print(error ?? "error")
+        LogError(error?.localizedDescription ?? "error")
     }
 }

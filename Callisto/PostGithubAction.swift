@@ -61,6 +61,9 @@ final class GithubAction {
         let inputFiles = self.command.files
         guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 
+        LogMessage("Input Files: ")
+        _ = inputFiles.map { LogMessage($0.absoluteString) }
+
         let summaries = inputFiles.map { SummaryFile.read(url: $0) }.compactMap { result -> SummaryFile? in
             switch result {
             case .success(let info):
@@ -153,6 +156,9 @@ final class GithubAction {
         }
 
         let message = document.text()
+        LogMessage("Posting Comment on Github")
+        print(message)
+
         switch self.githubController.postComment(on: currentBranch, comment: Comment(body: message, id: nil)) {
         case .success:
             LogMessage("Successfully posted BuildReport to GitHub")
@@ -235,9 +241,9 @@ private extension GithubAction {
 
     func markdownText(from info: BuildInformation) -> String {
         var string = info.githubSummaryTitle
-        string += "\n\n"
 
         if info.errors.isEmpty && info.warnings.isEmpty && info.unitTests.isEmpty {
+            string += "\n\n"
             string += "Well done 👍"
             return string
         }
