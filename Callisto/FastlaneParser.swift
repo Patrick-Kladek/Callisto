@@ -84,7 +84,7 @@ fileprivate extension FastlaneParser {
                 message.message.contains(warning) == false
             }
         })
-        return filtered
+        return filtered.uniqued()
     }
 
     func parseAnalyzerWarnings(_ lines: [String]) -> [CompilerMessage] {
@@ -102,7 +102,7 @@ fileprivate extension FastlaneParser {
                 message.message.contains(warning) == false
             }
         })
-        return filtered
+        return filtered.uniqued()
     }
 
     func parseUnitTestWarnings(_ lines: [String]) -> [UnitTestMessage] {
@@ -205,5 +205,4 @@ private extension String {
     func removeExtraSpaces() -> String {
         return self.replacingOccurrences(of: "[\\s\n]+", with: " ", options: .regularExpression, range: nil)
     }
-
 }
