@@ -57,10 +57,11 @@ final class ExtractBuildInformationController: NSObject {
     }
 
     func save(to url: URL) -> Result<Int, Error> {
-        let buildSummary = self.parser.buildSummary
+        let buildInformation = self.parser.buildSummary
+        let summary = SummaryFile.build(buildInformation)
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
-        guard let data = try? encoder.encode(buildSummary) else { return .failure(ExtractError.encodingError)}
+        guard let data = try? encoder.encode(summary) else { return .failure(ExtractError.encodingError)}
 
         do {
             try FileManager().createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)

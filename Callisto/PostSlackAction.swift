@@ -63,12 +63,33 @@ final class PostSlackAction: NSObject {
         let inputFiles = self.command.files
         guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 
-        let infos = inputFiles.map { BuildInformation.read(url: $0) }.compactMap { result -> BuildInformation? in
+        LogMessage("Input Files: ")
+        _ = inputFiles.map { LogMessage($0.absoluteString) }
+
+        let summaries = inputFiles.map { SummaryFile.read(url: $0) }.compactMap { result -> SummaryFile? in
             switch result {
             case .success(let info):
                 return info
             case .failure(let error):
                 LogError("\(error)")
+                return nil
+            }
+        }
+
+        let infos = summaries.compactMap { file -> BuildInformation? in
+            switch file {
+            case .build(let info):
+                return info
+            default:
+                return nil
+            }
+        }
+
+        let dependencies = summaries.compactMap { file -> DependencyInformation? in
+            switch file {
+            case .dependencies(let info):
+                return info
+            default:
                 return nil
             }
         }
@@ -79,7 +100,7 @@ final class PostSlackAction: NSObject {
         }
 
         let branch = self.currentBranch()
-        let slackMessage = self.makeSlackMessage(for: branch, infos: infos)
+        let slackMessage = self.makeSlackMessage(for: branch, infos: infos, dependencies: dependencies)
         guard let data = slackMessage.jsonDataRepresentation() else { quit(.jsonConversationFailed) }
 
         self.slackController.post(data: data)
@@ -101,7 +122,7 @@ private extension PostSlackAction {
         }
     }
 
-    func makeSlackMessage(for branch: Branch?, infos: [BuildInformation]) -> SlackMessage {
+    func makeSlackMessage(for branch: Branch?, infos: [BuildInformation], dependencies: [DependencyInformation]) -> SlackMessage {
         let ignoredKeywords = infos.flatMap {
             [
                 $0.config.ignore.values.compactMap { $0.warnings},
@@ -132,6 +153,11 @@ private extension PostSlackAction {
         unitTestAttachment.colorHex = "0077FF"
         message.add(attachment: unitTestAttachment)
 
+        // Dependencies
+        let outdated = dependencies.flatMap { $0.outdated }
+        let dependencyAttachment = self.makeSlackAttachment(outdated, type: .warning)
+        message.add(attachment: dependencyAttachment)
+
         return message
     }
 
@@ -148,6 +174,15 @@ private extension PostSlackAction {
         let attachment = SlackAttachment(type: type)
         for message in messages {
             attachment.addField(SlackField(message: message))
+        }
+        return attachment
+    }
+
+    func makeSlackAttachment(_ messages: [Dependency], type: SlackAttachmentType = .danger) -> SlackAttachment {
+        let attachment = SlackAttachment(type: type)
+        for message in messages {
+            attachment.addField(SlackField(title: "\(message.name) \(message.currentVersion.description)",
+                                           value: "New Version available: \(message.upgradeableVersion.description)"))
         }
         return attachment
     }

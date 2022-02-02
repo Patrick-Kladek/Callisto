@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MarkdownKit
 
 
 /// Holds all information about a compiler run
@@ -44,6 +45,17 @@ extension BuildInformation {
             }
         }
         return "### \(self.platform) - \(descriptionCount(of: self.warnings)) warnings, \(descriptionCount(of: self.errors)) errors"
+    }
+
+    var githubSummaryText: Title {
+        func descriptionCount(of array: [AnyHashable]) -> String {
+            if array.isEmpty {
+                return "no"
+            } else {
+                return "\(array.count)"
+            }
+        }
+        return Title("\(self.platform) - \(descriptionCount(of: self.warnings)) warnings, \(descriptionCount(of: self.errors)) errors", header: .h3)
     }
 
     func write(to url: URL) -> Result<Int, Error> {
