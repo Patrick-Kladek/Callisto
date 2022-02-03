@@ -7,3 +7,7 @@
 //
 
 import Foundation
+import ArgumentParser
+
+// MARK: - FailBuildAction
+final class FailBuildAction: ParsableCommand {}
