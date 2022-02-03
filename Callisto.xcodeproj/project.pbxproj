@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81E3743827ABFE3B00EB10EA /* FailBuildAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E3743727ABFE3B00EB10EA /* FailBuildAction.swift */; };
 		CD081CBC1EE7F19100F537B3 /* ios_build_4454.log in Resources */ = {isa = PBXBuildFile; fileRef = CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */; };
 		CD081CBE1EE7F1D700F537B3 /* mac_build_4454.log in Resources */ = {isa = PBXBuildFile; fileRef = CD081CBD1EE7F1D700F537B3 /* mac_build_4454.log */; };
 		CD0E20D923040AFE001D9159 /* Result+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0E20D823040AFE001D9159 /* Result+Sugar.swift */; };
@@ -98,6 +99,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		81E3743727ABFE3B00EB10EA /* FailBuildAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailBuildAction.swift; sourceTree = "<group>"; };
 		CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTestMessage.swift; sourceTree = "<group>"; };
 		CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_4454.log; sourceTree = "<group>"; };
 		CD081CBD1EE7F1D700F537B3 /* mac_build_4454.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mac_build_4454.log; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */,
 				CD4E0F6D22F4475A00C31E08 /* PostGithubAction.swift */,
 				CDB5A97B251A722D00CC486F /* PostSlackAction.swift */,
+				81E3743727ABFE3B00EB10EA /* FailBuildAction.swift */,
 				CD8CA236274CD9F4007606C4 /* Model */,
 				CD8BBDFA1EE00A8E00E8EE2E /* Parser */,
 				CD8BBDF41EE00A2500E8EE2E /* Communication Controller */,
@@ -512,6 +515,7 @@
 				CD9DF3A922FC2A1A00779F6F /* Check.swift in Sources */,
 				CDB5A97C251A722D00CC486F /* PostSlackAction.swift in Sources */,
 				CD9DF11722FC16D300779F6F /* CompilerMessage.swift in Sources */,
+				81E3743827ABFE3B00EB10EA /* FailBuildAction.swift in Sources */,
 				CD9DF11D22FC16D300779F6F /* Branch.swift in Sources */,
 				CD9DF12522FC16D300779F6F /* Common.swift in Sources */,
 				CD8CA238274CDA0E007606C4 /* SemanticVersion.swift in Sources */,
