@@ -28,6 +28,7 @@ enum ExitCodes: Int32 {
     case savingFailed = -15
     case invalidBuildInformationFile = -16
     case invalidOutputFile = -17
+    case containsWarnings = -18
 }
 
 extension ExitCodes: CustomStringConvertible {
@@ -68,6 +69,8 @@ extension ExitCodes: CustomStringConvertible {
             return "invalid file. Usage -files \"/path/to/file\""
         case .invalidOutputFile:
             return "invalid output file. Usage -output \"/path/to/file\""
+        case .containsWarnings:
+            return "The commits contains warnings. Please resovle all warnings."
         }
     }
 }
