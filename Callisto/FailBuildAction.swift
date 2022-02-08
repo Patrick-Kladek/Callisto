@@ -10,4 +10,7 @@ import Foundation
 import ArgumentParser
 
 // MARK: - FailBuildAction
-final class FailBuildAction: ParsableCommand {}
+final class FailBuildAction: ParsableCommand {
+    @Argument(help: "Location for .json file", completion: .file(), transform: URL(fileURLWithPath:))
+    var files: [URL] = []
+}
