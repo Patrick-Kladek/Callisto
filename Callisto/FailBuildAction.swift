@@ -11,6 +11,12 @@ import ArgumentParser
 
 // MARK: - FailBuildAction
 final class FailBuildAction: ParsableCommand {
-    @Argument(help: "Location for .json file", completion: .file(), transform: URL(fileURLWithPath:))
+    @Argument(help: "Location for .json file", completion: .file(), transform: URL.init(fileURLWithPath:))
     var files: [URL] = []
+}
+
+// MARK: - Extension
+extension FailBuildAction {
+    func run() throws {
+    }
 }
