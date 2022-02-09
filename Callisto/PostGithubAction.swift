@@ -287,7 +287,7 @@ private extension GithubAction {
     */
 }
 
-private extension Comment {
+extension Comment {
 
     var isCallistoComment: Bool {
         guard self.id != nil else { return false }
