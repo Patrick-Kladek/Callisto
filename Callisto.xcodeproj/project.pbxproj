@@ -99,6 +99,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		811DB4B227B5574700E60A0A /* MarkdownKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MarkdownKit; path = Dependencies/MarkdownKit; sourceTree = "<group>"; };
 		81E3743727ABFE3B00EB10EA /* FailBuildAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailBuildAction.swift; sourceTree = "<group>"; };
 		CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTestMessage.swift; sourceTree = "<group>"; };
 		CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_4454.log; sourceTree = "<group>"; };
@@ -136,7 +137,6 @@
 		CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackMessage.swift; sourceTree = "<group>"; };
 		CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+synchronousTask.swift"; sourceTree = "<group>"; };
 		CD8CA206274CD877007606C4 /* DependenciesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependenciesAction.swift; sourceTree = "<group>"; };
-		CD8CA22A274CD971007606C4 /* MarkdownKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MarkdownKit; path = Dependencies/MarkdownKit; sourceTree = "<group>"; };
 		CD8CA22F274CD9D1007606C4 /* PodDependencyParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodDependencyParser.swift; sourceTree = "<group>"; };
 		CD8CA230274CD9D1007606C4 /* Dependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
 		CD8CA231274CD9D1007606C4 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
@@ -216,6 +216,7 @@
 		CD8BBDC11EE0093900E8EE2E = {
 			isa = PBXGroup;
 			children = (
+				811DB4B227B5574700E60A0A /* MarkdownKit */,
 				CD8CA229274CD971007606C4 /* Packages */,
 				CD8BBDCC1EE0093900E8EE2E /* Callisto */,
 				CD8320FF1EE7DF640029DBE0 /* CallistoTest */,
@@ -335,7 +336,6 @@
 		CD8CA229274CD971007606C4 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				CD8CA22A274CD971007606C4 /* MarkdownKit */,
 			);
 			name = Packages;
 			sourceTree = "<group>";

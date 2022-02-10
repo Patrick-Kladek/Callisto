@@ -14,21 +14,6 @@ import MarkdownKit
 final class FailBuildAction: ParsableCommand {
     public static let configuration = CommandConfiguration(commandName: "github", abstract: "Upload Build Summary to Github")
 
-    @Option(help: "Your GitHub Access Token")
-    var githubToken: String
-
-    @Option(help: "Your GitHub Organisation Account Name")
-    var githubOrganisation: String
-
-    @Option(help: "GitHub Repository Name")
-    var githubRepository: String
-
-    @Option(help: "GitHub Branch")
-    var branch: String
-
-    @Flag(help: "Delete previously postet comments from pull request")
-    var deletePreviousComments: Bool = false
-
     @Argument(help: "Location for .buildReport file", completion: .file(), transform: URL.init(fileURLWithPath:))
     var files: [URL] = []
     
@@ -41,24 +26,22 @@ final class FailBuildAction: ParsableCommand {
 // MARK: - GithubWarningsAction
 final class GithubWarningsAction {
 
-    let githubController: GitHubCommunicationController
     let command: FailBuildAction
 
     // MARK: - Lifecycle
 
     init(command: FailBuildAction) {
         self.command = command
-
-        let repo = GithubRepository(organisation: command.githubOrganisation, repository: command.githubRepository)
-        let access = GithubAccess(token: command.githubToken)
-        self.githubController = GitHubCommunicationController(access: access, repository: repo)
     }
 
     // MARK: - UploadAction
 
     func run() throws {
         let inputFiles = self.command.files
-        guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
+        
+        guard inputFiles.hasElements else {
+            quit(.invalidBuildInformationFile)
+        }
 
         LogMessage("Input Files: ")
         _ = inputFiles.map { LogMessage($0.absoluteString) }
@@ -81,88 +64,11 @@ final class GithubWarningsAction {
                 return nil
             }
         })
+        
+        let inforWarnings = infos.flatMap { $0.warnings }
 
-        let dependencies = summaries.compactMap { file -> DependencyInformation? in
-            switch file {
-            case .dependencies(let info):
-                return info
-            default:
-                return nil
-            }
-        }
-
-        guard infos.hasElements else { quit(.invalidBuildInformationFile) }
-
-        let currentBranch = self.loadCurrentBranch()
-        LogMessage("Did load Branch:")
-        LogMessage(" * \(currentBranch.title ?? "<nil>") \(currentBranch.number ?? -1)")
-        LogMessage(" * \(currentBranch.url?.absoluteString ?? "<nil>")")
-
-        if self.command.deletePreviousComments {
-            let result = self.githubController.fetchPreviousComments(on: currentBranch)
-            switch result {
-            case .failure(let error):
-                LogError(error.localizedDescription)
-            case .success(let comments):
-                let commentsToDelete = comments.filter { $0.isCallistoComment }
-                if commentsToDelete.hasElements {
-                    LogMessage("Found \(commentsToDelete.count) outdated build comment\(commentsToDelete.count > 1 ? "s" : ""). Deleting ...")
-                }
-                _ = commentsToDelete.map { comment in
-                    switch self.githubController.deleteComment(comment: comment) {
-                    case .success:
-                        LogMessage("Deleted comment with ID: \(comment.id!)")
-                    case .failure(let error):
-                        LogError(error.localizedDescription)
-                    }
-                }
-            }
-        }
-
-
-        var document = Document()
-
-        if infos.hasElements {
-            document.addComponent(Title("Build Summary", header: .h1))
-            document.addComponent(EmptyLine())
-
-            for info in infos {
-                document.addComponent(Text(self.markdownText(from: info)))
-            }
-        }
-
-        if dependencies.hasElements {
-            document.addComponent(Title("Dependencies", header: .h3))
-            document.addComponent(EmptyLine())
-
-
-            let outdated = dependencies.flatMap ({ $0.outdated })
-            if outdated.hasElements {
-                var table = Table(titles: Table.Row(columns: ["Name", "Current", "New"]))
-                for dependency in outdated {
-                    let row = Table.Row(columns: [
-                        dependency.name,
-                        dependency.currentVersion.description,
-                        dependency.upgradeableVersion.description
-                    ])
-
-                    table.addRow(row)
-                }
-                document.addComponent(table)
-            } else {
-                document.addComponent(Text("Everything Up-to-date 👍"))
-            }
-        }
-
-        let message = document.text()
-        LogMessage("Posting Comment on Github")
-        print(message)
-
-        switch self.githubController.postComment(on: currentBranch, comment: Comment(body: message, id: nil)) {
-        case .success:
-            LogMessage("Successfully posted BuildReport to GitHub")
-        case .failure(let error):
-            LogError(error.localizedDescription)
+        guard inforWarnings.hasElements else {
+            quit(.containsWarnings)
         }
 
         quit(.success)
@@ -183,16 +89,6 @@ private extension GithubWarningsAction {
         }
 
         return allBuildInfos
-    }
-
-    func loadCurrentBranch() -> Branch {
-        switch self.githubController.branch(named: self.command.branch) {
-        case .success(let branch):
-            return branch
-        case .failure(let error):
-            LogError(error.localizedDescription)
-            quit(.reloadBranchFailed)
-        }
     }
 
     func commonInfos(_ infos: [BuildInformation]) -> BuildInformation? {
@@ -219,51 +115,6 @@ private extension GithubWarningsAction {
                              unitTests: info.unitTests.deleting(strip.unitTests),
                              config: .empty)
         }
-    }
-
-    func logBuildInfo(_ infos: [BuildInformation]) {
-        for info in infos {
-            LogMessage("*** \(info.platform) ***")
-            for error in info.errors {
-                LogError(error.description)
-            }
-
-            for warning in info.warnings {
-                LogWarning(warning.description)
-            }
-
-            for unitTest in info.unitTests {
-                LogWarning(unitTest.description)
-            }
-        }
-    }
-
-    func markdownText(from info: BuildInformation) -> String {
-        var string = info.githubSummaryTitle
-
-        if info.errors.isEmpty && info.warnings.isEmpty && info.unitTests.isEmpty {
-            string += "\n\n"
-            string += "Well done 👍"
-            return string
-        }
-
-        if info.errors.hasElements {
-            string += "\n\n"
-            string += info.errors.map { ":red_circle: **\($0.file):\($0.line)**\n\($0.message)" }.joined(separator: "\n\n")
-        }
-
-        if info.warnings.hasElements {
-            string += "\n\n"
-            string += info.warnings.map { ":warning: **\($0.file):\($0.line)**\n\($0.message)" }.joined(separator: "\n\n")
-        }
-
-        if info.unitTests.hasElements {
-            string += "\n\n"
-            string += info.unitTests.map { ":large_blue_circle: `\($0.method)`\n\($0.assertType)\n\($0.explanation)" }.joined(separator: "\n\n")
-        }
-
-        string += "\n\n"
-        return string
     }
 
 }
