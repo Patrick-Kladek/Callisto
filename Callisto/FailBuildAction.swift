@@ -12,7 +12,7 @@ import MarkdownKit
 
 // MARK: - FailBuildAction
 final class FailBuildAction: ParsableCommand {
-    public static let configuration = CommandConfiguration(commandName: "github", abstract: "Upload Build Summary to Github")
+    public static let configuration = CommandConfiguration(commandName: "FailBuild", abstract: "Exit with zero when there are no warnings.")
 
     @Argument(help: "Location for .buildReport file", completion: .file(), transform: URL.init(fileURLWithPath:))
     var files: [URL] = []
@@ -67,7 +67,7 @@ final class GithubWarningsAction {
         
         let inforWarnings = infos.flatMap { $0.warnings }
 
-        guard inforWarnings.hasElements else {
+        guard inforWarnings.isEmpty else {
             quit(.containsWarnings)
         }
 
