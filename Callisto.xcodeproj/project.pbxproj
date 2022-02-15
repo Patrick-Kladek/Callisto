@@ -217,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				811DB4B227B5574700E60A0A /* MarkdownKit */,
-				CD8CA229274CD971007606C4 /* Packages */,
 				CD8BBDCC1EE0093900E8EE2E /* Callisto */,
 				CD8320FF1EE7DF640029DBE0 /* CallistoTest */,
 				CD8BBDCB1EE0093900E8EE2E /* Products */,
@@ -331,13 +330,6 @@
 				CD33AF7022F07DF9002EC27C /* BuildInformation.swift */,
 			);
 			name = Parser;
-			sourceTree = "<group>";
-		};
-		CD8CA229274CD971007606C4 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 		CD8CA22B274CD9A4007606C4 /* Frameworks */ = {
