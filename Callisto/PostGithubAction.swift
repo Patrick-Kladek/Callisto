@@ -34,11 +34,15 @@ final class PostToGithub: ParsableCommand {
     @Argument(help: "Location for .buildReport file", completion: .file(), transform: URL.init(fileURLWithPath:))
     var files: [URL] = []
 
+    // MARK: - ParsableCommand
+
     func run() throws {
         let uploadAction = GithubAction(command: self)
         try uploadAction.run()
     }
 }
+
+// MARK: - GithubAction
 
 final class GithubAction {
 
@@ -55,7 +59,7 @@ final class GithubAction {
         self.githubController = GitHubCommunicationController(access: access, repository: repo)
     }
 
-    // MARK: - UploadAction
+    // MARK: - GithubAction
 
     func run() throws {
         let inputFiles = self.command.files
@@ -287,7 +291,7 @@ private extension GithubAction {
     */
 }
 
-private extension Comment {
+extension Comment {
 
     var isCallistoComment: Bool {
         guard self.id != nil else { return false }

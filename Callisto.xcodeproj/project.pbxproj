@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81E3743827ABFE3B00EB10EA /* FailBuildAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E3743727ABFE3B00EB10EA /* FailBuildAction.swift */; };
 		CD081CBC1EE7F19100F537B3 /* ios_build_4454.log in Resources */ = {isa = PBXBuildFile; fileRef = CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */; };
 		CD081CBE1EE7F1D700F537B3 /* mac_build_4454.log in Resources */ = {isa = PBXBuildFile; fileRef = CD081CBD1EE7F1D700F537B3 /* mac_build_4454.log */; };
 		CD0E20D923040AFE001D9159 /* Result+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0E20D823040AFE001D9159 /* Result+Sugar.swift */; };
@@ -98,6 +99,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		811DB4B227B5574700E60A0A /* MarkdownKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MarkdownKit; path = Dependencies/MarkdownKit; sourceTree = "<group>"; };
+		81E3743727ABFE3B00EB10EA /* FailBuildAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailBuildAction.swift; sourceTree = "<group>"; };
 		CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTestMessage.swift; sourceTree = "<group>"; };
 		CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_4454.log; sourceTree = "<group>"; };
 		CD081CBD1EE7F1D700F537B3 /* mac_build_4454.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mac_build_4454.log; sourceTree = "<group>"; };
@@ -134,7 +137,6 @@
 		CD8BBDE21EE009C600E8EE2E /* SlackMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackMessage.swift; sourceTree = "<group>"; };
 		CD8BBDE31EE009C600E8EE2E /* URLSession+synchronousTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+synchronousTask.swift"; sourceTree = "<group>"; };
 		CD8CA206274CD877007606C4 /* DependenciesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependenciesAction.swift; sourceTree = "<group>"; };
-		CD8CA22A274CD971007606C4 /* MarkdownKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MarkdownKit; path = Dependencies/MarkdownKit; sourceTree = "<group>"; };
 		CD8CA22F274CD9D1007606C4 /* PodDependencyParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodDependencyParser.swift; sourceTree = "<group>"; };
 		CD8CA230274CD9D1007606C4 /* Dependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
 		CD8CA231274CD9D1007606C4 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
@@ -214,7 +216,7 @@
 		CD8BBDC11EE0093900E8EE2E = {
 			isa = PBXGroup;
 			children = (
-				CD8CA229274CD971007606C4 /* Packages */,
+				811DB4B227B5574700E60A0A /* MarkdownKit */,
 				CD8BBDCC1EE0093900E8EE2E /* Callisto */,
 				CD8320FF1EE7DF640029DBE0 /* CallistoTest */,
 				CD8BBDCB1EE0093900E8EE2E /* Products */,
@@ -239,6 +241,7 @@
 				CD4E0F6722F43DC500C31E08 /* SummariseAction.swift */,
 				CD4E0F6D22F4475A00C31E08 /* PostGithubAction.swift */,
 				CDB5A97B251A722D00CC486F /* PostSlackAction.swift */,
+				81E3743727ABFE3B00EB10EA /* FailBuildAction.swift */,
 				CD8CA236274CD9F4007606C4 /* Model */,
 				CD8BBDFA1EE00A8E00E8EE2E /* Parser */,
 				CD8BBDF41EE00A2500E8EE2E /* Communication Controller */,
@@ -327,14 +330,6 @@
 				CD33AF7022F07DF9002EC27C /* BuildInformation.swift */,
 			);
 			name = Parser;
-			sourceTree = "<group>";
-		};
-		CD8CA229274CD971007606C4 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				CD8CA22A274CD971007606C4 /* MarkdownKit */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 		CD8CA22B274CD9A4007606C4 /* Frameworks */ = {
@@ -512,6 +507,7 @@
 				CD9DF3A922FC2A1A00779F6F /* Check.swift in Sources */,
 				CDB5A97C251A722D00CC486F /* PostSlackAction.swift in Sources */,
 				CD9DF11722FC16D300779F6F /* CompilerMessage.swift in Sources */,
+				81E3743827ABFE3B00EB10EA /* FailBuildAction.swift in Sources */,
 				CD9DF11D22FC16D300779F6F /* Branch.swift in Sources */,
 				CD9DF12522FC16D300779F6F /* Common.swift in Sources */,
 				CD8CA238274CDA0E007606C4 /* SemanticVersion.swift in Sources */,
