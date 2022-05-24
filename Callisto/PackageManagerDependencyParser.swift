@@ -12,6 +12,7 @@ class PackageManagerDependencyParser {
 
     static func parse(content: String) -> [Dependency] {
         let lines = content.split(separator: "\n")
+        guard lines.count > 4 else { return [] }
 
         let filteredLines = lines[3..<lines.count-2]
         var dependencies: [Dependency] = []
