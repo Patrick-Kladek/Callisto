@@ -30,12 +30,10 @@ final class Dependencies: ParsableCommand {
 
     func run() throws {
         let podOutout = self.shell("pod outdated", currentDirectoryURL: self.project)
-        LogMessage("$ pod outdated")
         print(podOutout)
         let podDependencies = PodDependencyParser.parse(content: podOutout)
 
         let pmOutput = self.shell("swift outdated", currentDirectoryURL: self.project)
-        LogMessage("$ swift outdated")
         print(pmOutput)
         let pmDependencies = PackageManagerDependencyParser.parse(content: pmOutput)
 
@@ -87,10 +85,19 @@ private extension Dependencies {
         task.executableURL = URL(fileURLWithPath: "/bin/zsh")
         task.environment = environment
         task.currentDirectoryURL = currentDirectoryURL
+
+        LogMessage("$ \(command)")
+
         task.launch()
 
         let data = outputPipe.fileHandleForReading.readDataToEndOfFile()
         let output = String(data: data, encoding: .utf8)!
+
+        let errorData = errorPipe.fileHandleForReading.readDataToEndOfFile()
+        let errorOutput = String(data: errorData, encoding: .utf8)!
+        if errorOutput.count > 0 {
+            LogError(errorOutput)
+        }
 
         return output
     }
