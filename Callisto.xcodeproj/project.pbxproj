@@ -75,6 +75,7 @@
 		CD9DF3A722FC294E00779F6F /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3A622FC294E00779F6F /* Output.swift */; };
 		CD9DF3A922FC2A1A00779F6F /* Check.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3A822FC2A1A00779F6F /* Check.swift */; };
 		CD9DF3AB22FC4AEF00779F6F /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9DF3AA22FC4AEF00779F6F /* Comment.swift */; };
+		CDA94E95283CBB2A001E4521 /* PackageManagerDependencyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA94E94283CBB2A001E4521 /* PackageManagerDependencyParser.swift */; };
 		CDAE77812705865A00651B95 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = CDAE77802705865A00651B95 /* ArgumentParser */; };
 		CDAE77842705B68600651B95 /* PostGithubAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E0F6D22F4475A00C31E08 /* PostGithubAction.swift */; };
 		CDB22D312303F985002A1EF3 /* String+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB22D302303F985002A1EF3 /* String+Sugar.swift */; };
@@ -99,7 +100,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		811DB4B227B5574700E60A0A /* MarkdownKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MarkdownKit; path = Dependencies/MarkdownKit; sourceTree = "<group>"; };
 		81E3743727ABFE3B00EB10EA /* FailBuildAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailBuildAction.swift; sourceTree = "<group>"; };
 		CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTestMessage.swift; sourceTree = "<group>"; };
 		CD081CBB1EE7F19100F537B3 /* ios_build_4454.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_build_4454.log; sourceTree = "<group>"; };
@@ -148,6 +148,8 @@
 		CD9DF3A622FC294E00779F6F /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
 		CD9DF3A822FC2A1A00779F6F /* Check.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Check.swift; sourceTree = "<group>"; };
 		CD9DF3AA22FC4AEF00779F6F /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		CDA94E94283CBB2A001E4521 /* PackageManagerDependencyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageManagerDependencyParser.swift; sourceTree = "<group>"; };
+		CDA94E99283CBBFC001E4521 /* MarkdownKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MarkdownKit; path = Dependencies/MarkdownKit; sourceTree = "<group>"; };
 		CDB22D302303F985002A1EF3 /* String+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Sugar.swift"; sourceTree = "<group>"; };
 		CDB5A97B251A722D00CC486F /* PostSlackAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSlackAction.swift; sourceTree = "<group>"; };
 		CDF007062074FAC200257FCC /* mac_build_8731.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mac_build_8731.log; sourceTree = "<group>"; };
@@ -216,7 +218,7 @@
 		CD8BBDC11EE0093900E8EE2E = {
 			isa = PBXGroup;
 			children = (
-				811DB4B227B5574700E60A0A /* MarkdownKit */,
+				CDA94E98283CBBFC001E4521 /* Packages */,
 				CD8BBDCC1EE0093900E8EE2E /* Callisto */,
 				CD8320FF1EE7DF640029DBE0 /* CallistoTest */,
 				CD8BBDCB1EE0093900E8EE2E /* Products */,
@@ -323,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				CD8CA22F274CD9D1007606C4 /* PodDependencyParser.swift */,
+				CDA94E94283CBB2A001E4521 /* PackageManagerDependencyParser.swift */,
 				CD33AF6E22F0766E002EC27C /* ExtractBuildInformationController.swift */,
 				CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */,
 				CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */,
@@ -356,6 +359,14 @@
 			children = (
 			);
 			name = Markdown;
+			sourceTree = "<group>";
+		};
+		CDA94E98283CBBFC001E4521 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				CDA94E99283CBBFC001E4521 /* MarkdownKit */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -513,6 +524,7 @@
 				CD8CA238274CDA0E007606C4 /* SemanticVersion.swift in Sources */,
 				CD9DF11322FC16D300779F6F /* PostGithubAction.swift in Sources */,
 				CD8BBDF01EE009C600E8EE2E /* SlackCommunicationController.swift in Sources */,
+				CDA94E95283CBB2A001E4521 /* PackageManagerDependencyParser.swift in Sources */,
 				CD8BBDEE1EE009C600E8EE2E /* SlackAction.swift in Sources */,
 				CD8CA23A274CDB4D007606C4 /* DependencyInformation.swift in Sources */,
 				CD9DF11122FC16D300779F6F /* main.swift in Sources */,

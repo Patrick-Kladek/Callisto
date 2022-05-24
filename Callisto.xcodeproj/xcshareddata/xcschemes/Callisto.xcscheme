@@ -50,6 +50,12 @@
             ReferencedContainer = "container:Callisto.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "dependencies --project /Users/patrick/Developer/Bikemap --output /Users/patrick/Desktop/summary.json"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

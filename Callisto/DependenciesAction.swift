@@ -29,15 +29,21 @@ final class Dependencies: ParsableCommand {
     var failPipeline: Bool = false
 
     func run() throws {
-        let output = self.shell("pod outdated", currentDirectoryURL: self.project)
+        let podOutout = self.shell("pod outdated", currentDirectoryURL: self.project)
         LogMessage("$ pod outdated")
-        print(output)
-        let dependencies = PodDependencyParser.parse(content: output)
+        print(podOutout)
+        let podDependencies = PodDependencyParser.parse(content: podOutout)
 
-        let filtered = PodDependencyParser.filter(dependencies: dependencies, with: self.ignore)
+        let pmOutput = self.shell("swift outdated", currentDirectoryURL: self.project)
+        LogMessage("$ swift outdated")
+        print(pmOutput)
+        let pmDependencies = PackageManagerDependencyParser.parse(content: pmOutput)
+
+        let dependencies = podDependencies + pmDependencies
+        let filtered = Self.filter(dependencies: dependencies, with: self.ignore)
         let ignored = filtered.difference(from: dependencies)
 
-        LogMessage("Outdated Pods: \(filtered)")
+        LogMessage("Outdated Dependencies: \(filtered)")
 
         let info = DependencyInformation(outdated: filtered, ignored: ignored)
         let summary = SummaryFile.dependencies(info)
@@ -89,25 +95,7 @@ private extension Dependencies {
         return output
     }
 
-    func makeOutdatedDocument(from dependencies: [Dependency]) -> Document {
-        var doc = Document()
-        doc.addComponent(Title("New Version Available", header: .h3))
-        doc.addComponent(EmptyLine())
-
-        var table = Table(titles: Table.Row(columns: ["Library", "Current", "New"]))
-        let rows = dependencies.map { Table.Row(columns: [$0.name, $0.currentVersion.description, $0.upgradeableVersion.description]) }
-        table.addRows(rows)
-        doc.addComponent(table)
-
-        doc.addComponent(EmptyLine())
-        doc.addComponent(Text("Update Version in Pofile and then run `pod update`"))
-
-        return doc
-    }
-
-    func makeUpdatedDocument() -> Document {
-        var doc = Document()
-        doc.addComponent(Title("All Dependencies up-to-date 👍", header: .h3))
-        return doc
+    static func filter(dependencies: [Dependency], with keywords: [String]) -> [Dependency] {
+        return Array(dependencies.drop { keywords.contains($0.name) })
     }
 }

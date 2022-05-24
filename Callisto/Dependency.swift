@@ -11,7 +11,7 @@ import MarkdownKit
 struct Dependency {
     let name: String
     let currentVersion: Version
-    let lockedVersion: Version
+    let lockedVersion: Version?
     let upgradeableVersion: Version
 }
 
