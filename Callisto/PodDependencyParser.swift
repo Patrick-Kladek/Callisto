@@ -32,8 +32,4 @@ class PodDependencyParser {
 
         return dependencies
     }
-
-    static func filter(dependencies: [Dependency], with keywords: [String]) -> [Dependency] {
-        return Array(dependencies.drop { keywords.contains($0.name) })
-    }
 }
