@@ -75,10 +75,6 @@ extension ExitCodes: CustomStringConvertible {
     }
 }
 
-struct AppInfo {
-    static let version = "2.0"
-}
-
 func time() -> String {
     return DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .medium)
 }
