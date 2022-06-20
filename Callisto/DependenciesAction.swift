@@ -68,22 +68,12 @@ private extension Dependencies {
         let task = Process()
         let outputPipe = Pipe()
         let errorPipe = Pipe()
-        let environment = [
-            "LANG": "en_US.UTF-8",
-            "PATH": [
-                "/usr/local/bin",
-                "/usr/bin",
-                "/bin",
-                "/usr/sbin",
-                "/sbin",
-            ].joined(separator: ":")
-        ]
 
         task.standardOutput = outputPipe
         task.standardError = errorPipe
         task.arguments = ["-c", command]
         task.executableURL = URL(fileURLWithPath: "/bin/zsh")
-        task.environment = environment
+        task.environment = ProcessInfo.processInfo.environment
         task.currentDirectoryURL = currentDirectoryURL
 
         LogMessage("$ \(command)")
