@@ -25,8 +25,7 @@ final class FailBuildAction: ParsableCommand {
         let inputFiles = self.files
         guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 
-        LogMessage("Input Files: ")
-        _ = inputFiles.map { LogMessage($0.absoluteString) }
+        _ = inputFiles.map { LogMessage("Processing \($0.absoluteString)") }
 
         let summaries = inputFiles.map { SummaryFile.read(url: $0) }.compactMap { result -> SummaryFile? in
             switch result {
@@ -47,8 +46,11 @@ final class FailBuildAction: ParsableCommand {
             }
         }
 
-        let warnings = infos.flatMap { $0.warnings }
-        guard warnings.isEmpty else { quit(.containsWarnings) }
+        let warnings = infos.flatMap { $0.warnings }.uniqued()
+        guard warnings.isEmpty else {
+            warnings.forEach { LogWarning($0.description) }
+            quit(.containsWarnings)
+        }
 
         quit(.success)
     }
