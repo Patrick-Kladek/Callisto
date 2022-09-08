@@ -15,7 +15,8 @@ class CallistoTest: XCTestCase {
         guard let fastlaneOutputURL = Bundle.init(for: type(of: self)).url(forResource: "ios_build_4454", withExtension: "log") else { XCTFail(); return; }
         guard let fastlaneContent = try? String.init(contentsOf: fastlaneOutputURL, encoding: .utf8) else { XCTFail(); return; }
 
-        let parser = FastlaneParser(content: fastlaneContent, ignoredKeywords: ["todo"])
+        let config = Config(ignore: ["*": Config.Details(warnings: ["todo"], errors: nil, tests: nil)])
+        let parser = FastlaneParser(content: fastlaneContent, config: config)
         XCTAssertEqual(65, parser.parse())
 
         XCTAssertEqual(parser.buildSummary.errors.count, 0)
@@ -27,7 +28,8 @@ class CallistoTest: XCTestCase {
         guard let fastlaneOutputURL = Bundle.init(for: type(of: self)).url(forResource: "mac_build_4454", withExtension: "log") else { XCTFail(); return; }
         guard let fastlaneContent = try? String.init(contentsOf: fastlaneOutputURL, encoding: .utf8) else { XCTFail(); return; }
 
-        let parser = FastlaneParser(content: fastlaneContent, ignoredKeywords: ["todo"])
+        let config = Config(ignore: ["*": Config.Details(warnings: ["todo"], errors: nil, tests: nil)])
+        let parser = FastlaneParser(content: fastlaneContent, config: config)
         XCTAssertEqual(65, parser.parse())
 
         XCTAssertEqual(parser.buildSummary.errors.count, 2)
@@ -39,8 +41,9 @@ class CallistoTest: XCTestCase {
         guard let fastlaneOutputURL = Bundle.init(for: type(of: self)).url(forResource: "ios_build_4822", withExtension: "log") else { XCTFail(); return; }
         guard let fastlaneContent = try? String.init(contentsOf: fastlaneOutputURL, encoding: .utf8) else { XCTFail(); return; }
 
-        let parser = FastlaneParser(content: fastlaneContent, ignoredKeywords: ["BITCrashManager", "todo"])
-        XCTAssertEqual(-1, parser.parse())
+        let config = Config(ignore: ["*": Config.Details(warnings: ["BITCrashManager", "todo"], errors: nil, tests: nil)])
+        let parser = FastlaneParser(content: fastlaneContent, config: config)
+        XCTAssertEqual(0, parser.parse())
 
         print(parser.buildSummary.errors.count)
         print(parser.buildSummary.warnings.count)
@@ -51,7 +54,8 @@ class CallistoTest: XCTestCase {
         guard let fastlaneOutputURL = Bundle.init(for: type(of: self)).url(forResource: "ios_build_8745", withExtension: "log") else { XCTFail(); return; }
         guard let fastlaneContent = try? String.init(contentsOf: fastlaneOutputURL, encoding: .utf8) else { XCTFail(); return; }
 
-        let parser = FastlaneParser(content: fastlaneContent, ignoredKeywords: ["todo"])
+        let config = Config(ignore: ["*": Config.Details(warnings: ["todo"], errors: nil, tests: nil)])
+        let parser = FastlaneParser(content: fastlaneContent, config: config)
         XCTAssertEqual(65, parser.parse())
 
         XCTAssertEqual(parser.buildSummary.errors.count, 0)
@@ -63,7 +67,8 @@ class CallistoTest: XCTestCase {
         guard let fastlaneOutputURL = Bundle.init(for: type(of: self)).url(forResource: "mac_build_8745", withExtension: "log") else { XCTFail(); return; }
         guard let fastlaneContent = try? String.init(contentsOf: fastlaneOutputURL, encoding: .utf8) else { XCTFail(); return; }
 
-        let parser = FastlaneParser(content: fastlaneContent, ignoredKeywords: ["todo"])
+        let config = Config(ignore: ["*": Config.Details(warnings: ["todo"], errors: nil, tests: nil)])
+        let parser = FastlaneParser(content: fastlaneContent, config: config)
         XCTAssertEqual(65, parser.parse())
 
         XCTAssertEqual(parser.buildSummary.errors.count, 0)

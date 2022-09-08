@@ -91,17 +91,21 @@ fileprivate extension FastlaneParser {
         let warningLines = lines.filter { self.lineIsWarning($0) }
         let warnings = self.compilerMessages(from: warningLines)
 
-        let filtered = warnings.filter({ message in
-            guard let rule = self.config.ignore.first(where: { key, value in
-                message.url.absoluteString.contains(key)
-            }) else { return true }
+        let filtered = warnings.filter { message in
+            var match: Bool = true
 
-            guard let warnings = rule.value.warnings else { return true }
-
-            return warnings.allSatisfy { warning in
-                message.message.contains(warning) == false
+            for rule in self.config.ignore {
+                let file = rule.key
+                if message.file.contains(file) || file == "*" {
+                    for warning in (rule.value.warnings ?? []) {
+                        if message.message.lowercased().contains(warning.lowercased()) {
+                            match = false
+                        }
+                    }
+                }
             }
-        })
+            return match
+        }
         return filtered.uniqued()
     }
 
