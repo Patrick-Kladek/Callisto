@@ -70,7 +70,7 @@ extension ExitCodes: CustomStringConvertible {
         case .invalidOutputFile:
             return "invalid output file. Usage -output \"/path/to/file\""
         case .containsWarnings:
-            return "The commits contains warnings. Please resovle all warnings."
+            return "This build contains warnings. Please resovle them."
         }
     }
 }
