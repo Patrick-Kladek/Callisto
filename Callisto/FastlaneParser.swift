@@ -47,6 +47,9 @@ class FastlaneParser {
                                              unitTests: self.parseUnitTestWarnings(lines),
                                              config: self.config)
 
+        self.buildSummary.errors.forEach { LogError($0.description) }
+        self.buildSummary.warnings.forEach { LogWarning($0.description) }
+        self.buildSummary.unitTests.forEach { LogWarning($0.description) }
         return self.parseExitStatusFromFastlane(trimmedContent)
     }
 }
@@ -96,7 +99,7 @@ fileprivate extension FastlaneParser {
 
             for rule in self.config.ignore {
                 let file = rule.key
-                if message.file.contains(file) || file == "*" {
+                if message.url.absoluteString.contains(file) || file == "*" {
                     for warning in (rule.value.warnings ?? []) {
                         if message.message.lowercased().contains(warning.lowercased()) {
                             match = false
