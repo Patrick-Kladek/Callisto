@@ -99,9 +99,9 @@ fileprivate extension FastlaneParser {
 
             for rule in self.config.ignore {
                 let file = rule.key
-                if message.url.absoluteString.contains(file) || file == "*" {
+                if message.url.absoluteString.contains(file) || file.last == "*" {
                     for warning in (rule.value.warnings ?? []) {
-                        if message.message.lowercased().contains(warning.lowercased()) {
+                        if message.message.lowercased().contains(warning.lowercased()) || warning == "*" {
                             match = false
                         }
                     }
