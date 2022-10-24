@@ -95,19 +95,17 @@ fileprivate extension FastlaneParser {
         let warnings = self.compilerMessages(from: warningLines)
 
         let filtered = warnings.filter { message in
-            var match: Bool = true
-
             for rule in self.config.ignore {
                 let file = rule.key
                 if message.url.absoluteString.contains(file) || file.last == "*" {
                     for warning in (rule.value.warnings ?? []) {
                         if message.message.lowercased().contains(warning.lowercased()) || warning == "*" {
-                            match = false
+                            return false
                         }
                     }
                 }
             }
-            return match
+            return true
         }
         return filtered.uniqued()
     }
@@ -153,6 +151,8 @@ fileprivate extension FastlaneParser {
         return .success(-1)
     }
 }
+
+// MARK: - Private
 
 private extension FastlaneParser {
 
