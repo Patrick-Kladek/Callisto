@@ -19,9 +19,9 @@ class PackageManagerDependencyParser {
         for line in filteredLines {
             var components = line.components(separatedBy: .whitespaces)
             components.removeAll(where: { $0.count == 0 })
-            let name = String(components[0])
-            let currentVersionString = String(components[1])
-            let latestVersionString = String(components[2])
+            let name = String(components[1])
+            let currentVersionString = String(components[3])
+            let latestVersionString = String(components[5])
 
             let currentVersion = Version(string: currentVersionString)
             let latestVersion = Version(string: latestVersionString)

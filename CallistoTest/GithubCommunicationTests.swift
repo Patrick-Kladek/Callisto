@@ -44,7 +44,7 @@ private extension GithubCommunicationTests {
         let repository = settings["repository"]!
 
 
-        let account = GithubAccount(username: username, token: token)
-        return GitHubCommunicationController(account: account, repository: GithubRepository(organisation: organisation, repository: repository))
+        let account = GithubAccess(token: token)
+        return GitHubCommunicationController(access: account, repository: GithubRepository(organisation: organisation, repository: repository))
     }
 }
