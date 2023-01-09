@@ -167,7 +167,7 @@ private extension FastlaneParser {
     }
 
     func lineIsUnitTest(_ line: String) -> Bool {
-        let pattern = "✗"
+        let pattern = "✖"
         return self.check(line: line, withRegex: pattern)
     }
 
