@@ -31,6 +31,9 @@ final class PostToGithub: ParsableCommand {
     @Flag(help: "Delete previously postet comments from pull request")
     var deletePreviousComments: Bool = false
 
+    @Option(help: "URL to an external website hosting a HTML Report (XCTestHTMLReport)", completion: .file(), transform: URL.init(string:))
+    var htmlReport: URL?
+
     @Argument(help: "Location for .buildReport file", completion: .file(), transform: URL.init(fileURLWithPath:))
     var files: [URL] = []
 
@@ -134,12 +137,17 @@ final class GithubAction {
             for info in infos {
                 document.addComponent(Text(self.markdownText(from: info)))
             }
+            document.addComponent(EmptyLine())
+        }
+
+        if let htmlReport = self.command.htmlReport {
+            document.addComponent(Link("Detailed Test Report", url: htmlReport))
+            document.addComponent(EmptyLine())
         }
 
         if dependencies.hasElements {
             document.addComponent(Title("Dependencies", header: .h3))
             document.addComponent(EmptyLine())
-
 
             let outdated = dependencies.flatMap ({ $0.outdated })
             if outdated.hasElements {

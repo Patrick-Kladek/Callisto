@@ -15,7 +15,7 @@ final class UnitTestMessage: Codable {
     let explanation: String
 
     init?(message: String) {
-        guard let xRange = (message.range(of: "✗")) else { return nil }
+        guard let xRange = (message.range(of: "✖")) else { return nil }
 
         let validMessage = message[xRange.lowerBound...]
         let components = validMessage.components(separatedBy: CharacterSet(charactersIn: ",-"))
