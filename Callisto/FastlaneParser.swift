@@ -44,12 +44,12 @@ class FastlaneParser {
         self.buildSummary = BuildInformation(platform: self.parseSchemeFromFastlane(trimmedContent) ?? "",
                                              errors: self.parseBuildErrors(lines),
                                              warnings: self.parseAnalyzerWarnings(lines),
-                                             unitTests: self.parseUnitTestWarnings(lines),
+                                             failedUnitTests: self.parseUnitTestWarnings(lines),
                                              config: self.config)
 
         self.buildSummary.errors.forEach { LogError($0.description) }
         self.buildSummary.warnings.forEach { LogWarning($0.description) }
-        self.buildSummary.unitTests.forEach { LogWarning($0.description) }
+        self.buildSummary.failedUnitTests.forEach { LogWarning($0.description) }
         return self.parseExitStatusFromFastlane(trimmedContent)
     }
 }

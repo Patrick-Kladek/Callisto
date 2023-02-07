@@ -16,13 +16,13 @@ struct BuildInformation: Codable {
     let platform: String
     let errors: [CompilerMessage]
     let warnings: [CompilerMessage]
-    let unitTests: [UnitTestMessage]
+    let failedUnitTests: [UnitTestMessage]
     let config: Config
 
     static let empty = BuildInformation(platform: "",
                                         errors: [],
                                         warnings: [],
-                                        unitTests: [],
+                                        failedUnitTests: [],
                                         config: Config.empty)
 }
 
@@ -33,7 +33,7 @@ extension BuildInformation {
     }
 
     var isEmpty: Bool {
-        return self.errors.isEmpty && self.warnings.isEmpty && self.unitTests.isEmpty
+        return self.errors.isEmpty && self.warnings.isEmpty && self.failedUnitTests.isEmpty
     }
 
     var githubSummaryTitle: String {

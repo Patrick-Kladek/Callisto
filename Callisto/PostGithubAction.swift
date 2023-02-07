@@ -213,12 +213,12 @@ private extension GithubAction {
 
         let commonErrors = infos[0].errors.filter { infos[1].errors.contains($0) }
         let commonWarnings = infos[0].warnings.filter { infos[1].warnings.contains($0) }
-        let commonUnitTests = infos[0].unitTests.filter { infos[1].unitTests.contains($0) }
+        let commonUnitTests = infos[0].failedUnitTests.filter { infos[1].failedUnitTests.contains($0) }
 
         return BuildInformation(platform: "Core",
                                 errors: commonErrors,
                                 warnings: commonWarnings,
-                                unitTests: commonUnitTests,
+                                failedUnitTests: commonUnitTests,
                                 config: .empty)
     }
 
@@ -229,7 +229,7 @@ private extension GithubAction {
             BuildInformation(platform: info.platform,
                              errors: info.errors.deleting(strip.errors),
                              warnings: info.warnings.deleting(strip.warnings),
-                             unitTests: info.unitTests.deleting(strip.unitTests),
+                             failedUnitTests: info.failedUnitTests.deleting(strip.failedUnitTests),
                              config: .empty)
         }
     }
@@ -245,7 +245,7 @@ private extension GithubAction {
                 LogWarning(warning.description)
             }
 
-            for unitTest in info.unitTests {
+            for unitTest in info.failedUnitTests {
                 LogWarning(unitTest.description)
             }
         }
@@ -254,7 +254,7 @@ private extension GithubAction {
     func markdownText(from info: BuildInformation) -> String {
         var string = info.githubSummaryTitle
 
-        if info.errors.isEmpty && info.warnings.isEmpty && info.unitTests.isEmpty {
+        if info.errors.isEmpty && info.warnings.isEmpty && info.failedUnitTests.isEmpty {
             string += "\n\n"
             string += "Well done 👍"
             return string
@@ -270,9 +270,9 @@ private extension GithubAction {
             string += info.warnings.map { ":warning: **\($0.file):\($0.line)**\n\($0.message)" }.joined(separator: "\n\n")
         }
 
-        if info.unitTests.hasElements {
+        if info.failedUnitTests.hasElements {
             string += "\n\n"
-            string += info.unitTests.map { ":large_blue_circle: `\($0.method)`\n\($0.assertType)\n\($0.explanation)" }.joined(separator: "\n\n")
+            string += info.failedUnitTests.map { ":large_blue_circle: `\($0.method)`\n\($0.assertType)\n\($0.explanation)" }.joined(separator: "\n\n")
         }
 
         string += "\n\n"
