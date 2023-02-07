@@ -41,15 +41,25 @@ class FastlaneParser {
         let trimmedContent = self.trimColors(in: self.content)
         let lines = trimmedContent.components(separatedBy: .newlines)
 
+        // Xcode supports rerunning tests if it fails
+        // We consider tests the test ok if it passes at least once but we still document it as unreliable
+        // If the test doesn't pass once its considered broken
+        let failedUnitTests = self.parseFailedUnitTest(lines)
+        let passedUnitTests = self.parsePassedUnitTest(lines)
+
+        let brokenUnitTests = Array(Set(failedUnitTests).subtracting(Set(passedUnitTests)))
+        let unreliableTests = Array(Set(failedUnitTests).intersection(Set(passedUnitTests)))
+
         self.buildSummary = BuildInformation(platform: self.parseSchemeFromFastlane(trimmedContent) ?? "",
                                              errors: self.parseBuildErrors(lines),
                                              warnings: self.parseAnalyzerWarnings(lines),
-                                             failedUnitTests: self.parseUnitTestWarnings(lines),
+                                             brokenUnitTests: brokenUnitTests,
+                                             unreliableUnitTests: unreliableTests,
                                              config: self.config)
 
         self.buildSummary.errors.forEach { LogError($0.description) }
         self.buildSummary.warnings.forEach { LogWarning($0.description) }
-        self.buildSummary.failedUnitTests.forEach { LogWarning($0.description) }
+        self.buildSummary.brokenUnitTests.forEach { LogWarning($0.description) }
         return self.parseExitStatusFromFastlane(trimmedContent)
     }
 }
@@ -110,8 +120,18 @@ fileprivate extension FastlaneParser {
         return filtered.uniqued()
     }
 
-    func parseUnitTestWarnings(_ lines: [String]) -> [UnitTestMessage] {
-        let unitTestLines = lines.filter { self.lineIsUnitTest($0) }
+    func parseFailedUnitTest(_ lines: [String]) -> [UnitTestMessage] {
+        let unitTestLines = lines.filter { self.lineIsFailedUnitTest($0) }
+
+        let filteredLines = Set(unitTestLines.compactMap { line -> UnitTestMessage? in
+            return UnitTestMessage(message: line)
+        })
+
+        return Array(filteredLines)
+    }
+
+    func parsePassedUnitTest(_ lines: [String]) -> [UnitTestMessage] {
+        let unitTestLines = lines.filter { self.lineIsPassedUnitTest($0) }
 
         let filteredLines = Set(unitTestLines.compactMap { line -> UnitTestMessage? in
             return UnitTestMessage(message: line)
@@ -166,8 +186,13 @@ private extension FastlaneParser {
         return self.check(line: line, withRegex: pattern)
     }
 
-    func lineIsUnitTest(_ line: String) -> Bool {
+    func lineIsFailedUnitTest(_ line: String) -> Bool {
         let pattern = "✖"
+        return self.check(line: line, withRegex: pattern)
+    }
+
+    func lineIsPassedUnitTest(_ line: String) -> Bool {
+        let pattern = "✔"
         return self.check(line: line, withRegex: pattern)
     }
 

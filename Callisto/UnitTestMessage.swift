@@ -11,26 +11,35 @@ import Cocoa
 final class UnitTestMessage: Codable {
 
     let method: String
-    let assertType: String
-    let explanation: String
+    let assertType: String?
+    let explanation: String?
 
     init?(message: String) {
-        guard let xRange = (message.range(of: "✖")) else { return nil }
+        guard let xRange = (message.range(of: "✖")) ?? (message.range(of: "✔")) else { return nil }
 
         let validMessage = message[xRange.lowerBound...]
         let components = validMessage.components(separatedBy: CharacterSet(charactersIn: ",-"))
-        guard components.count >= 3 else { return nil }
 
-        self.method = String(components[0].dropFirst(2))
-        self.assertType = components[1].trim()
-        self.explanation = components[2].trim().strippingLocalInfos.condenseWhitespace()
+        if components.count >= 3  {
+            self.method = String(components[0].dropFirst(2))
+            self.assertType = components[1].trim()
+            self.explanation = components[2].trim().strippingLocalInfos.condenseWhitespace()
+        } else {
+            self.method = String(components[0].dropFirst(2)).components(separatedBy: " ")[0]
+            self.assertType = nil
+            self.explanation = nil
+        }
     }
 }
 
 extension UnitTestMessage: CustomStringConvertible {
 
     var description: String {
-        return "\(self.method), \(self.assertType) - \(self.explanation)"
+        if let assertType = self.assertType,
+           let explanation = self.explanation {
+            return "\(self.method), \(assertType) - \(explanation)"
+        }
+        return "\(self.method)"
     }
 }
 
@@ -38,15 +47,11 @@ extension UnitTestMessage: Hashable {
 
     static func == (left: UnitTestMessage, right: UnitTestMessage) -> Bool {
         return
-            left.method == right.method &&
-            left.assertType == right.assertType &&
-            left.explanation == right.explanation
+            left.method == right.method
     }
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(self.method)
-        hasher.combine(self.assertType)
-        hasher.combine(self.explanation)
     }
 }
 

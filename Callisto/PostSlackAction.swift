@@ -148,7 +148,7 @@ private extension PostSlackAction {
         message.add(attachment: self.makeSlackAttachment(warnings, type: .warning))
 
         // Unit Tests
-        let unitTests = infos.flatMap { $0.failedUnitTests }
+        let unitTests = infos.flatMap { $0.brokenUnitTests }
         let unitTestAttachment = self.makeSlackAttachment(unitTests, type: .warning)
         unitTestAttachment.colorHex = "0077FF"
         message.add(attachment: unitTestAttachment)
