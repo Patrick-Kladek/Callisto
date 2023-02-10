@@ -52,6 +52,12 @@ final class FailBuildAction: ParsableCommand {
             quit(.containsWarnings)
         }
 
+        let brokenTests = infos.flatMap { $0.brokenUnitTests }.uniqued()
+        guard brokenTests.isEmpty else {
+            brokenTests.forEach { LogError("Repeatedly failed: \($0.description)") }
+            quit(.containsBrokenTests)
+        }
+
         quit(.success)
     }
 }
