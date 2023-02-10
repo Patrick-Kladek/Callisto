@@ -274,7 +274,14 @@ private extension GithubAction {
 
         if info.brokenUnitTests.hasElements {
             string += "\n\n"
+            string += "### Broken Tests\n"
             string += info.brokenUnitTests.map { ":large_blue_circle: `\($0.method)`\n\($0.assertType ?? "")\n\($0.explanation ?? "")" }.joined(separator: "\n\n")
+        }
+
+        if info.unreliableUnitTests.hasElements {
+            string += "\n\n"
+            string += "### Unreliable Tests (passed after retry)\n"
+            string += info.unreliableUnitTests.map { ":large_blue_circle: `\($0.method)`\n\($0.assertType ?? "")\n\($0.explanation ?? "")" }.joined(separator: "\n\n")
         }
 
         string += "\n\n"
