@@ -6,8 +6,8 @@
 //  Copyright © 2018 IdeasOnCanvas. All rights reserved.
 //
 
-import Foundation
 import Darwin // needed for exit()
+import Foundation
 
 
 enum ExitCodes: Int32 {

@@ -6,8 +6,8 @@
 //  Copyright © 2020 IdeasOnCanvas. All rights reserved.
 //
 
-import Foundation
 import ArgumentParser
+import Foundation
 
 
 final class PostToSlack: ParsableCommand {
