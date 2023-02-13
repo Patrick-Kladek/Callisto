@@ -256,10 +256,9 @@ private extension GithubAction {
     func markdownText(from info: BuildInformation) -> String {
         var string = info.githubSummaryTitle
 
-        if info.errors.isEmpty && info.warnings.isEmpty && info.brokenUnitTests.isEmpty {
+        if info.errors.isEmpty && info.warnings.isEmpty {
             string += "\n\n"
             string += "Well done 👍"
-            return string
         }
 
         if info.errors.hasElements {
