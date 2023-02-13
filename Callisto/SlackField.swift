@@ -26,7 +26,7 @@ class SlackField {
     }
 
     convenience init(message: UnitTestMessage) {
-        self.init(title: "\(message.method)", value: "\(message.assertType)\n\(message.explanation)")
+        self.init(title: "\(message.method)", value: "\(message.assertType ?? "")\n\(message.explanation ?? "")")
     }
 }
 

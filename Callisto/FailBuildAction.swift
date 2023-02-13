@@ -6,8 +6,8 @@
 //  Copyright © 2022 Bikemap. All rights reserved.
 //
 
-import Foundation
 import ArgumentParser
+import Foundation
 
 
 // MARK: - FailBuildAction
@@ -50,6 +50,12 @@ final class FailBuildAction: ParsableCommand {
         guard warnings.isEmpty else {
             warnings.forEach { LogWarning($0.description) }
             quit(.containsWarnings)
+        }
+
+        let brokenTests = infos.flatMap { $0.brokenUnitTests }.uniqued()
+        guard brokenTests.isEmpty else {
+            brokenTests.forEach { LogError("Repeatedly failed: \($0.description)") }
+            quit(.containsBrokenTests)
         }
 
         quit(.success)

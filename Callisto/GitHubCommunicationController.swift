@@ -174,8 +174,8 @@ extension GitHubCommunicationController {
         do {
             let taskResult = try URLSession.shared.synchronousDataTask(with: self.defaultRequest(url: pullRequestUrl))
 
-            if taskResult.response?.statusCode != 200 {
-                NSLog("Error by sending Message!")
+            if let statusCode = taskResult.response?.statusCode, statusCode != 200 {
+                NSLog("Error URLRequest Status Code: \(statusCode)")
                 NSLog("%@", taskResult.response ?? "<nil>")
                 throw StatusCodeError.noResponse
             }

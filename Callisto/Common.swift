@@ -6,8 +6,8 @@
 //  Copyright © 2018 IdeasOnCanvas. All rights reserved.
 //
 
-import Foundation
 import Darwin // needed for exit()
+import Foundation
 
 
 enum ExitCodes: Int32 {
@@ -29,6 +29,7 @@ enum ExitCodes: Int32 {
     case invalidBuildInformationFile = -16
     case invalidOutputFile = -17
     case containsWarnings = -18
+    case containsBrokenTests = -19
 }
 
 extension ExitCodes: CustomStringConvertible {
@@ -71,6 +72,8 @@ extension ExitCodes: CustomStringConvertible {
             return "invalid output file. Usage -output \"/path/to/file\""
         case .containsWarnings:
             return "This build contains warnings. Please resovle them."
+        case .containsBrokenTests:
+            return "This build contains repeatedly failing Tests. Please resovle them."
         }
     }
 }

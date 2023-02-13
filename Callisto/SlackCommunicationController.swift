@@ -27,8 +27,8 @@ class SlackCommunicationController: NSObject {
         do {
             let (_, response) = try URLSession.shared.synchronousDataTask(with: urlRequest)
 
-            if response?.statusCode != 200 {
-                NSLog("Error by sending Message!")
+            if let statusCode = response?.statusCode, statusCode != 200 {
+                NSLog("Error URLRequest Status Code: \(statusCode)")
                 NSLog("%@", response ?? "<nil>")
             }
         } catch let error as NSError {

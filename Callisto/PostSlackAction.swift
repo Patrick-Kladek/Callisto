@@ -6,8 +6,8 @@
 //  Copyright © 2020 IdeasOnCanvas. All rights reserved.
 //
 
-import Foundation
 import ArgumentParser
+import Foundation
 
 
 final class PostToSlack: ParsableCommand {
@@ -148,7 +148,7 @@ private extension PostSlackAction {
         message.add(attachment: self.makeSlackAttachment(warnings, type: .warning))
 
         // Unit Tests
-        let unitTests = infos.flatMap { $0.unitTests }
+        let unitTests = infos.flatMap { $0.brokenUnitTests }
         let unitTestAttachment = self.makeSlackAttachment(unitTests, type: .warning)
         unitTestAttachment.colorHex = "0077FF"
         message.add(attachment: unitTestAttachment)

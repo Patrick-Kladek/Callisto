@@ -6,8 +6,8 @@
 //  Copyright © 2019 IdeasOnCanvas. All rights reserved.
 //
 
-import Foundation
 import ArgumentParser
+import Foundation
 import MarkdownKit
 
 
@@ -213,12 +213,13 @@ private extension GithubAction {
 
         let commonErrors = infos[0].errors.filter { infos[1].errors.contains($0) }
         let commonWarnings = infos[0].warnings.filter { infos[1].warnings.contains($0) }
-        let commonUnitTests = infos[0].unitTests.filter { infos[1].unitTests.contains($0) }
+        let commonUnitTests = infos[0].brokenUnitTests.filter { infos[1].brokenUnitTests.contains($0) }
 
         return BuildInformation(platform: "Core",
                                 errors: commonErrors,
                                 warnings: commonWarnings,
-                                unitTests: commonUnitTests,
+                                brokenUnitTests: commonUnitTests,
+                                unreliableUnitTests: [],
                                 config: .empty)
     }
 
@@ -229,7 +230,8 @@ private extension GithubAction {
             BuildInformation(platform: info.platform,
                              errors: info.errors.deleting(strip.errors),
                              warnings: info.warnings.deleting(strip.warnings),
-                             unitTests: info.unitTests.deleting(strip.unitTests),
+                             brokenUnitTests: info.brokenUnitTests.deleting(strip.brokenUnitTests),
+                             unreliableUnitTests: [],
                              config: .empty)
         }
     }
@@ -245,7 +247,7 @@ private extension GithubAction {
                 LogWarning(warning.description)
             }
 
-            for unitTest in info.unitTests {
+            for unitTest in info.brokenUnitTests {
                 LogWarning(unitTest.description)
             }
         }
@@ -254,10 +256,9 @@ private extension GithubAction {
     func markdownText(from info: BuildInformation) -> String {
         var string = info.githubSummaryTitle
 
-        if info.errors.isEmpty && info.warnings.isEmpty && info.unitTests.isEmpty {
+        if info.errors.isEmpty && info.warnings.isEmpty {
             string += "\n\n"
             string += "Well done 👍"
-            return string
         }
 
         if info.errors.hasElements {
@@ -270,9 +271,16 @@ private extension GithubAction {
             string += info.warnings.map { ":warning: **\($0.file):\($0.line)**\n\($0.message)" }.joined(separator: "\n\n")
         }
 
-        if info.unitTests.hasElements {
+        if info.brokenUnitTests.hasElements {
             string += "\n\n"
-            string += info.unitTests.map { ":large_blue_circle: `\($0.method)`\n\($0.assertType)\n\($0.explanation)" }.joined(separator: "\n\n")
+            string += "### Broken Tests\n"
+            string += info.brokenUnitTests.map { ":large_blue_circle: `\($0.method)`\n\($0.assertType ?? "")\n\($0.explanation ?? "")" }.joined(separator: "\n\n")
+        }
+
+        if info.unreliableUnitTests.hasElements {
+            string += "\n\n"
+            string += "### Unreliable Tests (passed after retry)\n"
+            string += info.unreliableUnitTests.map { ":large_blue_circle: `\($0.method)`\n\($0.assertType ?? "")\n\($0.explanation ?? "")" }.joined(separator: "\n\n")
         }
 
         string += "\n\n"
