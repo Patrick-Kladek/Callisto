@@ -14,7 +14,7 @@ struct Callisto: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         abstract: "A Swift command-line tool to parse fastlane build output",
         version: PackageBuild.info.describe,
-        subcommands: [DependenciesCommand.self, SummariseCommand.self, PostGithubCommand.self, PostSlackCommand.self, FailBuildCommand.self, BuildInfoCommand.self])
+        subcommands: [DependenciesCommand.self, SummariseCommand.self, PostGithubCommand.self, PostSlackCommand.self, FailBuildCommand.self])
 
     init() { }
 }

@@ -34,82 +34,28 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Debug Git State
-        run: |
-          echo "=== Git Status ==="
-          git status
-          echo "=== Git Status Porcelain ==="
-          git status --porcelain
-          echo "=== Git Status Porcelain -uno ==="
-          git status --porcelain -uno
-          echo "=== Git Diff ==="
-          git diff
-          echo "=== Git Config ==="
-          git config --list | grep -E "(core\.|user\.)"
-          echo "=== Git Branch ==="
-          git branch -a
-          echo "=== Git Tags ==="
-          git tag
-          echo "=== Git Describe ==="
-          git describe --tags --always
-
-      - name: Debug Environment
-        run: |
-          echo "=== Environment Variables ==="
-          env | grep -E "(CI|GITHUB|BUILD)" | sort
-          echo "=== Current Directory ==="
-          pwd
-          echo "=== Directory Contents ==="
-          ls -la
-
       - name: Resolve Packages
         run: |
           swift package resolve
-
-      - name: Debug Before Build
-        run: |
-          echo "=== Git Status Before Build ==="
-          git status --porcelain
-          echo "=== Git Status Before Build (-uno) ==="
-          git status --porcelain -uno
-
-      - name: Debug PackageBuildInfo Script
-        run: |
-          echo "=== Testing PackageBuildInfo Script ==="
-          find .build -name "packageBuildInfo.sh" -exec echo "Found: {}" \;
-          find .build -name "packageBuildInfo.sh" -exec sh -c 'echo "Running: $1"; "$1" "$(pwd)" /tmp/test_output.swift myModule' _ {} \;
-          echo "=== Generated Output ==="
-          cat /tmp/test_output.swift
 
       - name: Build arm64
         run: |
           swift build -c release --arch arm64
 
       - name: Verify arm64
-        run: .build/arm64-apple-macosx/release/Callisto build-info
+        run: .build/arm64-apple-macosx/release/${{ env.TOOL_NAME }} --version
 
       - name: Build x86_64
         run: |
           swift build -c release --arch x86_64
 
       - name: Verify x86_64
-        run: .build/x86_64-apple-macosx/release/Callisto build-info
-
-      - name: Debug Generated PackageBuildInfo
-        run: |
-          echo "=== Generated PackageBuild.swift Files ==="
-          find .build -name "PackageBuild.swift" -exec echo "Found: {}" \;
-          echo "=== Content of Generated Files ==="
-          find .build -name "PackageBuild.swift" -exec sh -c 'echo "=== File: $1 ==="; cat "$1"' _ {} \;
-
-      - name: Remove release alias
-        run: rm .build/release
-
-      - name: Create release folder
-        run: mkdir .build/release
+        run: .build/x86_64-apple-macosx/release/${{ env.TOOL_NAME }} --version
 
       - name: Merge universal binary
         run: |
+          rm .build/release
+          mkdir .build/release
           lipo -create -output .build/release/${{ env.TOOL_NAME }} \
             .build/arm64-apple-macosx/release/${{ env.TOOL_NAME }} \
             .build/x86_64-apple-macosx/release/${{ env.TOOL_NAME }}
@@ -119,13 +65,6 @@ jobs:
 
       - name: Run ${{ env.TOOL_NAME }}
         run: .build/release/${{ env.TOOL_NAME }} --version
-
-      - name: Upload build folder
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: .build/
-          include-hidden-files: true
 
       - name: Upload macOS artifact
         uses: actions/upload-artifact@v4
