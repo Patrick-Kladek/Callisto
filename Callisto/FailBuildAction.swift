@@ -14,14 +14,22 @@ import ArgumentParser
 
 final class FailBuildAction: ParsableCommand {
 
-    public static let configuration = CommandConfiguration(commandName: "FailBuild", abstract: "Exit's with code 238 when .buildReport file contains warnings.")
+    public static let configuration = CommandConfiguration(
+        commandName: "fail-build",
+        abstract: "Exit's with code 238 when .buildReport file contains warnings."
+    )
 
     @Argument(help: "Location for .buildReport file", completion: .file(), transform: URL.init(fileURLWithPath:))
     var files: [URL] = []
 
+    @Flag
+    var verbose: Bool = false
+
     // MARK: - ParsableCommand
 
     func run() throws {
+        LoggerInfo.shared.configure(verbose: self.verbose)
+
         let inputFiles = self.files
         guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 

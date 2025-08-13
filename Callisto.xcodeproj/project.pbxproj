@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,6 +46,8 @@
 		CD8CA238274CDA0E007606C4 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8CA237274CDA0E007606C4 /* SemanticVersion.swift */; };
 		CD8CA23A274CDB4D007606C4 /* DependencyInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8CA239274CDB4D007606C4 /* DependencyInformation.swift */; };
 		CD8CA23C274CE06A007606C4 /* SummaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8CA23B274CE06A007606C4 /* SummaryFile.swift */; };
+		CD91658A2E4C9DA300716F94 /* XcodebuildParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9165892E4C9DA300716F94 /* XcodebuildParser.swift */; };
+		CD91658B2E4C9DA300716F94 /* XcodebuildParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9165892E4C9DA300716F94 /* XcodebuildParser.swift */; };
 		CD91658D2E4CA1C400716F94 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD91658C2E4CA1C400716F94 /* Logger.swift */; };
 		CD91658E2E4CA1C400716F94 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD91658C2E4CA1C400716F94 /* Logger.swift */; };
 		CD9165902E4CA1EC00716F94 /* CaseIterableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD91658F2E4CA1EC00716F94 /* CaseIterableExtension.swift */; };
@@ -168,6 +170,7 @@
 		CD8CA237274CDA0E007606C4 /* SemanticVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticVersion.swift; sourceTree = "<group>"; };
 		CD8CA239274CDB4D007606C4 /* DependencyInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInformation.swift; sourceTree = "<group>"; };
 		CD8CA23B274CE06A007606C4 /* SummaryFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryFile.swift; sourceTree = "<group>"; };
+		CD9165892E4C9DA300716F94 /* XcodebuildParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodebuildParser.swift; sourceTree = "<group>"; };
 		CD91658C2E4CA1C400716F94 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		CD91658F2E4CA1EC00716F94 /* CaseIterableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseIterableExtension.swift; sourceTree = "<group>"; };
 		CD9DF10D22FC102800779F6F /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
@@ -361,6 +364,7 @@
 				CDA94E94283CBB2A001E4521 /* PackageManagerDependencyParser.swift */,
 				CD33AF6E22F0766E002EC27C /* ExtractBuildInformationController.swift */,
 				CD8BBDD81EE009C600E8EE2E /* FastlaneParser.swift */,
+				CD9165892E4C9DA300716F94 /* XcodebuildParser.swift */,
 				CD8BBDD51EE009C600E8EE2E /* CompilerMessage.swift */,
 				CD081CB81EE7EDCD00F537B3 /* UnitTestMessage.swift */,
 				CD33AF7022F07DF9002EC27C /* BuildInformation.swift */,
@@ -557,6 +561,7 @@
 				CD56C6F428CA5F77005B81F3 /* PodDependencyParser.swift in Sources */,
 				CD9DF13722FC1C6F00779F6F /* Annotation.swift in Sources */,
 				CD9165912E4CA1EC00716F94 /* CaseIterableExtension.swift in Sources */,
+				CD91658A2E4C9DA300716F94 /* XcodebuildParser.swift in Sources */,
 				CD56C6EE28CA5F71005B81F3 /* FailBuildAction.swift in Sources */,
 				CDAE77842705B68600651B95 /* PostGithubAction.swift in Sources */,
 				CD9DF14022FC1C9100779F6F /* SlackMessage.swift in Sources */,
@@ -610,6 +615,7 @@
 				CD8BBDF21EE009C600E8EE2E /* SlackMessage.swift in Sources */,
 				CD9DF11222FC16D300779F6F /* SummariseAction.swift in Sources */,
 				CD9DF12322FC16D300779F6F /* NSColor+NSColorHexadecimalValue.swift in Sources */,
+				CD91658B2E4C9DA300716F94 /* XcodebuildParser.swift in Sources */,
 				CD9DF11B22FC16D300779F6F /* GithubAccess.swift in Sources */,
 				CD9DF11A22FC16D300779F6F /* GitHubCommunicationController.swift in Sources */,
 				CD8CA207274CD877007606C4 /* DependenciesAction.swift in Sources */,
@@ -630,6 +636,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ideasoncanvas.callisto.CallistoTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -647,6 +654,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ideasoncanvas.callisto.CallistoTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -779,6 +787,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ideasoncanvas.callisto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -797,6 +806,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ideasoncanvas.callisto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

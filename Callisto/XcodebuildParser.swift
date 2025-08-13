@@ -1,30 +1,33 @@
 //
-//  FastlaneParser.swift
-//  clangParser
+//  XcodebuildParser.swift
+//  Callisto
 //
-//  Created by Patrick Kladek on 19.04.17.
-//  Copyright © 2017 Patrick Kladek. All rights reserved.
+//  Created by Patrick Kladek on 13.08.25.
+//  Copyright © 2025 IdeasOnCanvas. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 
-class FastlaneParser: BuildOutputParserProtocol {
+enum ParsedBuildResult: Equatable {
+    case success
+    case failure(exitCode: Int?)
+}
 
-    enum ParserError: Error {
-        case exitStatusNotFound
-        case fastlaneRunError
-    }
+protocol BuildOutputParserProtocol {
 
-    enum RunStatus {
-        case success
-        case failure(exitCode: Int)
-        case unknown
-    }
+    var buildSummary: BuildInformation { get }
+
+    init(content: String, config: Config)
+    init(url: URL, config: Config) throws
+
+    func parse() -> ParsedBuildResult
+}
+
+class XcodebuildParser: BuildOutputParserProtocol {
 
     private let content: String
     private let config: Config
     private(set) var buildSummary: BuildInformation = .empty
-    private(set) var fastlaneReturnValue: RunStatus = .unknown
 
     // MARK: - Lifecycle
 
@@ -38,23 +41,22 @@ class FastlaneParser: BuildOutputParserProtocol {
         self.init(content: content, config: config)
     }
 
-    // MARK: - FastlaneParser
+    // MARK: - XcodebuildParser
 
     func parse() -> ParsedBuildResult {
-        let trimmedContent = self.trimColors(in: self.content)
-        let lines = trimmedContent.components(separatedBy: .newlines)
+        let lines = self.content.components(separatedBy: .newlines)
 
-        self.buildSummary = BuildInformation(platform: self.parseSchemeFromFastlane(trimmedContent) ?? "",
-                                             errors: self.parseBuildErrors(lines),
-                                             warnings: self.parseAnalyzerWarnings(lines),
-                                             unitTests: self.parseUnitTestWarnings(lines),
-                                             config: self.config)
+        self.buildSummary = BuildInformation(platform: self.parseScheme(from: self.content) ?? "",
+                                            errors: self.parseErrors(lines),
+                                            warnings: self.parseWarnings(lines),
+                                            unitTests: self.parseUnitTestWarnings(lines),
+                                            config: self.config)
 
         self.buildSummary.errors.forEach { log($0.description, level: .error) }
         self.buildSummary.warnings.forEach { log($0.description, level: .warning) }
         self.buildSummary.unitTests.forEach { log($0.description, level: .warning) }
 
-        if let exitCode = self.parseExitStatusFromFastlane(trimmedContent) {
+        if let exitCode = self.parseExitStatusFromFastlane(self.content) {
             return .failure(exitCode: exitCode)
         }
 
@@ -62,10 +64,11 @@ class FastlaneParser: BuildOutputParserProtocol {
     }
 }
 
-fileprivate extension FastlaneParser {
+fileprivate extension XcodebuildParser {
 
-    func parseSchemeFromFastlane(_ content: String) -> String? {
-        guard let regex = try? NSRegularExpression(pattern: "\\| scheme[ ]*\\| [a-zA-Z ]*\\|\\n", options: .caseInsensitive) else {
+    func parseScheme(from content: String) -> String? {
+        let pattern = #"-scheme\s+(?:"([^"]+)"|(\S+))"#
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else {
             log("Regular Expression Failed", level: .error)
             return nil
         }
@@ -75,14 +78,14 @@ fileprivate extension FastlaneParser {
             return nil
         }
 
-        schemeLine = schemeLine.replacingOccurrences(of: "| scheme | ", with: "")
-        schemeLine = schemeLine.replacingOccurrences(of: " | ", with: "")
+        schemeLine.replace("-scheme ", with: "")
+
         return schemeLine
     }
 
-    func parseBuildErrors(_ lines: [String]) -> [CompilerMessage] {
-        let errorLines = lines.filter { self.lineIsError($0) }
-        let errors = self.compilerMessages(from: errorLines)
+    func parseErrors(_ lines: [String]) -> [CompilerMessage] {
+        let errorLines = lines.filter { $0.isError() }
+        let errors = errorLines.compilerMessages()
 
         let filtered = errors.filter({ message in
             guard let rule = self.config.ignore.first(where: { key, value in
@@ -98,16 +101,17 @@ fileprivate extension FastlaneParser {
         return filtered.uniqued()
     }
 
-    func parseAnalyzerWarnings(_ lines: [String]) -> [CompilerMessage] {
-        let warningLines = lines.filter { self.lineIsWarning($0) }
-        let warnings = self.compilerMessages(from: warningLines)
+    func parseWarnings(_ lines: [String]) -> [CompilerMessage] {
+        let warningLines = lines.filter { $0.isWarning() }
+        let warnings = warningLines.compilerMessages()
 
         let filtered = warnings.filter { message in
             for rule in self.config.ignore {
                 let file = rule.key
-                if message.url.absoluteString.contains(file) || file == "*" {
+                if message.url.absoluteString.contains(file) {
                     for warning in (rule.value.warnings ?? []) {
                         if message.message.lowercased().contains(warning.lowercased()) || warning == "*" {
+                            log("Ignore warning as it matches rule: '\(message.description)", level: .verbose)
                             return false
                         }
                     }
@@ -119,7 +123,7 @@ fileprivate extension FastlaneParser {
     }
 
     func parseUnitTestWarnings(_ lines: [String]) -> [UnitTestMessage] {
-        let unitTestLines = lines.filter { self.lineIsUnitTest($0) }
+        let unitTestLines = lines.filter { $0.isUnitTest() }
 
         let filteredLines = Set(unitTestLines.compactMap { line -> UnitTestMessage? in
             return UnitTestMessage(message: line)
@@ -146,55 +150,31 @@ fileprivate extension FastlaneParser {
         }
 
         let statusCodeString = regexStatus.stringByReplacingMatches(in: exitStatusLine, options: [], range: NSMakeRange(0, exitStatusLine.count), withTemplate: "")
-        let statusCode = Int(statusCodeString) ?? 0
+        let statusCode = Int(statusCodeString)
         return statusCode
     }
 }
 
 // MARK: - Private
 
-private extension FastlaneParser {
+private extension String {
 
-    func lineIsWarning(_ line: String) -> Bool {
-        let pattern = "⚠️"
-        return self.check(line: line, withRegex: pattern)
+    func isWarning() -> Bool {
+        let pattern = "warning: "
+        return self.matches(regex: pattern)
     }
 
-    func lineIsError(_ line: String) -> Bool {
-        let pattern = "❌"
-        return self.check(line: line, withRegex: pattern)
+    func isError() -> Bool {
+        let pattern = "error: "
+        return self.matches(regex: pattern)
     }
 
-    func lineIsUnitTest(_ line: String) -> Bool {
-        if line.contains("testPasteboard,") {
-            print(#function)
-        }
-//        let pattern = "✖"
-        let pattern = "✗"
-        return self.check(line: line, withRegex: pattern)
+    func isUnitTest() -> Bool {
+        let pattern = "failed:" // TODO: implement
+        return self.matches(regex: pattern)
     }
 
-    func trimColors(in input: String) -> String {
-        var filteredString = input
-        filteredString = filteredString.replacingOccurrences(of: "\r", with: "")
-        filteredString = filteredString.replacingOccurrences(of: "\u{1b}", with: "")
-
-        guard let regex = try? NSRegularExpression(pattern: "\\[[0-9]+(m|;)[0-9]*(;)*[0-9]*m?", options: .caseInsensitive) else {
-            log("Regular Expression Failed", level: .error)
-            return ""
-        }
-
-        let range = NSMakeRange(0, filteredString.count)
-        return regex.stringByReplacingMatches(in: filteredString, options: [], range: range, withTemplate: "")
-    }
-
-    func compilerMessages(from: [String]) -> [CompilerMessage] {
-        return from.compactMap { line -> CompilerMessage? in
-            return CompilerMessage(message: line)
-        }
-    }
-
-    func check(line: String, withRegex pattern: String) -> Bool {
+    func matches(regex pattern: String) -> Bool {
         let regex: NSRegularExpression
 
         do {
@@ -204,15 +184,21 @@ private extension FastlaneParser {
             return false
         }
 
-        let range = NSMakeRange(0, line.count)
-        let matches = regex.matches(in: line, options: .reportCompletion, range: range)
+        let range = NSMakeRange(0, self.count)
+        let matches = regex.matches(in: self, options: .reportCompletion, range: range)
         return matches.count > 0
     }
-}
-
-private extension String {
 
     func removeExtraSpaces() -> String {
         return self.replacingOccurrences(of: "[\\s\n]+", with: " ", options: .regularExpression, range: nil)
+    }
+}
+
+private extension Array where Element == String {
+
+    func compilerMessages() -> [CompilerMessage] {
+        return self.compactMap { line -> CompilerMessage? in
+            return CompilerMessage(message: line)
+        }
     }
 }
