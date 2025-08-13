@@ -2,17 +2,22 @@
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
+import Foundation
 
-#if os(Linux)
-let plugins: [Target.PluginUsage] = [
-    .plugin(name: "PackageBuildInfoPlugin", package: "PackageBuildInfo")
-]
-#else
-let plugins: [Target.PluginUsage] = [
-    .plugin(name: "SwiftLint", package: "SwiftLintPlugin"),
-    .plugin(name: "PackageBuildInfoPlugin", package: "PackageBuildInfo")
-]
-#endif
+extension [String: String] {
+    subscript(bool key: String) -> Bool {
+        (self[key]?.lowercased() == "true") || (self[key]?.lowercased() == "yes") || (self[key] == "1")
+    }
+}
+
+var plugins: [Target.PluginUsage] = []
+
+if ProcessInfo.processInfo.environment[bool: "CI"] {
+    plugins.append(.plugin(name: "PackageBuildInfoPlugin", package: "PackageBuildInfo"))
+} else {
+    plugins.append(.plugin(name: "SwiftLint", package: "SwiftLintPlugin"))
+    plugins.append(.plugin(name: "PackageBuildInfoPlugin", package: "PackageBuildInfo"))
+}
 
 let package = Package(
     name: "Callisto",

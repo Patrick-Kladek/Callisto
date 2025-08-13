@@ -4,6 +4,7 @@ name: Release
 # Tool name variable - change this to reuse the workflow for different tools
 env:
   TOOL_NAME: "Callisto"
+  CI: true
 
 on:
   push:
