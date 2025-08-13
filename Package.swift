@@ -32,7 +32,10 @@ let package = Package(
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "MarkdownKit", package: "MarkdownKit"),
-                .product(name: "Yams", package: "Yams")
+                .product(name: "Yams", package: "Yams"),
+                .targetItem(name: "SlackKit", condition: .none),
+                .targetItem(name: "GithubKit", condition: .none),
+                .targetItem(name: "Common", condition: .none)
             ],
             plugins: plugins
         ),
@@ -43,6 +46,15 @@ let package = Package(
             ],
             resources: [
                 .process("Resources")
-            ])
+            ]
+        ),
+        .target(name: "Common"),
+        .target(name: "SlackKit"),
+        .target(
+            name: "GithubKit",
+            dependencies: [
+                .targetItem(name: "Common", condition: .none)
+            ]),
+
     ]
 )
