@@ -6,7 +6,7 @@
 //  Copyright © 2017 IdeasOnCanvas. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 
 struct UnitTestMessage: Codable {
 

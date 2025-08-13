@@ -6,7 +6,7 @@
 //  Copyright © 2017 Patrick Kladek. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 
 public final class SlackCommunicationController: NSObject {
 

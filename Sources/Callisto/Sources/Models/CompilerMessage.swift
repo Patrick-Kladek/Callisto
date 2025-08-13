@@ -6,7 +6,7 @@
 //  Copyright © 2017 Patrick Kladek. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 import Common
 
 struct CompilerMessage: Codable {

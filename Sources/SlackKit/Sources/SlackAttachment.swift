@@ -6,7 +6,7 @@
 //  Copyright © 2017 Patrick Kladek. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 import Common
 
 public enum SlackAttachmentType: String {
@@ -48,8 +48,8 @@ public class SlackAttachment {
         self.fields.append(field)
     }
 
-    public func setColor(_ color: NSColor) {
-        self.colorHex = color.hexValue()
+    public func setColor(_ color: String) {
+        self.colorHex = color
     }
 }
 
