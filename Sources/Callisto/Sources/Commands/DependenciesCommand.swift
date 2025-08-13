@@ -1,5 +1,5 @@
 //
-//  DependenciesAction.swift
+//  DependenciesCommand.swift
 //  Callisto
 //
 //  Created by Patrick Kladek on 23.11.21.
@@ -12,7 +12,12 @@ import MarkdownKit
 import Common
 
 /// Handles all steps from parsing the fastlane output to saving it in a temporary location
-final class Dependencies: AsyncParsableCommand {
+final class DependenciesCommand: AsyncParsableCommand {
+
+    public static let configuration = CommandConfiguration(
+        commandName: "dependencies",
+        abstract: "Spot outdated dependencies in Project"
+    )
 
     @Option(help: "Location of Project Folder", completion: .file())
     var project: URL
@@ -67,7 +72,7 @@ final class Dependencies: AsyncParsableCommand {
 
 // MARK: - Private
 
-private extension Dependencies {
+private extension DependenciesCommand {
 
     func shell(_ command: String, currentDirectoryURL: URL? = nil) -> String {
         let task = Process()

@@ -1,5 +1,5 @@
 //
-//  SummariseAction.swift
+//  SummariseCommand.swift
 //  Callisto
 //
 //  Created by Patrick Kladek on 02.08.19.
@@ -12,14 +12,17 @@ import Common
 import Yams
 
 /// Handles all steps from parsing the fastlane output to saving it in a temporary location
-final class Summarise: AsyncParsableCommand {
+final class SummariseCommand: AsyncParsableCommand {
 
     enum Parser: String, ExpressibleByArgument {
         case fastlane
         case xodebuild
     }
 
-    public static let configuration = CommandConfiguration(abstract: "Summarize Output from Fastlane")
+    public static let configuration = CommandConfiguration(
+        commandName: "summarise",
+        abstract: "Summarize Output from Fastlane"
+    )
 
     @Option(help: "Compiler Generated Output", completion: .file())
     var buildLog: URL

@@ -1,5 +1,5 @@
 //
-//  PostGithubAction.swift
+//  PostGithubCommand.swift
 //  Callisto
 //
 //  Created by Patrick Kladek on 02.08.19.
@@ -13,9 +13,12 @@ import Common
 import GithubKit
 
 /// Responsible to read the build summaries and post them to github
-final class PostToGithub: AsyncParsableCommand {
+final class PostGithubCommand: AsyncParsableCommand {
 
-    public static let configuration = CommandConfiguration(commandName: "github", abstract: "Upload Build Summary to Github")
+    public static let configuration = CommandConfiguration(
+        commandName: "github",
+        abstract: "Upload Build Summary to Github"
+    )
 
     @Option(help: "Your GitHub Access Token")
     var githubToken: String
@@ -51,11 +54,11 @@ final class PostToGithub: AsyncParsableCommand {
 final class GithubAction {
 
     let githubController: GitHubCommunicationController
-    let command: PostToGithub
+    let command: PostGithubCommand
 
     // MARK: - Lifecycle
 
-    init(command: PostToGithub) {
+    init(command: PostGithubCommand) {
         self.command = command
 
         let repo = GithubRepository(organisation: command.githubOrganisation, repository: command.githubRepository)

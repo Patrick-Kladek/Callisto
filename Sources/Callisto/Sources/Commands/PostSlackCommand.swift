@@ -1,5 +1,5 @@
 //
-//  PostSlackAction.swift
+//  PostSlackCommand.swift
 //  Callisto
 //
 //  Created by Patrick Kladek on 22.09.20.
@@ -12,9 +12,12 @@ import SlackKit
 import GithubKit
 import Common
 
-final class PostToSlack: AsyncParsableCommand {
+final class PostSlackCommand: AsyncParsableCommand {
 
-    public static let configuration = CommandConfiguration(commandName: "slack", abstract: "Post Build Summary to Slack")
+    public static let configuration = CommandConfiguration(
+        commandName: "slack",
+        abstract: "Post Build Summary to Slack"
+    )
 
     @Argument(help: "Location for .buildReport file", completion: .file())
     var files: [URL]
@@ -45,13 +48,13 @@ final class PostToSlack: AsyncParsableCommand {
 /// Responsible to post the parsed build information to Slack
 final class PostSlackAction: NSObject {
 
-    let command: PostToSlack
+    let command: PostSlackCommand
     let slackController: SlackCommunicationController
     let githubController: GitHubCommunicationController
 
     // MARK: - Lifecycle
 
-    init(command: PostToSlack) {
+    init(command: PostSlackCommand) {
         self.command = command
         let repo = GithubRepository(organisation: command.githubOrganisation, repository: command.githubRepository)
         let access = GithubAccess(token: command.githubToken)

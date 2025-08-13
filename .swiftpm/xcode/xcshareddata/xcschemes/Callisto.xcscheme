@@ -75,6 +75,10 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "--version"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "build-info"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

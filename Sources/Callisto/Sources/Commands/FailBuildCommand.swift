@@ -1,5 +1,5 @@
 //
-//  FailBuildAction.swift
+//  FailBuildCommand.swift
 //  Callisto
 //
 //  Created by Ammad on 03.02.2022.
@@ -10,9 +10,9 @@ import Foundation
 import ArgumentParser
 import Common
 
-// MARK: - FailBuildAction
+// MARK: - FailBuildCommand
 
-final class FailBuildAction: AsyncParsableCommand {
+final class FailBuildCommand: AsyncParsableCommand {
 
     public static let configuration = CommandConfiguration(
         commandName: "fail-build",
