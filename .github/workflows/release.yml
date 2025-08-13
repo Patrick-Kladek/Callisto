@@ -120,7 +120,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
-          path: .build/*
+          path: .build/
+          include-hidden-files: true
 
       - name: Upload macOS artifact
         uses: actions/upload-artifact@v4
