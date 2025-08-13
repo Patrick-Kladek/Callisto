@@ -17,7 +17,7 @@ class CallistoTest: XCTestCase {
 
         let config = Config(ignore: ["*": Config.Details(warnings: ["todo"], errors: nil, tests: nil)])
         let parser = FastlaneParser(content: fastlaneContent, config: config)
-        XCTAssertEqual(65, parser.parse())
+        XCTAssertEqual(parser.parse(), .failure(exitCode: 65))
 
         XCTAssertEqual(parser.buildSummary.errors.count, 0)
         XCTAssertEqual(parser.buildSummary.warnings.count, 0)
@@ -30,7 +30,7 @@ class CallistoTest: XCTestCase {
 
         let config = Config(ignore: ["*": Config.Details(warnings: ["todo"], errors: nil, tests: nil)])
         let parser = FastlaneParser(content: fastlaneContent, config: config)
-        XCTAssertEqual(65, parser.parse())
+        XCTAssertEqual(.failure(exitCode: 65), parser.parse())
 
         XCTAssertEqual(parser.buildSummary.errors.count, 2)
         XCTAssertEqual(parser.buildSummary.warnings.count, 0)
@@ -43,11 +43,12 @@ class CallistoTest: XCTestCase {
 
         let config = Config(ignore: ["*": Config.Details(warnings: ["BITCrashManager", "todo"], errors: nil, tests: nil)])
         let parser = FastlaneParser(content: fastlaneContent, config: config)
-        XCTAssertEqual(0, parser.parse())
 
-        print(parser.buildSummary.errors.count)
-        print(parser.buildSummary.warnings.count)
-        print(parser.buildSummary.unitTests.count)
+        XCTAssertEqual(parser.parse(), .success)
+
+        XCTAssertEqual(parser.buildSummary.warnings.count, 2)
+        XCTAssertEqual(parser.buildSummary.errors.count, 0)
+        XCTAssertEqual(parser.buildSummary.unitTests.count, 0)
     }
 
     func testXcode9_3_MobileParser() {
@@ -56,7 +57,7 @@ class CallistoTest: XCTestCase {
 
         let config = Config(ignore: ["*": Config.Details(warnings: ["todo"], errors: nil, tests: nil)])
         let parser = FastlaneParser(content: fastlaneContent, config: config)
-        XCTAssertEqual(65, parser.parse())
+        XCTAssertEqual(.failure(exitCode: 65), parser.parse())
 
         XCTAssertEqual(parser.buildSummary.errors.count, 0)
         XCTAssertEqual(parser.buildSummary.warnings.count, 9)
@@ -69,7 +70,7 @@ class CallistoTest: XCTestCase {
 
         let config = Config(ignore: ["*": Config.Details(warnings: ["todo"], errors: nil, tests: nil)])
         let parser = FastlaneParser(content: fastlaneContent, config: config)
-        XCTAssertEqual(65, parser.parse())
+        XCTAssertEqual(.failure(exitCode: 65), parser.parse())
 
         XCTAssertEqual(parser.buildSummary.errors.count, 0)
         XCTAssertEqual(parser.buildSummary.warnings.count, 6)
