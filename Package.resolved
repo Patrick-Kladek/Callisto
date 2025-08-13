@@ -1,0 +1,42 @@
+{
+  "originHash" : "c5a09e4cf708354bcc4e169ffb8aa1e3fe18fe1fac053e6513df7757714f21db",
+  "pins" : [
+    {
+      "identity" : "packagebuildinfo",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DimaRU/PackageBuildInfo",
+      "state" : {
+        "branch" : "master",
+        "revision" : "b58288cada24fdaaedaaa329afe52d910794fdb2"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser.git",
+      "state" : {
+        "revision" : "309a47b2b1d9b5e991f36961c983ecec72275be3",
+        "version" : "1.6.1"
+      }
+    },
+    {
+      "identity" : "swiftlintplugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lukepistrol/SwiftLintPlugin",
+      "state" : {
+        "revision" : "3780efccceaa87f17ec39638a9d263d0e742b71c",
+        "version" : "0.59.1"
+      }
+    },
+    {
+      "identity" : "yams",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jpsim/Yams",
+      "state" : {
+        "revision" : "9ff1cc9327586db4e0c8f46f064b6a82ec1566fa",
+        "version" : "4.0.6"
+      }
+    }
+  ],
+  "version" : 3
+}
