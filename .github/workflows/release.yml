@@ -116,6 +116,12 @@ jobs:
       - name: Run ${{ env.TOOL_NAME }}
         run: .build/release/${{ env.TOOL_NAME }} --version
 
+      - name: Upload build folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: .build
+
       - name: Upload macOS artifact
         uses: actions/upload-artifact@v4
         with:
