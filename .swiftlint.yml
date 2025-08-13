@@ -1,35 +1,53 @@
---- 
-disabled_rules: 
-  - line_length
+# Disabled rules
+disabled_rules:
   - nesting
-  - todo
-excluded: 
-  - excluded_dir
-file_length: 
-  warning: 500
-excluded:
-  - Purchasing/Sourcery/Generated
-  - Core/Vendor/ThingsJSONCoder
-  - Carthage
-large_tuple: 
-  error: 4
-  warning: 3
-opt_in_rules: 
+  - trailing_whitespace
+  - line_length
+  - unneeded_synthesized_initializer
+  - file_length
+  - function_body_length
+  - closure_parameter_position
+  - type_body_length
+# Optional Rules
+opt_in_rules:
   - empty_count
-  - explicit_init
-  - closure_spacing
-  - operator_usage_whitespace
-  - overridden_super_call
-  - prohibited_super_call
-  - nimble_operator
-  - redundant_nil_coalescing
-  - switch_case_on_newline
-  - first_where
-  - attributes
-  - private_outlet
-  - fatal_error_message
-  - sorted_imports
-private_outlet: 
-  allow_private_set: true
-vertical_whitespace: 
-  max_empty_lines: 2
+  - file_header
+
+excluded: 
+  - build
+
+# Customised rules
+force_try:
+  severity: warning
+identifier_name:
+  min_length: 0
+empty_count:
+  severity: warning
+cyclomatic_complexity:
+  ignores_case_statements: true
+file_header:
+  required_pattern: |
+                    \/\/
+                    \/\/  SWIFTLINT_CURRENT_FILENAME
+                    \/\/  .*?
+                    \/\/
+                    \/\/  Created by .*? on \d{1,2}\.|/\d{1,2}\.|/\d{2,4}\.
+                    \/\/  Copyright © \d{4} *?\. All rights reserved\.
+                    \/\/
+custom_rules:
+  init_usage:
+    name: "init() usage"
+    message: "Avoid using .init() as reviewer looses context especially in github without syntax Highlighting"
+    regex: "(?<!self|super)\\.init\\("
+    severity: warning
+  print_usage:
+    name: "print usage"
+    message: "use log(_: level:) instead of print()"
+    regex: '\bprint\s*\('
+    severity: warning
+  private_function_usage:
+    included: ".*\\.swift"
+    name: "private function usage"
+    regex: '\bprivate\s+func\b'
+    message: "Create a private extension of this class below"
+    severity: warning

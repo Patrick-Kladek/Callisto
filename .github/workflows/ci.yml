@@ -1,0 +1,71 @@
+name: Pull Request
+
+# Tool name variable - change this to reuse the workflow for different tools
+env:
+  TOOL_NAME: "Callisto"
+  CI: true
+  
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+
+concurrency:
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Build macOS
+    runs-on: macos-15
+    steps:
+      - name: Setup Xcode Version
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git for CI
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+          git config --global core.filemode false
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Ensure Clean Repository
+        run: |
+          # Remove any potential build artifacts that might cause dirty state
+          rm -rf .build
+          rm -rf .swiftpm
+          git clean -fd
+          git status --porcelain
+
+      - name: Debug Git Status
+        run: |
+          echo "=== Git Status ==="
+          git status
+          echo "=== Git Diff ==="
+          git diff
+          echo "=== Git Config ==="
+          git config --list | grep -E "(core\.|user\.)"
+
+      - name: Resolve Packages
+        run: |
+          swift package resolve
+
+      - name: Build with Clean Git State
+        run: |
+          # Ensure git state is clean before build
+          git reset --hard HEAD
+          git clean -fd
+          swift build -c release
+
+      - name: Run ${{ env.TOOL_NAME }}
+        run: |
+          .build/release/${{ env.TOOL_NAME }} --version
