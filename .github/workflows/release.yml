@@ -85,9 +85,14 @@ jobs:
         run: |
           swift build -c release --arch arm64
 
+      - name: Verify arm64
+        run: arm64-apple-macosx/release/Callisto --version
+
       - name: Build x86_64
         run: |
           swift build -c release --arch x86_64
+      - name: Verify x86_64
+        run: x86_64-apple-macosx/release/Callisto --version
 
       - name: Debug Generated PackageBuildInfo
         run: |
@@ -96,13 +101,11 @@ jobs:
           echo "=== Content of Generated Files ==="
           find .build -name "PackageBuild.swift" -exec sh -c 'echo "=== File: $1 ==="; cat "$1"' _ {} \;
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-debug
-          path: .build/
-          retention-days: 7
-          include-hidden-files: true
+      - name: Remove release alias
+        run: rm .build/release
+
+      - name: Create release folder
+        run: mkdir .build/release
 
       - name: Merge universal binary
         run: |
