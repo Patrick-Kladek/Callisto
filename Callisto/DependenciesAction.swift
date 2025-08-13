@@ -41,7 +41,7 @@ final class Dependencies: ParsableCommand {
         let filtered = Self.filter(dependencies: dependencies, with: self.ignore)
         let ignored = filtered.difference(from: dependencies)
 
-        LogMessage("Outdated Dependencies: \(filtered)")
+        log("Outdated Dependencies: \(filtered)")
 
         let info = DependencyInformation(outdated: filtered, ignored: ignored)
         let summary = SummaryFile.dependencies(info)
@@ -52,7 +52,7 @@ final class Dependencies: ParsableCommand {
 
         try data.write(to: self.output)
 
-        LogMessage("Summary written to: \(self.output.absoluteString)")
+        log("Summary written to: \(self.output.absoluteString)")
 
         if self.failPipeline && filtered.hasElements {
             throw ExitCode(1)
@@ -76,7 +76,7 @@ private extension Dependencies {
         task.environment = ProcessInfo.processInfo.environment
         task.currentDirectoryURL = currentDirectoryURL
 
-        LogMessage("$ \(command)")
+        log("$ \(command)")
 
         task.launch()
 
@@ -86,7 +86,7 @@ private extension Dependencies {
         let errorData = errorPipe.fileHandleForReading.readDataToEndOfFile()
         let errorOutput = String(data: errorData, encoding: .utf8)!
         if errorOutput.count > 0 {
-            LogError(errorOutput)
+            log(errorOutput, level: .error)
         }
 
         return output

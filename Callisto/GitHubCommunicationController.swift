@@ -38,7 +38,7 @@ class GitHubCommunicationController {
             let prNumber = dict["number"] as? Int
             return .success(Branch(title: title, name: name, url: URL(string: branchPath), number: prNumber))
         } catch {
-            LogError("Something happend when collecting information about Pull Requests")
+            log("Something happend when collecting information about Pull Requests", level: .error)
             return .failure(error)
         }
     }
@@ -53,7 +53,7 @@ class GitHubCommunicationController {
             let taskResult = try URLSession.shared.synchronousDataTask(with: request)
 
             if taskResult.response?.statusCode != 201 {
-                LogError(taskResult.response.debugDescription)
+                log(taskResult.response.debugDescription, level: .error)
                 throw StatusCodeError.noResponse
             }
 
@@ -75,7 +75,7 @@ class GitHubCommunicationController {
             let taskResult = try URLSession.shared.synchronousDataTask(with: request)
 
             if taskResult.response?.statusCode != 200 {
-                LogError(taskResult.response.debugDescription)
+                log(taskResult.response.debugDescription, level: .error)
                 throw StatusCodeError.noResponse
             }
 
@@ -98,7 +98,7 @@ class GitHubCommunicationController {
             let taskResult = try URLSession.shared.synchronousDataTask(with: request)
 
             if taskResult.response?.statusCode != 204 {
-                LogError(taskResult.response.debugDescription)
+                log(taskResult.response.debugDescription, level: .error)
                 throw StatusCodeError.noResponse
             }
 
@@ -186,7 +186,7 @@ extension GitHubCommunicationController {
                 throw StatusCodeError.noData
             }
         } catch {
-            LogError(error.localizedDescription)
+            log(error.localizedDescription, level: .error)
             return []
         }
     }

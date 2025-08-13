@@ -21,7 +21,7 @@ public extension URL {
         do {
             try FileManager().createDirectory(at: folder, withIntermediateDirectories: true, attributes: nil)
         } catch {
-            LogError("Could not create temporary file: \(name)")
+            log("Could not create temporary file: \(name)", level: .error)
         }
 
         return folder

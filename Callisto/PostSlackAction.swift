@@ -63,15 +63,15 @@ final class PostSlackAction: NSObject {
         let inputFiles = self.command.files
         guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 
-        LogMessage("Input Files: ")
-        _ = inputFiles.map { LogMessage($0.absoluteString) }
+        log("Input Files: ")
+        _ = inputFiles.map { log($0.absoluteString) }
 
         let summaries = inputFiles.map { SummaryFile.read(url: $0) }.compactMap { result -> SummaryFile? in
             switch result {
             case .success(let info):
                 return info
             case .failure(let error):
-                LogError("\(error)")
+                log("\(error)", level: .error)
                 return nil
             }
         }
@@ -95,7 +95,7 @@ final class PostSlackAction: NSObject {
         }
 
         if infos.allSatisfy({ $0.isEmpty }) {
-            LogMessage("No Build issues found")
+            log("No Build issues found")
             quit(.success)
         }
 
@@ -117,7 +117,7 @@ private extension PostSlackAction {
         case .success(let branch):
             return branch
         case .failure(let error):
-            LogWarning(error.localizedDescription)
+            log(error.localizedDescription, level: .warning)
             return nil
         }
     }

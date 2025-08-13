@@ -32,7 +32,7 @@ class SlackCommunicationController: NSObject {
                 NSLog("%@", response ?? "<nil>")
             }
         } catch let error as NSError {
-            LogError(String(format: "%@", error))
+            log(String(format: "%@", error), level: .error)
             fatalError()
         } catch {
             fatalError()
@@ -43,6 +43,6 @@ class SlackCommunicationController: NSObject {
 extension SlackCommunicationController: URLSessionDelegate {
 
     func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
-        LogError(error?.localizedDescription ?? "error")
+        log(error?.localizedDescription ?? "error", level: .error)
     }
 }

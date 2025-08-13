@@ -68,15 +68,15 @@ final class GithubAction {
         let inputFiles = self.command.files
         guard inputFiles.hasElements else { quit(.invalidBuildInformationFile) }
 
-        LogMessage("Input Files: ")
-        _ = inputFiles.map { LogMessage($0.absoluteString) }
+        log("Input Files: ")
+        _ = inputFiles.map { log($0.absoluteString) }
 
         let summaries = inputFiles.map { SummaryFile.read(url: $0) }.compactMap { result -> SummaryFile? in
             switch result {
             case .success(let info):
                 return info
             case .failure(let error):
-                LogError("\(error)")
+                log("\(error)", level: .error)
                 return nil
             }
         }
@@ -102,26 +102,26 @@ final class GithubAction {
         guard infos.hasElements else { quit(.invalidBuildInformationFile) }
 
         let currentBranch = self.loadCurrentBranch()
-        LogMessage("Did load Branch:")
-        LogMessage(" * \(currentBranch.title ?? "<nil>") \(currentBranch.number ?? -1)")
-        LogMessage(" * \(currentBranch.url?.absoluteString ?? "<nil>")")
+        log("Did load Branch:")
+        log(" * \(currentBranch.title ?? "<nil>") \(currentBranch.number ?? -1)")
+        log(" * \(currentBranch.url?.absoluteString ?? "<nil>")")
 
         if self.command.deletePreviousComments {
             let result = self.githubController.fetchPreviousComments(on: currentBranch)
             switch result {
             case .failure(let error):
-                LogError(error.localizedDescription)
+                log(error.localizedDescription, level: .error)
             case .success(let comments):
                 let commentsToDelete = comments.filter { $0.isCallistoComment }
                 if commentsToDelete.hasElements {
-                    LogMessage("Found \(commentsToDelete.count) outdated build comment\(commentsToDelete.count > 1 ? "s" : ""). Deleting ...")
+                    log("Found \(commentsToDelete.count) outdated build comment\(commentsToDelete.count > 1 ? "s" : ""). Deleting ...")
                 }
                 _ = commentsToDelete.map { comment in
                     switch self.githubController.deleteComment(comment: comment) {
                     case .success:
-                        LogMessage("Deleted comment with ID: \(comment.id!)")
+                        log("Deleted comment with ID: \(comment.id!)")
                     case .failure(let error):
-                        LogError(error.localizedDescription)
+                        log(error.localizedDescription, level: .error)
                     }
                 }
             }
@@ -168,14 +168,14 @@ final class GithubAction {
         }
 
         let message = document.text()
-        LogMessage("Posting Comment on Github")
+        log("Posting Comment on Github")
         print(message)
 
         switch self.githubController.postComment(on: currentBranch, comment: Comment(body: message, id: nil)) {
         case .success:
-            LogMessage("Successfully posted BuildReport to GitHub")
+            log("Successfully posted BuildReport to GitHub")
         case .failure(let error):
-            LogError(error.localizedDescription)
+            log(error.localizedDescription, level: .error)
         }
 
         quit(.success)
@@ -203,7 +203,7 @@ private extension GithubAction {
         case .success(let branch):
             return branch
         case .failure(let error):
-            LogError(error.localizedDescription)
+            log(error.localizedDescription, level: .error)
             quit(.reloadBranchFailed)
         }
     }
@@ -236,17 +236,17 @@ private extension GithubAction {
 
     func logBuildInfo(_ infos: [BuildInformation]) {
         for info in infos {
-            LogMessage("*** \(info.platform) ***")
+            log("*** \(info.platform) ***")
             for error in info.errors {
-                LogError(error.description)
+                log(error.description, level: .error)
             }
 
             for warning in info.warnings {
-                LogWarning(warning.description)
+                log(warning.description, level: .warning)
             }
 
             for unitTest in info.unitTests {
-                LogWarning(unitTest.description)
+                log(unitTest.description, level: .warning)
             }
         }
     }
