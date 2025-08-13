@@ -86,13 +86,14 @@ jobs:
           swift build -c release --arch arm64
 
       - name: Verify arm64
-        run: arm64-apple-macosx/release/Callisto --version
+        run: .build/arm64-apple-macosx/release/Callisto --version
 
       - name: Build x86_64
         run: |
           swift build -c release --arch x86_64
+
       - name: Verify x86_64
-        run: x86_64-apple-macosx/release/Callisto --version
+        run: .build/x86_64-apple-macosx/release/Callisto --version
 
       - name: Debug Generated PackageBuildInfo
         run: |
