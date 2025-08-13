@@ -3,10 +3,10 @@
     {
       "identity" : "packagebuildinfo",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/DimaRU/PackageBuildInfo",
+      "location" : "https://github.com/Patrick-Kladek/PackageBuildInfo",
       "state" : {
-        "branch" : "master",
-        "revision" : "b58288cada24fdaaedaaa329afe52d910794fdb2"
+        "branch" : "develop",
+        "revision" : "7429cab4ba7c050005371fc10b1c3bd1fd6493d0"
       }
     },
     {
