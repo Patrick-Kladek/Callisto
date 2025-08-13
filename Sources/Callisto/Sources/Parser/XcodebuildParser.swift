@@ -109,7 +109,7 @@ fileprivate extension XcodebuildParser {
         let filtered = warnings.filter { message in
             for rule in self.config.ignore {
                 let file = rule.key
-                if message.url.absoluteString.contains(file) {
+                if message.url.absoluteString.contains(file) || file == "*" {
                     for warning in (rule.value.warnings ?? []) {
                         if message.message.lowercased().contains(warning.lowercased()) || warning == "*" {
                             log("Ignore warning as it matches rule: '\(message.description)", level: .verbose)

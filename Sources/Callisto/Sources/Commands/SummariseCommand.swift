@@ -31,7 +31,7 @@ final class SummariseCommand: AsyncParsableCommand {
     var parser: Parser = .xodebuild
 
     @Option(help: "Location for Output file", completion: .file())
-    var output: URL
+    var output: URL = .currentDirectory()
 
     @Option(help: "YAML file to exclude messages from specific files", completion: .file())
     var config: URL?
